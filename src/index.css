@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* 1. COLOR SYSTEM TOKENS (60-30-10 Archival & Architectural Palette) */
+    --color-canvas-primary: #FBF9F5;
+    --color-canvas-elevated: #F5F1EA;
+    --color-surface-structural: #EBE6DF;
+    --color-surface-obsidian: #141210;
+
+    --color-ink-primary: #1C1917;
+    --color-ink-secondary: #44403C;
+    --color-ink-muted: #57534E;
+    --color-ink-caption: #78716C;
+    --color-ink-inverse: #FBF9F5;
+
+    --color-border-hairline: #D6CEBE;
+    --color-border-subtle: #E5DEC9;
+    --color-border-strong: #1C1917;
+
+    --color-accent-bronze: #78350F;
+    --color-accent-bronze-hover: #5C280B;
+    --color-accent-terracotta: #9A3412;
+    --color-accent-botanical: #14532D;
+
+    /* 2. TYPOGRAPHY TOKENS (2+1 Font Discipline) */
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* 3. SPACING & RHYTHM TOKENS */
+    --space-section-y: 4rem;
+    --space-container-x: 1.5rem;
+    --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-architectural: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --space-section-y: 6rem;
+      --space-container-x: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --space-section-y: 7.5rem;
+      --space-container-x: 3rem;
+    }
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas-primary);
+    color: var(--color-ink-primary);
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Visible Keyboard Focus Standard (WCAG AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-bronze);
+    outline-offset: 2px;
+  }
+}
+
+/* Typographic & Numeric Utilities */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Dark Surface Optical Compensation */
+.surface-dark-optical {
+  background-color: var(--color-surface-obsidian);
+  color: var(--color-ink-inverse);
+  letter-spacing: 0.01em;
+}
+
+/* Editorial Drop Cap */
+.editorial-dropcap::first-letter {
+  float: left;
+  margin-right: 0.85rem;
+  margin-top: 0.15rem;
+  font-family: var(--font-serif);
+  font-size: 3.35rem;
+  line-height: 0.85;
+  font-weight: 600;
+  color: var(--color-accent-bronze);
+}
+
+/* Subtle Architectural Hover Underline */
+.editorial-link-underline {
+  position: relative;
+}
+.editorial-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-accent-bronze);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 240ms var(--ease-editorial);
+}
+.editorial-link-underline:hover::after,
+.editorial-link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Masked Word / Line Container for Split Typography */
+.split-mask-line {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.split-mask-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Clip-path Aperture Transition Helper */
+.architectural-clip-frame {
+  clip-path: inset(0% 0% 0% 0%);
+  transition: clip-path 700ms var(--ease-architectural);
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

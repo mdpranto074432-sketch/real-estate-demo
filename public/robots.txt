@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Varendra & Co. — Dhaka Architectural Residences (Concept Portfolio)
+Sitemap: /sitemap.xml
