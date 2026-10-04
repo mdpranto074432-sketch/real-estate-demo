@@ -175,12 +175,12 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
       </a>
 
       {/* Strict 3-Zone Top Bar Contract (56px mobile height respects <15% viewport cap) */}
-      <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-[#D6CEBE] bg-[#FBF9F5]/95 backdrop-blur-xs">
-        <div className="mx-auto flex h-full max-w-[1360px] items-center justify-between px-5 sm:px-6 md:px-12">
+      <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-[#D6CEBE]/70 bg-[#FBF9F5]/92 backdrop-blur-md">
+        <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 sm:px-10 md:px-14">
           {/* Zone 1: Single text element wordmark */}
           <Link
             to="/"
-            className="font-serif text-lg sm:text-xl font-medium tracking-tight text-[#1C1917] whitespace-nowrap shrink-0 py-2 transition-colors duration-150 hover:text-[#78350F] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#78350F]"
+            className="font-serif text-lg sm:text-[21px] font-normal tracking-tight text-[#1C1917] whitespace-nowrap shrink-0 py-2 transition-colors duration-200 hover:text-[#78350F] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#78350F]"
           >
             {languageMode === 'BN' ? 'বরেন্দ্র অ্যান্ড কোং' : DEVELOPER_PROFILE.brandName}
           </Link>
@@ -188,17 +188,17 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           {/* Zone 2: 4 clean text navigation links */}
           <nav
             aria-label="Primary Navigation"
-            className="hidden md:flex items-center gap-8 text-xs font-medium text-[#44403C]"
+            className="hidden md:flex items-center gap-10 font-mono text-[11px] tracking-[0.18em] uppercase text-[#44403C]"
           >
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) =>
-                  `py-2 whitespace-nowrap shrink-0 transition-colors duration-150 border-b ${
+                  `py-2 whitespace-nowrap shrink-0 transition-colors duration-200 border-b ${
                     isActive
-                      ? 'border-[#1C1917] text-[#1C1917] font-semibold'
-                      : 'border-transparent hover:border-[#78350F]/60 hover:text-[#1C1917]'
+                      ? 'border-[#1C1917] text-[#1C1917] font-medium'
+                      : 'border-transparent hover:border-[#78350F]/50 hover:text-[#1C1917]'
                   }`
                 }
               >
@@ -208,11 +208,11 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           </nav>
 
           {/* Zone 3: Bilingual EN/BN Toggle + 1 Primary Action + 44x44px Mobile Menu Trigger */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-4">
             <button
               type="button"
               onClick={() =>
-                setLanguageMode(languageMode === 'EN' ? 'BN' : 'EN')
+                setLanguageMode(languageMode === 'EN' ? 'BN' : 'BN' === languageMode ? 'EN' : 'BN')
               }
               aria-label={
                 languageMode === 'EN'
@@ -220,15 +220,15 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   : 'Switch to English editorial headings'
               }
               title="Toggle English / বাংলা Bilingual Readiness"
-              className="inline-flex min-h-[44px] sm:min-h-[38px] items-center gap-1 border border-[#D6CEBE] bg-[#EBE6DF]/50 px-2.5 py-1 font-mono text-[11px] font-medium text-[#1C1917] transition-colors hover:border-[#78350F] cursor-pointer"
+              className="inline-flex min-h-[44px] sm:min-h-[36px] items-center gap-1.5 border border-[#D6CEBE]/80 bg-transparent px-3 py-1 font-mono text-[10px] tracking-[0.14em] text-[#1C1917] transition-colors hover:border-[#1C1917] cursor-pointer"
             >
-              <span className={languageMode === 'EN' ? 'font-bold text-[#78350F]' : 'text-[#78716C]'}>
+              <span className={languageMode === 'EN' ? 'font-semibold text-[#1C1917]' : 'text-[#78716C]'}>
                 EN
               </span>
               <span aria-hidden="true" className="text-[#D6CEBE]">
                 /
               </span>
-              <span className={languageMode === 'BN' ? 'font-bold text-[#78350F]' : 'text-[#78716C]'}>
+              <span className={languageMode === 'BN' ? 'font-semibold text-[#1C1917]' : 'text-[#78716C]'}>
                 বাংলা
               </span>
             </button>
@@ -236,7 +236,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <Link
               ref={headerCtaRef}
               to="/contact"
-              className="hidden sm:inline-flex min-h-[40px] items-center justify-center bg-[#1C1917] px-4 py-2 text-xs font-medium text-[#FBF9F5] whitespace-nowrap shrink-0 transition-colors duration-150 hover:bg-[#78350F] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78350F]"
+              className="hidden sm:inline-flex min-h-[38px] items-center justify-center border border-[#1C1917] bg-[#1C1917] px-5 py-2 font-mono text-[10px] tracking-[0.2em] uppercase text-[#FBF9F5] whitespace-nowrap shrink-0 transition-all duration-200 hover:bg-transparent hover:text-[#1C1917] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78350F]"
             >
               {languageMode === 'BN' ? 'পরামর্শ বুকিং' : 'Schedule Briefing'}
             </Link>

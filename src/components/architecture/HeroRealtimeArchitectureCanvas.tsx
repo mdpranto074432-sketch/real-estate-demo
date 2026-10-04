@@ -40,18 +40,28 @@ export const EHL_FLOOR_METADATA: Record<number, EHLFloorInspectionData> = {
   },
 };
 
+interface DustParticle {
+  x: number;
+  y: number;
+  radius: number;
+  vx: number;
+  vy: number;
+  alpha: number;
+  phase: number;
+}
+
 /**
- * FULL-SCREEN MULTI-ANGLE ARCHITECTURAL PHOTOGRAPHY & CINEMATIC CAMERA JOURNEY
- * Reference Architecture:
- * EHL Premium Condominiums — Dhaka, Bangladesh (Kashef Chowdhury / URBANA, 2013 · 4,536 m²)
+ * WORLD-CLASS LUXURY ARCHITECTURAL CINEMATIC HERO ENGINE
+ * Preserves the exact real-building identity of EHL Premium Condominiums (Dhaka)
+ * with zero fake geometry and zero wave/displacement warping.
  *
- * ZERO fake procedural 3D boxes.
- * ZERO wave/displacement distortion.
- * ZERO blank right-side or empty regions (`100vw` × `100vh` full-bleed).
- *
- * Orchestrates 4 seamless, full-screen photographic perspectives of the architecture
- * with multi-plane depth parallax (Background Sky, Midground Building, Foreground Canopy),
- * localized diurnal sunlight & window glow progression, and spatial portal transitions.
+ * Delivers:
+ * - Multi-plane 2.5D spatial separation (Background Sky/Horizon, Midground Architecture,
+ *   Foreground Botanical Canopy & Atmosphere) using subtle differential parallax
+ * - Slow, continuous autonomous camera drift + pointer response + scroll camera push-in
+ * - Restrained natural lighting progression (Warm Afternoon -> Golden Hour -> Blue Hour -> Nocturnal)
+ * - Subtle live atmospheric dust motes & monsoon light shafts on a lightweight 2D canvas
+ * - Seamless multi-angle photographic transitions into architectural details and interior spaces
  */
 export const HeroRealtimeArchitectureCanvas: React.FC<
   HeroRealtimeArchitectureCanvasProps
@@ -62,224 +72,390 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
   scrollProgress = 0,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [pointer, setPointer] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const targetPointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [entered, setEntered] = useState<boolean>(false);
+  const atmosphereCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  const [introStage, setIntroStage] = useState<number>(0);
+  const [cameraState, setCameraState] = useState<{
+    px: number;
+    py: number;
+    driftX: number;
+    driftY: number;
+    breathScale: number;
+  }>({
+    px: 0,
+    py: 0,
+    driftX: 0,
+    driftY: 0,
+    breathScale: 0,
+  });
+
+  const targetPointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const currentPointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  // 06 — INTRO MOTION CHOREOGRAPHY
+  // 01: subtle atmospheric reveal -> 02: building settles -> 03: light reveals architecture
   useEffect(() => {
-    const t = window.setTimeout(() => setEntered(true), 60);
-    return () => window.clearTimeout(t);
+    if (prefersReducedMotion()) {
+      setIntroStage(3);
+      return;
+    }
+    const t1 = window.setTimeout(() => setIntroStage(1), 80);
+    const t2 = window.setTimeout(() => setIntroStage(2), 450);
+    const t3 = window.setTimeout(() => setIntroStage(3), 1050);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      window.clearTimeout(t3);
+    };
   }, []);
 
+  // 03 & 08 — LIVE CINEMATIC CAMERA FEEL + SUBTLE ENVIRONMENTAL MOTION
   useEffect(() => {
     if (prefersReducedMotion()) return;
 
     let rafId = 0;
+    const startTime = performance.now();
+
     const handleMouseMove = (e: MouseEvent) => {
-      const w = window.innerWidth || 1280;
-      const h = window.innerHeight || 800;
+      const w = window.innerWidth || 1440;
+      const h = window.innerHeight || 900;
       targetPointerRef.current = {
         x: (e.clientX / w - 0.5) * 2, // -1 .. 1
         y: (e.clientY / h - 0.5) * 2, // -1 .. 1
       };
     };
 
-    const tick = () => {
-      rafId = requestAnimationFrame(tick);
-      setPointer((prev) => {
-        const dx = targetPointerRef.current.x - prev.x;
-        const dy = targetPointerRef.current.y - prev.y;
-        if (Math.abs(dx) < 0.001 && Math.abs(dy) < 0.001) return prev;
-        return {
-          x: prev.x + dx * 0.065,
-          y: prev.y + dy * 0.065,
-        };
+    // Initialize subtle atmospheric dust particles
+    const canvas = atmosphereCanvasRef.current;
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    const particles: DustParticle[] = [];
+    const particleCount = window.innerWidth < 768 ? 18 : 34;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random(),
+        y: Math.random(),
+        radius: 0.6 + Math.random() * 1.35,
+        vx: 0.00008 + Math.random() * 0.00014,
+        vy: -0.00005 - Math.random() * 0.0001,
+        alpha: 0.12 + Math.random() * 0.26,
+        phase: Math.random() * Math.PI * 2,
       });
+    }
+
+    const handleResize = () => {
+      if (!canvas) return;
+      canvas.width = window.innerWidth || 1440;
+      canvas.height = window.innerHeight || 900;
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    const animate = (now: number) => {
+      rafId = requestAnimationFrame(animate);
+      const elapsed = (now - startTime) * 0.001;
+
+      // Damped pointer interpolation (no sudden jerks or distortion)
+      currentPointerRef.current.x +=
+        (targetPointerRef.current.x - currentPointerRef.current.x) * 0.045;
+      currentPointerRef.current.y +=
+        (targetPointerRef.current.y - currentPointerRef.current.y) * 0.045;
+
+      // Ultra-slow autonomous architectural camera drift (feels like a stabilized cinema dolly)
+      const driftX = Math.sin(elapsed * 0.28) * 6.5;
+      const driftY = Math.cos(elapsed * 0.22) * 4.0;
+      const breathScale = (Math.sin(elapsed * 0.24) + 1) * 0.008;
+
+      setCameraState({
+        px: currentPointerRef.current.x,
+        py: currentPointerRef.current.y,
+        driftX,
+        driftY,
+        breathScale,
+      });
+
+      // Render subtle golden-hour dust motes & warm light scattering
+      if (ctx && canvas) {
+        const cw = canvas.width;
+        const ch = canvas.height;
+        ctx.clearRect(0, 0, cw, ch);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x > 1.05) p.x = -0.05;
+          if (p.y < -0.05) p.y = 1.05;
+
+          const drawX =
+            (p.x + currentPointerRef.current.x * 0.012) * cw;
+          const drawY =
+            (p.y + currentPointerRef.current.y * 0.008) * ch;
+          const twinkle =
+            p.alpha * (0.65 + 0.35 * Math.sin(elapsed * 1.1 + p.phase));
+
+          ctx.beginPath();
+          ctx.arc(drawX, drawY, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(247, 226, 196, ${twinkle.toFixed(3)})`;
+          ctx.fill();
+        }
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    rafId = requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(animate);
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
   const s = Math.max(0, Math.min(1, scrollProgress));
 
-  // Smooth step helper for seamless multi-angle architectural transitions
   const smoothstep = (edge0: number, edge1: number, x: number) => {
     const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
     return t * t * (3 - 2 * t);
   };
 
   // ===========================================================================
-  // 4-CHAPTER CONTINUOUS SCROLL CAMERA CHOREOGRAPHY ACROSS REAL PHOTOGRAPHY
+  // 04 & 05 — MULTI-PLANE SPATIAL DEPTH PARALLAX & SCROLL CAMERA JOURNEY
+  // Preserves 100% straight architectural lines—zero bending or warping.
   // ===========================================================================
-  // PLATE 01 (0.00 -> 0.34): Wide Establishing Exterior of EHL Premium Condominiums
-  // Camera pushes slowly inward toward the cantilevered slabs & hanging gardens
-  const plate1Opacity = 1 - smoothstep(0.24, 0.36, s);
-  const plate1Scale =
-    (entered ? 1.02 : 1.09) + smoothstep(0.0, 0.36, s) * 0.16;
-  const plate1Tx = -pointer.x * 14;
-  const plate1Ty = -pointer.y * 9 - smoothstep(0.0, 0.36, s) * 18;
+  // Background Sky / Horizon Plane (moves slowest: 0.45x parallax)
+  const bgTx = -cameraState.px * 5.5 + cameraState.driftX * 0.45;
+  const bgTy = -cameraState.py * 3.5 + cameraState.driftY * 0.45 - s * 10;
+  const bgScale = 1.03 + s * 0.05;
 
-  // PLATE 02 (0.24 -> 0.62): Close-up Architectural Detail of Cantilevered Concrete Overhangs,
-  // Exterior Iron-Wood Louver Screens & Cascading Verandah Greens
-  const plate2Enter = smoothstep(0.22, 0.35, s);
-  const plate2Exit = smoothstep(0.52, 0.64, s);
+  // Midground Primary Building Plane (moves at 1.0x camera speed + continuous scroll push-in)
+  const introScaleOffset = introStage === 0 ? 0.055 : introStage === 1 ? 0.02 : 0;
+  const bldgScale =
+    1.035 + introScaleOffset + cameraState.breathScale + smoothstep(0.0, 0.48, s) * 0.14;
+  const bldgTx = -cameraState.px * 12.5 + cameraState.driftX;
+  const bldgTy = -cameraState.py * 7.5 + cameraState.driftY - smoothstep(0.0, 0.48, s) * 16;
+
+  // Foreground Canopy / Verandah Frame Plane (moves fastest: 1.65x parallax for genuine depth)
+  const fgTx = -cameraState.px * 21.0 + cameraState.driftX * 1.45;
+  const fgTy = -cameraState.py * 12.5 + cameraState.driftY * 1.45 - s * 28;
+  const fgScale = 1.06 + smoothstep(0.0, 0.5, s) * 0.19;
+
+  // ===========================================================================
+  // CONTINUOUS SCROLL PROGRESSION ACROSS ARCHITECTURAL PERSPECTIVES
+  // 0.00 -> 0.44: Primary EHL Premium Condominiums Establishing Elevation
+  //               (with 3-layer Background / Building / Foreground depth parallax)
+  // 0.36 -> 0.72: Close-up Cantilevered Concrete Overhangs, Iron-Wood Louvers & Hanging Greens
+  // 0.64 -> 0.90: Interior Cross-Ventilated Living Gallery & Verandah Threshold
+  // 0.82 -> 1.00: Nocturnal Elevation & Seamless Upward Curtain Reveal into Section 02
+  // ===========================================================================
+  const plate1Opacity = 1 - smoothstep(0.36, 0.48, s);
+
+  const plate2Enter = smoothstep(0.34, 0.47, s);
+  const plate2Exit = smoothstep(0.64, 0.75, s);
   const plate2Opacity = plate2Enter * (1 - plate2Exit);
-  const plate2Scale = 1.14 - smoothstep(0.22, 0.62, s) * 0.11;
-  const plate2Tx = -pointer.x * 20 + (1 - plate2Enter) * 24;
-  const plate2Ty = -pointer.y * 12;
+  const plate2Scale = 1.12 - smoothstep(0.34, 0.74, s) * 0.09 + cameraState.breathScale;
+  const plate2Tx = -cameraState.px * 15 + cameraState.driftX + (1 - plate2Enter) * 18;
+  const plate2Ty = -cameraState.py * 9 + cameraState.driftY;
 
-  // PLATE 03 (0.52 -> 0.84): Interior Double-End Cross-Ventilated Living Gallery & Verandah Threshold
-  const plate3Enter = smoothstep(0.50, 0.63, s);
-  const plate3Exit = smoothstep(0.75, 0.86, s);
+  const plate3Enter = smoothstep(0.62, 0.74, s);
+  const plate3Exit = smoothstep(0.83, 0.92, s);
   const plate3Opacity = plate3Enter * (1 - plate3Exit);
-  const plate3Scale = 1.03 + smoothstep(0.50, 0.85, s) * 0.12;
-  const plate3Tx = -pointer.x * 16;
-  const plate3Ty = -pointer.y * 10 + (1 - plate3Enter) * 16;
+  const plate3Scale = 1.03 + smoothstep(0.62, 0.91, s) * 0.09 + cameraState.breathScale;
+  const plate3Tx = -cameraState.px * 13 + cameraState.driftX;
+  const plate3Ty = -cameraState.py * 8 + cameraState.driftY + (1 - plate3Enter) * 14;
 
-  // PLATE 04 (0.74 -> 1.00): Nocturnal / Blue-Hour Transformation of EHL Premium Condominiums
-  // Warm interior tungsten glow reflecting across the ground rainwater harvesting court
-  const plate4Opacity = smoothstep(0.73, 0.86, s);
-  const plate4Scale = 1.12 - smoothstep(0.73, 1.0, s) * 0.09;
-  const plate4Tx = -pointer.x * 14;
-  const plate4Ty = -pointer.y * 8;
-
-  // Foreground Depth Layer (Subtle faster parallax on periphery for genuine 2.5D spatial depth without bending lines)
-  const fgParallaxX = -pointer.x * 28;
-  const fgParallaxY = -pointer.y * 16;
-
-  // Localized Solar Light Sweep (Golden Hour sunbeam shifting across the facade as user scrolls/moves pointer)
-  const lightAngleDeg = 118 + pointer.x * 8 + s * 25;
-  const goldenWarmthOpacity = Math.max(0.12, 0.42 - s * 0.35);
+  const plate4Opacity = smoothstep(0.81, 0.92, s);
+  const plate4Scale = 1.09 - smoothstep(0.81, 1.0, s) * 0.06 + cameraState.breathScale;
+  const plate4Tx = -cameraState.px * 11 + cameraState.driftX;
+  const plate4Ty = -cameraState.py * 7 + cameraState.driftY;
 
   const primaryExteriorSrc = IMAGE_ASSETS.ehlDhakaPlate || fallbackImageSrc;
   const detailFacadeSrc = IMAGE_ASSETS.ehlDhakaDetailPlate || primaryExteriorSrc;
   const interiorGallerySrc = IMAGE_ASSETS.penthouseInterior || primaryExteriorSrc;
   const nocturnalExteriorSrc = IMAGE_ASSETS.ehlDhakaNightPlate || primaryExteriorSrc;
 
+  // Subtle localized warm highlight angle (shifts naturally with pointer and scroll)
+  const warmShaftAngle = 122 + cameraState.px * 6 + s * 18;
+  const warmShaftOpacity =
+    introStage >= 2 ? Math.max(0.08, 0.24 - s * 0.16) : 0.0;
+
   return (
     <div
       ref={containerRef}
-      className={`relative h-full w-full overflow-hidden bg-[#14171C] select-none ${className}`}
-      aria-label="EHL Premium Condominiums, Dhaka — Full-Screen Architectural Presentation"
+      className={`relative h-full w-full overflow-hidden bg-[#13161B] select-none ${className}`}
+      aria-label="EHL Premium Condominiums, Dhaka — Full-Screen Cinematic Architectural Experience"
     >
       {/* =====================================================================
-          ANGLE 01: WIDE ESTABLISHING EXTERIOR (0% -> 35% SCROLL)
-          Deep continuous cantilevered concrete slabs, warm iron-wood & hanging gardens
+          CHAPTER 01 (0% -> 46% SCROLL): PRIMARY REAL-BUILDING VISUAL
+          Separated into 3 depth planes (Background Sky, Midground Architecture,
+          Foreground Peripheral Canopy) so the real photograph feels spatial and alive.
       ===================================================================== */}
       <div
-        className="absolute inset-0 h-full w-full will-change-transform"
-        style={{
-          opacity: plate1Opacity,
-          transform: `translate3d(${plate1Tx.toFixed(1)}px, ${plate1Ty.toFixed(1)}px, 0) scale(${plate1Scale.toFixed(4)})`,
-          transition: entered ? 'none' : 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
+        className="absolute inset-0 h-full w-full"
+        style={{ opacity: plate1Opacity }}
       >
-        <img
-          src={primaryExteriorSrc}
-          alt={fallbackAlt}
-          className="h-full w-full object-cover object-center"
-          draggable={false}
-        />
+        {/* DEPTH LAYER 1: BACKGROUND SKY & HORIZON (0.45x Parallax) */}
+        <div
+          className="absolute inset-0 h-full w-full will-change-transform"
+          style={{
+            transform: `translate3d(${bgTx.toFixed(2)}px, ${bgTy.toFixed(2)}px, 0) scale(${bgScale.toFixed(4)})`,
+          }}
+        >
+          <img
+            src={primaryExteriorSrc}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-[54%_38%] sm:object-center"
+            draggable={false}
+          />
+        </div>
+
+        {/* DEPTH LAYER 2: MIDGROUND PRIMARY ARCHITECTURAL SUBJECT (1.0x Parallax)
+            Masked smoothly so the building's straight concrete slabs and iron-wood
+            louvers glide with subtle differential depth against the distant Dhaka sky */}
+        <div
+          className="absolute inset-0 h-full w-full will-change-transform"
+          style={{
+            transform: `translate3d(${bldgTx.toFixed(2)}px, ${bldgTy.toFixed(2)}px, 0) scale(${bldgScale.toFixed(4)})`,
+            transition:
+              introStage < 3
+                ? 'transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s ease-out'
+                : 'none',
+            WebkitMaskImage:
+              'radial-gradient(ellipse 76% 82% at 54% 52%, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 98%)',
+            maskImage:
+              'radial-gradient(ellipse 76% 82% at 54% 52%, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 98%)',
+          }}
+        >
+          <img
+            src={primaryExteriorSrc}
+            alt={fallbackAlt}
+            className="h-full w-full object-cover object-[54%_38%] sm:object-center"
+            draggable={false}
+          />
+        </div>
+
+        {/* DEPTH LAYER 3: FOREGROUND BOTANICAL FRAME (1.65x Parallax at peripheral edges) */}
+        <div
+          className="pointer-events-none absolute inset-0 h-full w-full will-change-transform"
+          style={{
+            transform: `translate3d(${fgTx.toFixed(2)}px, ${fgTy.toFixed(2)}px, 0) scale(${fgScale.toFixed(4)})`,
+            WebkitMaskImage:
+              'radial-gradient(ellipse 68% 72% at 52% 48%, rgba(0,0,0,0) 68%, rgba(0,0,0,0.85) 100%)',
+            maskImage:
+              'radial-gradient(ellipse 68% 72% at 52% 48%, rgba(0,0,0,0) 68%, rgba(0,0,0,0.85) 100%)',
+          }}
+        >
+          <img
+            src={primaryExteriorSrc}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-[54%_38%] sm:object-center"
+            draggable={false}
+          />
+        </div>
       </div>
 
       {/* =====================================================================
-          ANGLE 02: CLOSE-UP ARCHITECTURAL DETAIL (25% -> 62% SCROLL)
-          Board-formed concrete overhangs, exterior iron-wood screens & swaying greens
+          CHAPTER 02 (34% -> 74% SCROLL): ARCHITECTURAL FACADE & OVERHANG DETAIL
+          Close-up of cantilevered concrete slabs, exterior iron-wood screens & hanging gardens
       ===================================================================== */}
       <div
-        className="absolute inset-0 h-full w-full will-change-transform"
+        className="pointer-events-none absolute inset-0 h-full w-full will-change-transform"
         style={{
           opacity: plate2Opacity,
-          transform: `translate3d(${plate2Tx.toFixed(1)}px, ${plate2Ty.toFixed(1)}px, 0) scale(${plate2Scale.toFixed(4)})`,
-          pointerEvents: 'none',
+          transform: `translate3d(${plate2Tx.toFixed(2)}px, ${plate2Ty.toFixed(2)}px, 0) scale(${plate2Scale.toFixed(4)})`,
         }}
       >
         <img
           src={detailFacadeSrc}
-          alt="EHL Premium Condominiums — Close-up architectural study of cantilevered concrete overhangs, exterior iron-wood louvers, and hanging gardens"
+          alt="Close-up architectural study of cantilevered concrete overhangs, exterior iron-wood louvers, and hanging gardens"
           className="h-full w-full object-cover object-center"
+          loading="lazy"
           draggable={false}
         />
       </div>
 
       {/* =====================================================================
-          ANGLE 03: INTERIOR LIVING GALLERY & VERANDAH THRESHOLD (52% -> 85% SCROLL)
-          Full-length cross-ventilated living gallery opening to shaded verandas
+          CHAPTER 03 (62% -> 91% SCROLL): CROSS-VENTILATED LIVING GALLERY & VERANDAH
       ===================================================================== */}
       <div
-        className="absolute inset-0 h-full w-full will-change-transform"
+        className="pointer-events-none absolute inset-0 h-full w-full will-change-transform"
         style={{
           opacity: plate3Opacity,
-          transform: `translate3d(${plate3Tx.toFixed(1)}px, ${plate3Ty.toFixed(1)}px, 0) scale(${plate3Scale.toFixed(4)})`,
-          pointerEvents: 'none',
+          transform: `translate3d(${plate3Tx.toFixed(2)}px, ${plate3Ty.toFixed(2)}px, 0) scale(${plate3Scale.toFixed(4)})`,
         }}
       >
         <img
           src={interiorGallerySrc}
-          alt="EHL Premium Condominiums — Full-length cross-ventilated interior living gallery and shaded monsoon verandah"
+          alt="Full-length cross-ventilated interior living gallery and shaded monsoon verandah"
           className="h-full w-full object-cover object-center"
+          loading="lazy"
           draggable={false}
         />
       </div>
 
       {/* =====================================================================
-          ANGLE 04: NOCTURNAL / BLUE-HOUR TRANSFORMATION (74% -> 100% SCROLL)
-          Warm glowing interiors and rainwater harvesting court reflections at dusk
+          CHAPTER 04 (81% -> 100% SCROLL): NOCTURNAL ELEVATION & REFLECTION COURT
       ===================================================================== */}
       <div
-        className="absolute inset-0 h-full w-full will-change-transform"
+        className="pointer-events-none absolute inset-0 h-full w-full will-change-transform"
         style={{
           opacity: plate4Opacity,
-          transform: `translate3d(${plate4Tx.toFixed(1)}px, ${plate4Ty.toFixed(1)}px, 0) scale(${plate4Scale.toFixed(4)})`,
-          pointerEvents: 'none',
+          transform: `translate3d(${plate4Tx.toFixed(2)}px, ${plate4Ty.toFixed(2)}px, 0) scale(${plate4Scale.toFixed(4)})`,
         }}
       >
         <img
           src={nocturnalExteriorSrc}
-          alt="EHL Premium Condominiums — Nocturnal architectural elevation with warm interior illumination and rainwater court reflections"
+          alt="Nocturnal architectural elevation with warm interior illumination and rainwater court reflections"
           className="h-full w-full object-cover object-center"
+          loading="lazy"
           draggable={false}
         />
       </div>
 
       {/* =====================================================================
-          LOCALIZED WEST SOLAR SHAFT & ATMOSPHERIC LIGHT LAYER
-          Shifts subtly with pointer and scroll without distorting building geometry
+          07 — RESTRAINED NATURAL LIGHTING & ATMOSPHERIC GRADING
+          Subtle warm afternoon sun-ray highlight + soft shadow depth (never orange/Instagram)
       ===================================================================== */}
       <div
-        className="pointer-events-none absolute inset-0 mix-blend-screen transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 mix-blend-soft-light transition-opacity duration-1000"
         style={{
-          opacity: goldenWarmthOpacity,
-          background: `linear-gradient(${lightAngleDeg.toFixed(1)}deg, rgba(255, 186, 115, 0.34) 0%, rgba(255, 168, 92, 0.10) 38%, rgba(18, 22, 28, 0.0) 72%)`,
+          opacity: warmShaftOpacity,
+          background: `linear-gradient(${warmShaftAngle.toFixed(1)}deg, rgba(255, 224, 186, 0.55) 0%, rgba(255, 205, 152, 0.18) 38%, rgba(16, 20, 26, 0.0) 70%)`,
         }}
       />
 
       {/* =====================================================================
-          FOREGROUND DEPTH CANOPY VIGNETTE LAYER (2.5D SPATIAL SEPARATION)
+          08 — SUBTLE LIVE ATMOSPHERIC DUST & LIGHT SCATTERING CANVAS
+      ===================================================================== */}
+      <canvas
+        ref={atmosphereCanvasRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-75"
+      />
+
+      {/* =====================================================================
+          06 — INTRO ATMOSPHERIC REVEAL VEIL
+          Dissolves smoothly on load so the building emerges naturally from light
       ===================================================================== */}
       <div
-        className="pointer-events-none absolute -inset-8 will-change-transform"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[#111317] transition-opacity duration-1000 ease-out"
         style={{
-          transform: `translate3d(${fgParallaxX.toFixed(1)}px, ${fgParallaxY.toFixed(1)}px, 0)`,
-          background:
-            'radial-gradient(circle at 55% 45%, rgba(14,18,24,0.0) 48%, rgba(10,13,18,0.42) 100%)',
+          opacity: introStage === 0 ? 0.55 : 0,
         }}
       />
 
       {/* =====================================================================
-          RESTRAINED LOWER-LEFT EDITORIAL LEGIBILITY GRADIENT
-          Leaves 85% of the full-bleed building completely unobstructed
+          02 — CINEMATIC EDITORIAL FRAMING GRADIENT
+          Protects headline legibility in the lower-left while leaving the entire
+          central and upper architectural volume 100% clear and luminous.
       ===================================================================== */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'linear-gradient(180deg, rgba(12,15,20,0.22) 0%, rgba(12,15,20,0.0) 18%, rgba(12,15,20,0.0) 64%, rgba(12,15,20,0.74) 100%)',
+            'linear-gradient(180deg, rgba(14,17,22,0.18) 0%, rgba(14,17,22,0.0) 16%, rgba(14,17,22,0.0) 58%, rgba(14,17,22,0.72) 100%), radial-gradient(circle at 18% 82%, rgba(12,15,20,0.48) 0%, rgba(12,15,20,0.0) 52%)',
         }}
       />
     </div>
