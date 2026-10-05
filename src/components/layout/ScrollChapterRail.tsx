@@ -68,8 +68,8 @@ export const ScrollChapterRail: React.FC = () => {
     >
       {/* Expanded Monograph Index */}
       {expanded && (
-        <div className="mb-2.5 w-60 border border-[#D6CEBE]/25 bg-[#141210]/88 p-4 text-[#FBF9F5] backdrop-blur-md">
-          <div className="flex items-center justify-between border-b border-[#FBF9F5]/10 pb-2 font-mono text-[9px] tracking-[0.2em] text-[#E7C396] uppercase">
+        <div className="mb-2.5 w-60 border border-[#D8D1C5]/30 bg-[#151514]/90 p-4 text-[#F2EEE7] backdrop-blur-md">
+          <div className="flex items-center justify-between border-b border-[#F2EEE7]/10 pb-2 font-mono text-[9px] tracking-[0.2em] text-[#B5A07D] uppercase">
             <span>Monograph Index</span>
             <span>0{activeChapterIndex + 1} / 08</span>
           </div>
@@ -83,12 +83,12 @@ export const ScrollChapterRail: React.FC = () => {
                     onClick={() => handleJumpToChapter(chap.id)}
                     className={`flex w-full items-center justify-between px-2 py-1.5 text-left transition-colors cursor-pointer ${
                       isCurrent
-                        ? 'text-[#FBF9F5]'
-                        : 'text-[#A8A29E] hover:text-[#FBF9F5]'
+                        ? 'text-[#F2EEE7]'
+                        : 'text-[#A59D90] hover:text-[#F2EEE7]'
                     }`}
                   >
                     <div className="flex items-baseline gap-2.5">
-                      <span className="font-mono text-[9px] text-[#C28E5C]">
+                      <span className="font-mono text-[9px] text-[#986046]">
                         {chap.number}
                       </span>
                       <span className="font-serif text-xs tracking-wide">
@@ -96,7 +96,7 @@ export const ScrollChapterRail: React.FC = () => {
                       </span>
                     </div>
                     {isCurrent && (
-                      <span className="h-1 w-1 rounded-full bg-[#E7C396]" />
+                      <span className="h-1 w-1 rounded-full bg-[#B5A07D]" />
                     )}
                   </button>
                 </li>
@@ -106,23 +106,23 @@ export const ScrollChapterRail: React.FC = () => {
         </div>
       )}
 
-      {/* Subtle Editorial Chapter Indicator (No heavy box or software velocity readout) */}
+      {/* Subtle Editorial Chapter Indicator */}
       <button
         type="button"
         onClick={() => setExpanded((prev) => !prev)}
         aria-expanded={expanded}
-        className="group flex items-center gap-3 border border-[#FBF9F5]/15 bg-[#12151B]/55 px-3.5 py-2 text-left text-[#FBF9F5] backdrop-blur-md transition-all duration-300 hover:border-[#FBF9F5]/35 hover:bg-[#12151B]/80 cursor-pointer"
+        className="group flex items-center gap-3 border border-[#F2EEE7]/20 bg-[#151514]/75 px-3.5 py-2 text-left text-[#F2EEE7] backdrop-blur-md transition-all duration-300 hover:border-[#F2EEE7]/40 hover:bg-[#151514]/90 cursor-pointer"
       >
-        <span className="font-mono text-[9px] tracking-[0.22em] text-[#E7C396]">
+        <span className="font-mono text-[9px] tracking-[0.22em] text-[#B5A07D]">
           {currentChapter.number} / 08
         </span>
-        <span className="h-2.5 w-[1px] bg-[#FBF9F5]/20" />
-        <span className="font-serif text-xs tracking-wide text-[#F5F2EB]/90">
+        <span className="h-2.5 w-[1px] bg-[#F2EEE7]/20" />
+        <span className="font-serif text-xs tracking-wide text-[#F2EEE7]/90">
           {currentChapter.label}
         </span>
-        <div className="ml-1 h-[1px] w-8 overflow-hidden bg-[#FBF9F5]/20">
+        <div className="ml-1 h-[1px] w-8 overflow-hidden bg-[#F2EEE7]/20">
           <div
-            className="h-full bg-[#E7C396] transition-all duration-150"
+            className="h-full bg-[#986046] transition-all duration-150"
             style={{ width: `${Math.max(10, Math.round(scrollProgress * 100))}%` }}
           />
         </div>

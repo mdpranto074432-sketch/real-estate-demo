@@ -94,14 +94,14 @@ export const AboutPage: React.FC = () => {
   ];
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="min-h-screen bg-[#F2EEE7]">
       {/* =====================================================================
           01. BRAND PHILOSOPHY & MANIFESTO HEADER
       ===================================================================== */}
       <section className="mx-auto max-w-[1360px] px-6 pt-10 pb-16 md:px-12 lg:pt-16">
         <div
           data-animate="editorial"
-          className="border-b border-[#D6CEBE] pb-12"
+          className="border-b border-[#D8D1C5] pb-12"
         >
           <EditorialMetaLine
             items={[
@@ -110,10 +110,10 @@ export const AboutPage: React.FC = () => {
               DEVELOPER_PROFILE.headquarters,
             ]}
           />
-          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-normal leading-[1.06] tracking-tight text-[#1C1917] text-balance sm:text-6xl lg:text-[66px]">
+          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-normal leading-[1.06] tracking-tight text-[#151514] text-balance sm:text-6xl lg:text-[66px]">
             {DEVELOPER_PROFILE.manifestoHeadline}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#44403C]">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#544E46]">
             {DEVELOPER_PROFILE.manifestoLead}
           </p>
         </div>
@@ -123,7 +123,7 @@ export const AboutPage: React.FC = () => {
           data-animate="editorial"
           className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center"
         >
-          <div className="max-w-prose space-y-6 text-base leading-[1.8] text-[#1C1917] lg:col-span-6">
+          <div className="max-w-prose space-y-6 text-base leading-[1.8] text-[#151514] lg:col-span-6">
             <p className="editorial-dropcap">
               For half a century, Bengal has stood at the crossroads of
               monumental modern architecture—where Louis Kahn’s timeless brick
@@ -151,11 +151,11 @@ export const AboutPage: React.FC = () => {
 
           <div className="lg:col-span-6">
             <ArchitecturalImage
-              src={IMAGE_ASSETS.dhanmondiTerrace}
-              alt="Hand-crafted brick and architectural concrete facade with lush monsoon terraces"
+              src={IMAGE_ASSETS.architectAtelierDraft}
+              alt="Hand-drawn architectural blueprints, tactile terracotta brick samples, and wooden massing models in Dhaka studio atelier"
               aspectRatioClass="aspect-[4/3]"
-              caption="Material Study — Perforated kiln-brick jali screens and board-formed architectural concrete."
-              figureNumber="ARCHIVE PLATE / MATERIALITY"
+              caption="Studio Atelier & Materials Archive — Hand-drawn blueprints, tactile terracotta brick samples, and timber scale models."
+              figureNumber="ARCHIVE PLATE / PRACTICE"
             />
           </div>
         </div>
@@ -180,23 +180,23 @@ export const AboutPage: React.FC = () => {
           {DEVELOPER_PROFILE.philosophies.map((phil) => (
             <div
               key={phil.index}
-              className="flex flex-col justify-between border border-[#D6CEBE] bg-[#FBF9F5] p-8"
+              className="flex flex-col justify-between border border-[#D8D1C5] bg-[#FAF7F2] p-8"
             >
               <div>
-                <span className="font-mono text-xs text-[#78350F] tabular-nums">
+                <span className="font-mono text-xs text-[#986046] tabular-nums">
                   TENET {phil.index}
                 </span>
-                <h3 className="mt-2 font-serif text-2xl text-[#1C1917]">
+                <h3 className="mt-2 font-serif text-2xl text-[#151514]">
                   {phil.title}
                 </h3>
-                <p className="mt-3 font-serif text-base italic text-[#1C1917]">
+                <p className="mt-3 font-serif text-base italic text-[#151514]">
                   “{phil.thesis}”
                 </p>
-                <p className="mt-4 text-sm leading-relaxed text-[#44403C]">
+                <p className="mt-4 text-sm leading-relaxed text-[#544E46]">
                   {phil.detail}
                 </p>
               </div>
-              <span className="mt-6 border-t border-[#D6CEBE] pt-3 font-mono text-[11px] text-[#78716C]">
+              <span className="mt-6 border-t border-[#D8D1C5] pt-3 font-mono text-[11px] text-[#736B63]">
                 STUDIO STANDARD · DHAKA
               </span>
             </div>
@@ -215,25 +215,25 @@ export const AboutPage: React.FC = () => {
           subtitle="We define luxury not through decorative ornament, but through measurable acoustic, structural, atmospheric, and hydrological thresholds."
         />
 
-        <div className="mt-10 overflow-x-auto border border-[#D6CEBE] bg-[#FBF9F5]">
+        <div className="mt-10 overflow-x-auto border border-[#D8D1C5] bg-[#FAF7F2]">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
-              <tr className="border-b border-[#1C1917] bg-[#EBE6DF]/60 text-xs font-semibold text-[#1C1917]">
-                <th className="py-4 px-5">Engineering Discipline</th>
-                <th className="py-4 px-5">Architectural & Material Specification</th>
-                <th className="py-4 px-5 text-right">Measured Benchmark</th>
+              <tr className="border-b border-[#151514] bg-[#E8E2D8]/70 text-xs font-semibold text-[#151514]">
+                <th className="py-4 px-5 font-mono text-[11px] tracking-wider">Engineering Discipline</th>
+                <th className="py-4 px-5 font-mono text-[11px] tracking-wider">Architectural & Material Specification</th>
+                <th className="py-4 px-5 text-right font-mono text-[11px] tracking-wider">Measured Benchmark</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#D6CEBE]">
+            <tbody className="divide-y divide-[#D8D1C5]">
               {DEVELOPER_PROFILE.craftStandards.map((std) => (
-                <tr key={std.category} className="hover:bg-[#EBE6DF]/35">
-                  <td className="py-4 px-5 font-serif text-lg font-medium text-[#1C1917]">
+                <tr key={std.category} className="hover:bg-[#E8E2D8]/40">
+                  <td className="py-4 px-5 font-serif text-lg font-medium text-[#151514]">
                     {std.category}
                   </td>
-                  <td className="py-4 px-5 text-xs text-[#44403C]">
+                  <td className="py-4 px-5 text-xs text-[#544E46]">
                     {std.specification}
                   </td>
-                  <td className="py-4 px-5 text-right font-mono text-xs font-semibold text-[#78350F] tabular-nums">
+                  <td className="py-4 px-5 text-right font-mono text-xs font-semibold text-[#986046] tabular-nums">
                     <ArchitecturalTooltip
                       term={std.benchmark}
                       definition={std.specification}
@@ -285,22 +285,22 @@ export const AboutPage: React.FC = () => {
                   onClick={() => setActiveProcessStep(idx)}
                   className={`flex flex-col justify-between border p-6 text-left transition-all cursor-pointer ${
                     isSelected
-                      ? 'border-[#1C1917] bg-[#1C1917] text-[#FBF9F5]'
-                      : 'border-[#D6CEBE] bg-[#FBF9F5] text-[#1C1917] hover:border-[#78350F]'
+                      ? 'border-[#151514] bg-[#151514] text-[#F2EEE7]'
+                      : 'border-[#D8D1C5] bg-[#FAF7F2] text-[#151514] hover:border-[#986046]'
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between font-mono text-xs">
                       <span
                         className={
-                          isSelected ? 'text-[#D6CEBE]' : 'text-[#78350F]'
+                          isSelected ? 'text-[#B5A07D]' : 'text-[#986046]'
                         }
                       >
                         {proc.step}
                       </span>
                       <span
                         className={
-                          isSelected ? 'text-[#A8A29E]' : 'text-[#78716C]'
+                          isSelected ? 'text-[#A59D90]' : 'text-[#736B63]'
                         }
                       >
                         {proc.duration}
@@ -311,7 +311,7 @@ export const AboutPage: React.FC = () => {
                     </h3>
                     <p
                       className={`mt-2.5 text-xs leading-relaxed ${
-                        isSelected ? 'text-[#D6CEBE]/90' : 'text-[#44403C]'
+                        isSelected ? 'text-[#D8D1C5]/90' : 'text-[#544E46]'
                       }`}
                     >
                       {proc.summary}
@@ -321,8 +321,8 @@ export const AboutPage: React.FC = () => {
                   <p
                     className={`mt-5 border-t pt-3 font-mono text-[11px] ${
                       isSelected
-                        ? 'border-[#D6CEBE]/20 text-[#FBF9F5]'
-                        : 'border-[#D6CEBE] text-[#78350F]'
+                        ? 'border-[#D8D1C5]/20 text-[#F2EEE7]'
+                        : 'border-[#D8D1C5] text-[#986046]'
                     }`}
                   >
                     Dossier: {proc.deliverable}
@@ -333,12 +333,12 @@ export const AboutPage: React.FC = () => {
           </div>
 
           {/* Right 5 Columns: Demo-Safe Practice History & Chronology */}
-          <div className="border border-[#D6CEBE] bg-[#FBF9F5] p-6 md:p-8 lg:col-span-5">
-            <div className="flex items-center justify-between border-b border-[#D6CEBE] pb-4">
-              <span className="font-mono text-xs text-[#78350F]">
+          <div className="border border-[#D8D1C5] bg-[#FAF7F2] p-6 md:p-8 lg:col-span-5">
+            <div className="flex items-center justify-between border-b border-[#D8D1C5] pb-4">
+              <span className="font-mono text-xs text-[#986046]">
                 PRACTICE CHRONOLOGY (CONCEPT TIMELINE)
               </span>
-              <span className="font-mono text-[10px] text-[#78716C]">
+              <span className="font-mono text-[10px] text-[#736B63]">
                 ILLUSTRATIVE
               </span>
             </div>
@@ -347,15 +347,15 @@ export const AboutPage: React.FC = () => {
               {practiceChronology.map((item) => (
                 <div
                   key={item.year}
-                  className="border-l-2 border-[#78350F] pl-4"
+                  className="border-l-2 border-[#986046] pl-4"
                 >
-                  <p className="font-mono text-xs font-semibold text-[#78350F] tabular-nums">
+                  <p className="font-mono text-xs font-semibold text-[#986046] tabular-nums">
                     {item.year}
                   </p>
-                  <h4 className="mt-1 font-serif text-lg font-medium text-[#1C1917]">
+                  <h4 className="mt-1 font-serif text-lg font-medium text-[#151514]">
                     {item.milestone}
                   </h4>
-                  <p className="mt-1 text-xs leading-relaxed text-[#44403C]">
+                  <p className="mt-1 text-xs leading-relaxed text-[#544E46]">
                     {item.note}
                   </p>
                 </div>
@@ -380,21 +380,21 @@ export const AboutPage: React.FC = () => {
           {DEVELOPER_PROFILE.principals.map((principal) => (
             <div
               key={principal.name}
-              className="flex flex-col justify-between border border-[#D6CEBE] bg-[#FBF9F5] p-8"
+              className="flex flex-col justify-between border border-[#D8D1C5] bg-[#FAF7F2] p-8"
             >
               <div>
-                <p className="font-mono text-xs text-[#78350F]">
+                <p className="font-mono text-xs text-[#986046]">
                   {principal.role}
                 </p>
-                <h3 className="mt-2 font-serif text-2xl text-[#1C1917]">
+                <h3 className="mt-2 font-serif text-2xl text-[#151514]">
                   {principal.name}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#44403C]">
+                <p className="mt-3 text-sm leading-relaxed text-[#544E46]">
                   {principal.background}
                 </p>
               </div>
 
-              <blockquote className="mt-6 border-t border-[#D6CEBE] pt-4 font-serif text-lg italic text-[#1C1917]">
+              <blockquote className="mt-6 border-t border-[#D8D1C5] pt-4 font-serif text-lg italic text-[#151514]">
                 “{principal.quote}”
               </blockquote>
             </div>
@@ -412,7 +412,7 @@ export const AboutPage: React.FC = () => {
           <ConversionActionSuite projectSlug={PROJECTS_DATA[0].slug} />
         </div>
 
-        <p className="mt-8 font-mono text-[11px] text-[#78716C]">
+        <p className="mt-8 font-mono text-[11px] text-[#736B63]">
           {GLOBAL_DEMO_NOTICE}
         </p>
       </EditorialGridSection>

@@ -209,7 +209,7 @@ export const HeroScrollArchitectureChapter: React.FC<
     <section
       ref={sectionRef}
       aria-label="Architectural Hero"
-      className="relative h-screen min-h-[680px] w-screen max-w-full overflow-hidden bg-[#13161B] text-[#FBF9F5]"
+      className="relative h-screen min-h-[680px] w-screen max-w-full overflow-hidden bg-[#151514] text-[#F2EEE7]"
     >
       {/* =====================================================================
           1. FULL-BLEED REAL BUILDING VISUAL & LIVE CAMERA MOTION
@@ -242,7 +242,7 @@ export const HeroScrollArchitectureChapter: React.FC<
           <div className="lg:col-span-8">
             <div className="overflow-hidden">
               <p
-                className={`font-mono text-[10px] tracking-[0.26em] text-[#E7C396] uppercase transition-all duration-700 ease-out sm:text-[11px] ${
+                className={`font-mono text-[10px] tracking-[0.26em] text-[#B5A07D] uppercase transition-all duration-700 ease-out sm:text-[11px] ${
                   typographyReady
                     ? 'translate-y-0 opacity-100'
                     : 'translate-y-4 opacity-0'
@@ -256,7 +256,7 @@ export const HeroScrollArchitectureChapter: React.FC<
             {isProjectDetail && projectTitle && scrollProgress < 0.36 ? (
               <div className="mt-3 overflow-hidden">
                 <h1
-                  className={`font-serif text-4xl font-normal leading-[1.04] tracking-tight text-[#FBF9F5] transition-all duration-900 ease-out sm:text-5xl lg:text-[62px] ${
+                  className={`font-serif text-4xl font-normal leading-[1.04] tracking-tight text-[#F2EEE7] transition-all duration-900 ease-out sm:text-5xl lg:text-[62px] ${
                     typographyReady
                       ? 'translate-y-0 opacity-100'
                       : 'translate-y-8 opacity-0'
@@ -268,7 +268,7 @@ export const HeroScrollArchitectureChapter: React.FC<
               </div>
             ) : (
               <h1
-                className="mt-3 font-serif text-3xl font-normal leading-[1.03] tracking-tight text-[#FBF9F5] sm:text-5xl lg:text-[58px]"
+                className="mt-3 font-serif text-3xl font-normal leading-[1.03] tracking-tight text-[#F2EEE7] sm:text-5xl lg:text-[58px]"
                 style={{ textShadow: '0 8px 32px rgba(0,0,0,0.65)' }}
               >
                 {activeBeat.lines.map((line, idx) => (
@@ -291,7 +291,7 @@ export const HeroScrollArchitectureChapter: React.FC<
             )}
 
             <p
-              className={`mt-4 max-w-md text-sm leading-relaxed text-[#F5F2EB]/90 transition-all duration-900 delay-300 ease-out sm:text-[15px] ${
+              className={`mt-4 max-w-md text-sm leading-relaxed text-[#F2EEE7]/90 transition-all duration-900 delay-300 ease-out sm:text-[15px] ${
                 typographyReady
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
@@ -302,53 +302,63 @@ export const HeroScrollArchitectureChapter: React.FC<
             </p>
           </div>
 
-          {/* RIGHT COLUMN: Primary CTA + Minimal Scroll Indicator */}
+          {/* RIGHT COLUMN: One Primary CTA + One Secondary CTA + Minimal Scroll Indicator */}
           <div
             className={`pointer-events-auto flex flex-col items-start justify-between gap-6 transition-all duration-900 ease-out lg:col-span-4 lg:items-end ${
               ctaReady ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
           >
-            {isProjectDetail ? (
-              <a
-                href="#project-facts"
-                data-cursor="EXPLORE"
-                onClick={(e) => {
-                  if (onLaunchGallery && scrollProgress > 0.5) {
-                    e.preventDefault();
-                    onLaunchGallery();
-                  }
-                }}
-                className="group inline-flex items-center gap-3.5 border border-[#FBF9F5]/35 bg-[#12151B]/55 px-6 py-3.5 font-mono text-[11px] tracking-[0.22em] text-[#FBF9F5] uppercase backdrop-blur-md transition-all duration-300 hover:border-[#FBF9F5] hover:bg-[#FBF9F5] hover:text-[#1C1917]"
-              >
-                <span>Explore Residences</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArchitecturalIcon name="arrow-up-right" size={13} />
-                </span>
-              </a>
-            ) : (
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              {isProjectDetail ? (
+                <a
+                  href="#project-facts"
+                  data-cursor="EXPLORE"
+                  onClick={(e) => {
+                    if (onLaunchGallery && scrollProgress > 0.5) {
+                      e.preventDefault();
+                      onLaunchGallery();
+                    }
+                  }}
+                  className="group inline-flex min-h-[44px] items-center justify-center gap-3 border border-[#F2EEE7] bg-[#F2EEE7] px-6 py-3 font-mono text-[11px] tracking-[0.22em] text-[#151514] uppercase transition-all duration-300 hover:bg-[#986046] hover:border-[#986046] hover:text-[#F2EEE7]"
+                >
+                  <span>Explore Residences</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <ArchitecturalIcon name="arrow-up-right" size={13} />
+                  </span>
+                </a>
+              ) : (
+                <Link
+                  to={`/projects/${projectSlug}`}
+                  data-cursor="ENTER"
+                  className="group inline-flex min-h-[44px] items-center justify-center gap-3 border border-[#F2EEE7] bg-[#F2EEE7] px-6 py-3 font-mono text-[11px] tracking-[0.22em] text-[#151514] uppercase transition-all duration-300 hover:bg-[#986046] hover:border-[#986046] hover:text-[#F2EEE7]"
+                >
+                  <span>Explore Residences</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <ArchitecturalIcon name="arrow-up-right" size={13} />
+                  </span>
+                </Link>
+              )}
+
               <Link
-                to={`/projects/${projectSlug}`}
-                data-cursor="ENTER"
-                className="group inline-flex items-center gap-3.5 border border-[#FBF9F5]/35 bg-[#12151B]/55 px-6 py-3.5 font-mono text-[11px] tracking-[0.22em] text-[#FBF9F5] uppercase backdrop-blur-md transition-all duration-300 hover:border-[#FBF9F5] hover:bg-[#FBF9F5] hover:text-[#1C1917]"
+                to="/contact"
+                data-cursor="BRIEFING"
+                className="group inline-flex min-h-[44px] items-center justify-center gap-2.5 border border-[#F2EEE7]/40 bg-[#151514]/60 px-5 py-3 font-mono text-[11px] tracking-[0.2em] text-[#F2EEE7] uppercase backdrop-blur-md transition-all duration-300 hover:border-[#F2EEE7] hover:bg-[#151514]/90"
               >
-                <span>Explore Residences</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                  <ArchitecturalIcon name="arrow-up-right" size={13} />
-                </span>
+                <span>Schedule Briefing</span>
               </Link>
-            )}
+            </div>
 
             {/* 13 — MINIMAL SCROLL INDICATOR */}
             <div className="flex items-center gap-3.5">
               <span
-                className="font-mono text-[9px] tracking-[0.26em] text-[#E7E2DA]/80 uppercase"
+                className="font-mono text-[9px] tracking-[0.26em] text-[#A59D90] uppercase"
                 style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
               >
                 Scroll to Explore
               </span>
-              <div className="relative h-7 w-[1px] overflow-hidden bg-[#FBF9F5]/20">
+              <div className="relative h-7 w-[1px] overflow-hidden bg-[#F2EEE7]/20">
                 <div
-                  className="w-full bg-[#E7C396] transition-all duration-150"
+                  className="w-full bg-[#986046] transition-all duration-150"
                   style={{
                     height: `${Math.max(18, Math.round(scrollProgress * 100))}%`,
                   }}
@@ -364,7 +374,7 @@ export const HeroScrollArchitectureChapter: React.FC<
       ===================================================================== */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 bg-gradient-to-t from-[#FBF9F5] to-transparent"
+        className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 bg-gradient-to-t from-[#F2EEE7] to-transparent"
         style={{
           height: `${Math.round(exitTransitionT * 72)}px`,
           opacity: exitTransitionT * 0.9,

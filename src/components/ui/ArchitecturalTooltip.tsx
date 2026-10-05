@@ -66,30 +66,30 @@ export const ArchitecturalTooltip: React.FC<ArchitecturalTooltipProps> = ({
         aria-expanded={isVisible}
         aria-describedby={isVisible ? tooltipId : undefined}
         onClick={() => setIsVisible((prev) => !prev)}
-        className="inline-flex min-h-[32px] items-center gap-1 border-b border-dotted border-[#78350F] py-0.5 font-mono text-xs text-[#1C1917] transition-colors duration-150 hover:text-[#78350F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78350F] cursor-pointer"
+        className="inline-flex min-h-[32px] items-center gap-1 border-b border-dotted border-[#986046] py-0.5 font-mono text-xs text-[#151514] transition-colors duration-150 hover:text-[#986046] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#986046] cursor-pointer"
       >
         <span>{children || term}</span>
-        <ArchitecturalIcon name="info" size={12} className="text-[#78350F]" />
+        <ArchitecturalIcon name="info" size={12} className="text-[#986046]" />
       </button>
 
       {isVisible && (
         <span
           id={tooltipId}
           role="tooltip"
-          className="fixed inset-x-4 bottom-5 z-50 border border-[#D6CEBE]/40 bg-[#141210] p-4 text-left text-xs text-[#FBF9F5] shadow-2xl sm:absolute sm:inset-auto sm:bottom-full sm:left-1/2 sm:mb-2.5 sm:w-64 sm:-translate-x-1/2 sm:p-3.5"
+          className="fixed inset-x-4 bottom-5 z-50 border border-[#D8D1C5]/40 bg-[#151514] p-4 text-left text-xs text-[#F2EEE7] shadow-2xl sm:absolute sm:inset-auto sm:bottom-full sm:left-1/2 sm:mb-2.5 sm:w-64 sm:-translate-x-1/2 sm:p-3.5"
         >
-          <span className="flex items-center justify-between font-mono text-[10px] tracking-wider text-[#D6CEBE]">
+          <span className="flex items-center justify-between font-mono text-[10px] tracking-wider text-[#B5A07D]">
             <span>TECHNICAL SPECIFICATION</span>
-            <span className="sm:hidden text-[10px] text-[#A8A29E]">TAP TO CLOSE</span>
+            <span className="sm:hidden text-[10px] text-[#A59D90]">TAP TO CLOSE</span>
           </span>
-          <span className="mt-1 block font-serif text-base sm:text-sm font-medium text-[#FBF9F5]">
+          <span className="mt-1 block font-serif text-base sm:text-sm font-medium text-[#F2EEE7]">
             {term}
           </span>
-          <span className="mt-1 block text-xs sm:text-[11px] leading-relaxed text-[#D6CEBE]/90">
+          <span className="mt-1 block text-xs sm:text-[11px] leading-relaxed text-[#D8D1C5]/90">
             {definition}
           </span>
           {benchmark && (
-            <span className="mt-2 block border-t border-[#D6CEBE]/20 pt-1.5 font-mono text-[10px] text-[#FBF9F5] tabular-nums">
+            <span className="mt-2 block border-t border-[#D8D1C5]/20 pt-1.5 font-mono text-[10px] text-[#B5A07D] tabular-nums">
               Standard: {benchmark}
             </span>
           )}

@@ -71,14 +71,14 @@ export const LocationsPage: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="min-h-screen bg-[#F2EEE7]">
       {/* =====================================================================
           01. EDITORIAL HEADER & ENCLAVE SELECTOR
       ===================================================================== */}
       <section className="mx-auto max-w-[1360px] px-6 pt-10 pb-12 md:px-12 lg:pt-16">
         <div
           data-animate="editorial"
-          className="border-b border-[#D6CEBE] pb-10"
+          className="border-b border-[#D8D1C5] pb-10"
         >
           <EditorialMetaLine
             items={[
@@ -87,10 +87,10 @@ export const LocationsPage: React.FC = () => {
               'MICROCLIMATE & CANOPY STUDIES (CONCEPT DEMO)',
             ]}
           />
-          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-normal leading-[1.08] tracking-tight text-[#1C1917] text-balance sm:text-5xl lg:text-[62px]">
+          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-normal leading-[1.08] tracking-tight text-[#151514] text-balance sm:text-5xl lg:text-[62px]">
             The Geography of Quiet in Dhaka
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#44403C]">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#544E46]">
             In one of the world’s most vital metropolises, true residential
             sanctuary depends on micro-geography: lakeside wind corridors,
             mature rain-tree canopies, diplomatic height discipline, and
@@ -123,20 +123,20 @@ export const LocationsPage: React.FC = () => {
       >
         <div
           data-animate="editorial"
-          className="grid grid-cols-1 gap-10 border-b border-[#D6CEBE] pb-16 lg:grid-cols-12"
+          className="grid grid-cols-1 gap-10 border-b border-[#D8D1C5] pb-16 lg:grid-cols-12"
         >
           {/* Left 6 Columns: Interactive Dhaka Watershed & Coordinate Map */}
-          <div className="flex flex-col justify-between border border-[#D6CEBE] bg-[#EBE6DF]/40 p-6 md:p-8 lg:col-span-6">
-            <div className="flex items-center justify-between border-b border-[#D6CEBE] pb-4 text-xs">
-              <span className="font-mono text-[#78350F]">
+          <div className="flex flex-col justify-between border border-[#D8D1C5] bg-[#E8E2D8]/40 p-6 md:p-8 lg:col-span-6">
+            <div className="flex items-center justify-between border-b border-[#D8D1C5] pb-4 text-xs">
+              <span className="font-mono text-[#986046]">
                 INTERACTIVE DHAKA ENCLAVE MAP (ILLUSTRATIVE)
               </span>
-              <span className="font-mono text-[#1C1917] tabular-nums">
+              <span className="font-mono text-[#151514] tabular-nums">
                 {activeEnclave.coordinatesLabel}
               </span>
             </div>
 
-            <div className="relative my-6 aspect-[4/3] w-full border border-[#D6CEBE] bg-[#FBF9F5]">
+            <div className="relative my-6 aspect-[4/3] w-full border border-[#D8D1C5] bg-[#FAF7F2]">
               <svg
                 viewBox="0 0 100 100"
                 className="h-full w-full select-none"
@@ -150,7 +150,7 @@ export const LocationsPage: React.FC = () => {
                       y1="0"
                       x2={coord}
                       y2="100"
-                      stroke="#D6CEBE"
+                      stroke="#D8D1C5"
                       strokeWidth="0.3"
                       strokeDasharray="1.5 1.5"
                     />
@@ -159,7 +159,7 @@ export const LocationsPage: React.FC = () => {
                       y1={coord}
                       x2="100"
                       y2={coord}
-                      stroke="#D6CEBE"
+                      stroke="#D8D1C5"
                       strokeWidth="0.3"
                       strokeDasharray="1.5 1.5"
                     />
@@ -170,21 +170,21 @@ export const LocationsPage: React.FC = () => {
                 <path
                   d="M 44 12 Q 50 38, 45 55 T 52 92"
                   fill="none"
-                  stroke="#78350F"
+                  stroke="#986046"
                   strokeWidth="0.9"
                   strokeOpacity="0.3"
                 />
                 <path
                   d="M 82 10 Q 88 45, 84 90"
                   fill="none"
-                  stroke="#14532D"
+                  stroke="#66705B"
                   strokeWidth="1.2"
                   strokeOpacity="0.28"
                 />
                 <path
                   d="M 18 65 Q 30 75, 24 90"
                   fill="none"
-                  stroke="#78350F"
+                  stroke="#986046"
                   strokeWidth="0.9"
                   strokeOpacity="0.3"
                 />
@@ -323,10 +323,10 @@ export const LocationsPage: React.FC = () => {
         <div className="mt-14">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="font-mono text-xs text-[#78350F]">
+              <p className="font-mono text-xs text-[#986046]">
                 ASSOCIATED ARCHITECTURAL MONOGRAPHS
               </p>
-              <h3 className="mt-1 font-serif text-2xl text-[#1C1917] sm:text-3xl">
+              <h3 className="mt-1 font-serif text-2xl text-[#151514] sm:text-3xl">
                 Commissioned Residences in {activeEnclave.name}
               </h3>
             </div>
@@ -344,7 +344,7 @@ export const LocationsPage: React.FC = () => {
               return (
                 <div
                   key={proj.id}
-                  className="flex flex-col justify-between border border-[#D6CEBE] bg-[#FBF9F5] p-6 md:p-8"
+                  className="flex flex-col justify-between border border-[#D8D1C5] bg-[#FAF7F2] p-6 md:p-8"
                 >
                   <div>
                     <EditorialMetaLine
@@ -354,29 +354,29 @@ export const LocationsPage: React.FC = () => {
                         proj.completionYear,
                       ]}
                     />
-                    <h4 className="mt-2 font-serif text-3xl text-[#1C1917]">
+                    <h4 className="mt-2 font-serif text-3xl text-[#151514]">
                       <Link
                         to={`/projects/${proj.slug}`}
-                        className="hover:text-[#78350F]"
+                        className="hover:text-[#986046]"
                       >
                         {proj.title}
                       </Link>
                     </h4>
-                    <p className="mt-1 font-serif text-base italic text-[#44403C]">
+                    <p className="mt-1 font-serif text-base italic text-[#544E46]">
                       {proj.subtitle}
                     </p>
-                    <p className="mt-3 text-xs leading-relaxed text-[#44403C]">
+                    <p className="mt-3 text-xs leading-relaxed text-[#544E46]">
                       {proj.curatorialStatement}
                     </p>
                   </div>
 
-                  <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#D6CEBE] pt-4 text-xs">
-                    <span className="font-mono text-[#1C1917] tabular-nums">
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#D8D1C5] pt-4 text-xs">
+                    <span className="font-mono text-[#151514] tabular-nums">
                       {metrics.areaRangeLabel} · {metrics.bedroomsLabel}
                     </span>
                     <Link
                       to={`/projects/${proj.slug}`}
-                      className="inline-flex items-center gap-1 font-medium text-[#1C1917] hover:text-[#78350F]"
+                      className="inline-flex items-center gap-1 font-medium text-[#151514] hover:text-[#986046]"
                     >
                       <span>Examine Monograph</span>
                       <ArchitecturalIcon name="arrow-up-right" size={14} />
@@ -416,49 +416,49 @@ export const LocationsPage: React.FC = () => {
                 key={loc.id}
                 className={`flex flex-col justify-between border p-6 transition-colors ${
                   isSelected
-                    ? 'border-[#1C1917] bg-[#FBF9F5]'
-                    : 'border-[#D6CEBE] bg-[#FBF9F5] hover:border-[#78350F]'
+                    ? 'border-[#151514] bg-[#FAF7F2]'
+                    : 'border-[#D8D1C5] bg-[#FAF7F2] hover:border-[#986046]'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between font-mono text-xs">
-                    <span className="text-[#78350F] tabular-nums">
+                    <span className="text-[#986046] tabular-nums">
                       ENCLAVE 0{idx + 1} · {loc.district.toUpperCase()}
                     </span>
-                    <span className="text-[#78716C] tabular-nums">
+                    <span className="text-[#736B63] tabular-nums">
                       {associatedCount} Monograph{associatedCount !== 1 ? 's' : ''}
                     </span>
                   </div>
 
-                  <h3 className="mt-3 font-serif text-2xl text-[#1C1917]">
+                  <h3 className="mt-3 font-serif text-2xl text-[#151514]">
                     {loc.name}
                   </h3>
 
-                  <p className="mt-1 font-mono text-[11px] text-[#78716C] tabular-nums">
+                  <p className="mt-1 font-mono text-[11px] text-[#736B63] tabular-nums">
                     {loc.coordinatesLabel}
                   </p>
 
-                  <p className="mt-4 text-xs leading-relaxed text-[#44403C]">
+                  <p className="mt-4 text-xs leading-relaxed text-[#544E46]">
                     {loc.characterSummary}
                   </p>
                 </div>
 
-                <div className="mt-6 border-t border-[#D6CEBE] pt-4">
-                  <p className="font-mono text-[11px] text-[#14532D]">
+                <div className="mt-6 border-t border-[#D8D1C5] pt-4">
+                  <p className="font-mono text-[11px] text-[#66705B]">
                     {loc.canopyCoverageEstimate}
                   </p>
                   <div className="mt-4 flex items-center justify-between text-xs">
                     <button
                       type="button"
                       onClick={() => handleSelectEnclave(loc.slug)}
-                      className="font-mono font-medium text-[#1C1917] underline hover:text-[#78350F] cursor-pointer"
+                      className="font-mono font-medium text-[#151514] underline hover:text-[#986046] cursor-pointer"
                     >
                       {isSelected ? 'Currently Inspecting' : 'Inspect Enclave Study →'}
                     </button>
 
                     <Link
                       to={`/projects?enclave=${loc.slug}`}
-                      className="text-[#57534E] hover:text-[#1C1917]"
+                      className="text-[#544E46] hover:text-[#151514]"
                     >
                       View Projects
                     </Link>
@@ -477,7 +477,7 @@ export const LocationsPage: React.FC = () => {
         <ConversionActionSuite
           projectSlug={enclaveProjects[0]?.slug || PROJECTS_DATA[0].slug}
         />
-        <p className="mt-6 font-mono text-[11px] text-[#78716C]">
+        <p className="mt-6 font-mono text-[11px] text-[#736B63]">
           {GLOBAL_DEMO_NOTICE}
         </p>
       </EditorialGridSection>

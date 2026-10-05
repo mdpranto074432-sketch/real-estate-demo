@@ -201,12 +201,12 @@ export const BangladeshTrustLedger: React.FC<BangladeshTrustLedgerProps> = ({
               References, Project Documentation, Ownership & Undivided Land Share
               (Khatiyan), Construction Engineering, Delivery History, Utilities,
               and Allotment Terms. Because this platform is a{' '}
-              <strong className="font-medium text-[#1C1917]">
+              <strong className="font-medium text-[#151514]">
                 Concept Architectural Portfolio
               </strong>
               , all statutory reference fields below are deliberately maintained
               as{' '}
-              <strong className="font-medium text-[#78350F]">
+              <strong className="font-medium text-[#986046]">
                 Unpopulated Template Slots
               </strong>{' '}
               rather than inventing synthetic permit numbers.
@@ -234,32 +234,32 @@ export const BangladeshTrustLedger: React.FC<BangladeshTrustLedgerProps> = ({
         {visibleCards.map((card) => (
           <article
             key={card.id}
-            className="flex flex-col justify-between border border-[#D6CEBE] bg-[#FBF9F5] p-6 transition-colors hover:border-[#78350F]"
+            className="flex flex-col justify-between border border-[#D8D1C5] bg-[#FAF7F2] p-6 transition-colors hover:border-[#986046]"
           >
             <div>
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D6CEBE] pb-3 font-mono text-[10px]">
-                <span className="font-semibold text-[#78350F]">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D8D1C5] pb-3 font-mono text-[10px]">
+                <span className="font-semibold text-[#986046]">
                   {card.badge}
                 </span>
-                <span className="text-[#78716C]">ILLUSTRATIVE SCHEMA</span>
+                <span className="text-[#8C827A]">ILLUSTRATIVE SCHEMA</span>
               </div>
 
-              <h4 className="mt-4 font-serif text-xl font-normal text-[#1C1917] sm:text-2xl">
+              <h4 className="mt-4 font-serif text-xl font-normal text-[#151514] sm:text-2xl">
                 {card.title}
               </h4>
 
-              <p className="mt-2 font-mono text-[11px] leading-relaxed text-[#1C1917] bg-[#EBE6DF]/60 px-2.5 py-1.5 border-l-2 border-[#78350F]">
+              <p className="mt-2 font-mono text-[11px] leading-relaxed text-[#151514] bg-[#E8E2D8]/60 px-2.5 py-1.5 border-l-2 border-[#986046]">
                 {card.subtitle}
               </p>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#44403C]">
+              <p className="mt-3 text-xs leading-relaxed text-[#544E46]">
                 {card.summary}
               </p>
 
-              <ul className="mt-4 space-y-2 border-t border-[#D6CEBE]/70 pt-3 text-[11px] text-[#44403C]">
+              <ul className="mt-4 space-y-2 border-t border-[#D8D1C5]/70 pt-3 text-[11px] text-[#544E46]">
                 {card.items.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="mt-0.5 font-mono text-[10px] text-[#78350F]">
+                    <span className="mt-0.5 font-mono text-[10px] text-[#986046]">
                       ·
                     </span>
                     <span>{item}</span>
@@ -268,7 +268,7 @@ export const BangladeshTrustLedger: React.FC<BangladeshTrustLedgerProps> = ({
               </ul>
             </div>
 
-            <div className="mt-5 flex items-center justify-between border-t border-[#D6CEBE] pt-3 font-mono text-[10px] text-[#78716C]">
+            <div className="mt-5 flex items-center justify-between border-t border-[#D8D1C5] pt-3 font-mono text-[10px] text-[#8C827A]">
               <span>STATUS: CONCEPT TEMPLATE</span>
               <span>ZERO FABRICATED IDs</span>
             </div>
@@ -278,20 +278,20 @@ export const BangladeshTrustLedger: React.FC<BangladeshTrustLedgerProps> = ({
 
       {/* Indicative Bangladesh Milestone Payment Structure Schedule */}
       {showPaymentStructure && (
-        <div className="border border-[#D6CEBE] bg-[#FBF9F5] p-6 md:p-8">
-          <div className="flex flex-col justify-between gap-4 border-b border-[#D6CEBE] pb-6 lg:flex-row lg:items-end">
+        <div className="border border-[#D8D1C5] bg-[#FAF7F2] p-6 md:p-8">
+          <div className="flex flex-col justify-between gap-4 border-b border-[#D8D1C5] pb-6 lg:flex-row lg:items-end">
             <div>
-              <p className="font-mono text-xs text-[#78350F]">
+              <p className="font-mono text-xs text-[#986046]">
                 {languageMode === 'BN'
                   ? 'নির্মাণ-সংযুক্ত কিস্তি ও মূল্য পরিশোধ কাঠামো (ডেমো / ধারণাগত)'
                   : 'CONSTRUCTION-LINKED PAYMENT STRUCTURE MODEL (ILLUSTRATIVE DEMO)'}
               </p>
-              <h3 className="mt-1 font-serif text-2xl text-[#1C1917] sm:text-3xl">
+              <h3 className="mt-1 font-serif text-2xl text-[#151514] sm:text-3xl">
                 {languageMode === 'BN'
                   ? `${project.titleBn || project.title} — ধারণাগত কিস্তি তফসিল`
                   : `${project.title} — Progressive Milestone Allocation Schedule`}
               </h3>
-              <p className="mt-1 text-xs text-[#44403C]">
+              <p className="mt-1 text-xs text-[#544E46]">
                 {project.paymentStructureSummary ||
                   'Structured around verifiable engineering completions—from Earnest Booking (Bayna) and Tripartite Allotment to progressive Post-Tensioned Slab Pours and Key Handover.'}
               </p>
@@ -310,35 +310,35 @@ export const BangladeshTrustLedger: React.FC<BangladeshTrustLedgerProps> = ({
             {paymentStages.map((stage) => (
               <div
                 key={stage.stageCode}
-                className="flex flex-col justify-between border border-[#D6CEBE] bg-[#EBE6DF]/35 p-4"
+                className="flex flex-col justify-between border border-[#D8D1C5] bg-[#E8E2D8]/40 p-4"
               >
                 <div>
                   <div className="flex items-center justify-between font-mono text-[11px]">
-                    <span className="font-semibold text-[#78350F]">
+                    <span className="font-semibold text-[#986046]">
                       {stage.stageCode}
                     </span>
-                    <span className="text-[#14532D] font-semibold">
+                    <span className="text-[#66705B] font-semibold">
                       {stage.percentageAllocation.split(' ')[0]}
                     </span>
                   </div>
-                  <h4 className="mt-2 font-serif text-base font-medium text-[#1C1917]">
+                  <h4 className="mt-2 font-serif text-base font-medium text-[#151514]">
                     {languageMode === 'BN'
                       ? stage.milestoneLabelBn
                       : stage.milestoneLabel}
                   </h4>
-                  <p className="mt-1.5 text-[11px] leading-relaxed text-[#44403C]">
+                  <p className="mt-1.5 text-[11px] leading-relaxed text-[#544E46]">
                     {stage.scheduleNote}
                   </p>
                 </div>
-                <p className="mt-4 border-t border-[#D6CEBE] pt-2 font-mono text-[10px] text-[#78716C]">
+                <p className="mt-4 border-t border-[#D8D1C5] pt-2 font-mono text-[10px] text-[#8C827A]">
                   {stage.demoStatusNote}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col justify-between gap-4 border-t border-[#D6CEBE] pt-4 text-xs sm:flex-row sm:items-center">
-            <p className="font-mono text-[11px] text-[#78716C]">
+          <div className="mt-6 flex flex-col justify-between gap-4 border-t border-[#D8D1C5] pt-4 text-xs sm:flex-row sm:items-center">
+            <p className="font-mono text-[11px] text-[#8C827A]">
               {GLOBAL_DEMO_NOTICE}
             </p>
             <ActionButton

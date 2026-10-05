@@ -160,19 +160,19 @@ export const ProjectDetailPage: React.FC = () => {
     },
     {
       id: 'gp-4',
-      src: IMAGE_ASSETS.dhanmondiTerrace,
-      title: `${project.title} — Tectonic Masonry & Brise-Soleil Detail`,
+      src: IMAGE_ASSETS.craftMaterial,
+      title: `${project.title} — Tectonic Craftsmanship & Material Detail`,
       category: 'Material & Detail',
-      caption: `Solar heat gain reduced by ${project.environmentalMetrics.solarHeatGainReduction}.`,
+      caption: `Handcrafted material honesty: board-formed architectural concrete and seasoned teak joinery. Solar heat gain reduced by ${project.environmentalMetrics.solarHeatGainReduction}.`,
       figureCode: `${project.catalogNumber} / PLATE 04`,
     },
     {
       id: 'gp-5',
-      src: IMAGE_ASSETS.baridharaPavilion,
-      title: `${project.title} — Podium Lap Pool & Reflections`,
+      src: IMAGE_ASSETS.amenityInfinityPool,
+      title: `${project.title} — Cantilevered Lap Pool & Monsoon Reflections`,
       category: 'Interior Volume',
       caption:
-        'Acoustically isolated hydrotherapy lap pool and shaded courtyard cloister.',
+        'Acoustically isolated 25-meter Sukabumi stone infinity pool with panoramic horizon view.',
       figureCode: `${project.catalogNumber} / PLATE 05`,
     },
   ];

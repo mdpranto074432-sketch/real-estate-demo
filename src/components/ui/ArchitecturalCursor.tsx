@@ -85,8 +85,8 @@ export const ArchitecturalCursor: React.FC = () => {
       <div
         className={`flex items-center justify-center transition-all duration-200 ${
           activeLabel
-            ? 'px-3 py-1 bg-[#141210]/95 border border-[#D97724]/80 text-[#FBF9F5] shadow-lg translate-x-14 translate-y-6'
-            : 'h-6 w-6 border border-[#78350F]/45 rounded-full'
+            ? 'px-3 py-1 bg-[#151514]/95 border border-[#B5A07D]/80 text-[#F2EEE7] shadow-xl translate-x-14 translate-y-6'
+            : 'h-6 w-6 border border-[#986046]/45 rounded-full'
         }`}
       >
         {activeLabel ? (
@@ -94,7 +94,7 @@ export const ArchitecturalCursor: React.FC = () => {
             {activeLabel}
           </span>
         ) : (
-          <span className="h-1 w-1 rounded-full bg-[#78350F]/70" />
+          <span className="h-1 w-1 rounded-full bg-[#986046]" />
         )}
       </div>
     </div>

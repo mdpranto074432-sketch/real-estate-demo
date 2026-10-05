@@ -12,6 +12,8 @@ import {
   Layers,
   MapPin,
   Menu,
+  Pause,
+  Play,
   SlidersHorizontal,
   Sparkles,
   Volume2,
@@ -35,7 +37,9 @@ export type ArchitecturalIconName =
   | 'dossier'
   | 'wind'
   | 'acoustic'
-  | 'building';
+  | 'building'
+  | 'play'
+  | 'pause';
 
 const ICON_MAP: Record<ArchitecturalIconName, React.ElementType> = {
   'arrow-up-right': ArrowUpRight,
@@ -54,6 +58,8 @@ const ICON_MAP: Record<ArchitecturalIconName, React.ElementType> = {
   wind: Wind,
   acoustic: Volume2,
   building: Building2,
+  play: Play,
+  pause: Pause,
 };
 
 export interface ArchitecturalIconProps {

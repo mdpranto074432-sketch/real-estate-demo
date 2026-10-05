@@ -59,16 +59,12 @@ export const ArchitecturalModal: React.FC<ArchitecturalModalProps> = ({
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
 
-        if (event.shiftKey) {
-          if (document.activeElement === firstElement) {
-            event.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            event.preventDefault();
-            firstElement.focus();
-          }
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
         }
       }
     };
@@ -92,31 +88,31 @@ export const ArchitecturalModal: React.FC<ArchitecturalModalProps> = ({
       aria-labelledby={titleId}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10"
     >
-      {/* Measured Obsidian Backdrop */}
+      {/* Measured Charcoal Backdrop */}
       <div
         onClick={onClose}
         aria-hidden="true"
-        className="fixed inset-0 bg-[#141210]/80 backdrop-blur-[2px] transition-opacity duration-200"
+        className="fixed inset-0 bg-[#151514]/80 backdrop-blur-[2px] transition-opacity duration-200"
       />
 
       {/* Modal Container */}
       <div
-        className={`relative z-10 flex max-h-[90vh] w-full ${maxWidthClass} flex-col border border-[#D6CEBE] bg-[#FBF9F5] text-[#1C1917] shadow-2xl transition-transform duration-200`}
+        className={`relative z-10 flex max-h-[90vh] w-full ${maxWidthClass} flex-col border border-[#D8D1C5] bg-[#F2EEE7] text-[#151514] shadow-2xl transition-transform duration-200`}
       >
         {/* Top Modal Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-[#D6CEBE] px-6 py-5 md:px-8">
+        <div className="flex items-start justify-between gap-4 border-b border-[#D8D1C5] px-6 py-5 md:px-8">
           <div>
-            <p className="font-mono text-[11px] tracking-wider text-[#78350F] tabular-nums">
+            <p className="font-mono text-[11px] tracking-wider text-[#986046] tabular-nums">
               {kicker}
             </p>
             <h2
               id={titleId}
-              className="mt-1 font-serif text-2xl font-normal text-[#1C1917] sm:text-3xl"
+              className="mt-1 font-serif text-2xl font-normal text-[#151514] sm:text-3xl"
             >
               {title}
             </h2>
             {subtitle && (
-              <p className="mt-1 text-xs text-[#57534E]">{subtitle}</p>
+              <p className="mt-1 text-xs text-[#544E46]">{subtitle}</p>
             )}
           </div>
 
@@ -125,7 +121,7 @@ export const ArchitecturalModal: React.FC<ArchitecturalModalProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Close dossier modal"
-            className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center border border-[#D6CEBE] bg-[#FBF9F5] text-[#1C1917] transition-colors duration-150 hover:border-[#1C1917] hover:bg-[#EBE6DF] active:scale-[0.98] cursor-pointer"
+            className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center border border-[#D8D1C5] bg-[#F2EEE7] text-[#151514] transition-colors duration-150 hover:border-[#151514] hover:bg-[#E8E2D8] active:scale-[0.98] cursor-pointer"
           >
             <ArchitecturalIcon name="close" size={16} />
           </button>
@@ -137,8 +133,8 @@ export const ArchitecturalModal: React.FC<ArchitecturalModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#D6CEBE] bg-[#EBE6DF]/50 px-6 py-4 md:px-8">
-          <span className="font-mono text-[11px] text-[#57534E]">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#D8D1C5] bg-[#E8E2D8]/50 px-6 py-4 md:px-8">
+          <span className="font-mono text-[11px] text-[#736B63]">
             PRESS [ESC] TO CLOSE PLATE
           </span>
           <div className="flex items-center gap-3">
@@ -146,7 +142,7 @@ export const ArchitecturalModal: React.FC<ArchitecturalModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="min-h-[44px] sm:min-h-[38px] border border-[#1C1917] px-4 py-2 text-xs font-medium text-[#1C1917] whitespace-nowrap transition-colors duration-150 hover:bg-[#1C1917] hover:text-[#FBF9F5] cursor-pointer"
+              className="min-h-[44px] sm:min-h-[38px] border border-[#151514] px-4 py-2 text-xs font-medium text-[#151514] whitespace-nowrap transition-colors duration-150 hover:bg-[#151514] hover:text-[#F2EEE7] cursor-pointer"
             >
               Close Dossier
             </button>

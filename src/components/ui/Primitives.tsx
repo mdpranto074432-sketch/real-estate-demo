@@ -14,13 +14,13 @@ export const EditorialMetaLine: React.FC<{
   const validItems = items.filter(Boolean);
   return (
     <div
-      className={`flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs tracking-wide text-[#57534E] ${className}`}
+      className={`flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs tracking-wide text-[#736B63] ${className}`}
     >
       {validItems.map((item, idx) => (
         <React.Fragment key={idx}>
           <span>{item}</span>
           {idx < validItems.length - 1 && (
-            <span aria-hidden="true" className="text-[#78716C]">
+            <span aria-hidden="true" className="text-[#A59D90]">
               ·
             </span>
           )}
@@ -36,17 +36,23 @@ export const EditorialMetaLine: React.FC<{
  */
 export const ArchitecturalStatusText: React.FC<{
   status: string;
-  tone?: 'botanical' | 'bronze' | 'muted';
-}> = ({ status, tone = 'bronze' }) => {
+  tone?: 'olive' | 'cinnamon' | 'champagne' | 'botanical' | 'bronze' | 'muted';
+}> = ({ status, tone = 'cinnamon' }) => {
   const colorMap = {
-    botanical: 'text-[#14532D]',
-    bronze: 'text-[#78350F]',
-    muted: 'text-[#57534E]',
+    olive: 'text-[#66705B]',
+    botanical: 'text-[#66705B]',
+    cinnamon: 'text-[#986046]',
+    bronze: 'text-[#986046]',
+    champagne: 'text-[#B5A07D]',
+    muted: 'text-[#736B63]',
   };
   const dotMap = {
-    botanical: 'bg-[#14532D]',
-    bronze: 'bg-[#78350F]',
-    muted: 'bg-[#57534E]',
+    olive: 'bg-[#66705B]',
+    botanical: 'bg-[#66705B]',
+    cinnamon: 'bg-[#986046]',
+    bronze: 'bg-[#986046]',
+    champagne: 'bg-[#B5A07D]',
+    muted: 'bg-[#736B63]',
   };
 
   return (
@@ -59,8 +65,8 @@ export const ArchitecturalStatusText: React.FC<{
 
 /**
  * 3. SECTION HEADING SYSTEM WITH MEASURED ARCHITECTURAL CHOREOGRAPHY
- * Uses natural human editorial numbering (e.g. "01. Architectural Thesis") — never slash comments.
- * Uses clean block elevation and horizontal hairline rule expansion (reserving word-split for Hero H1s).
+ * Uses natural human editorial numbering (e.g. "01. Architectural Thesis").
+ * Uses clean block elevation and horizontal hairline rule expansion.
  */
 export const SectionHeader: React.FC<{
   indexNumber?: string;
@@ -75,7 +81,7 @@ export const SectionHeader: React.FC<{
       {(indexNumber || kicker) && (
         <div
           data-scroll="panel-elevate"
-          className="mb-3 flex items-center gap-2 text-xs text-[#78350F]"
+          className="mb-3 flex items-center gap-2 text-xs text-[#986046]"
         >
           {indexNumber && <span className="font-mono tabular-nums">{indexNumber}.</span>}
           {kicker && <span className="font-medium tracking-wide">{kicker}</span>}
@@ -91,11 +97,11 @@ export const SectionHeader: React.FC<{
         }
       >
         <div className="max-w-2xl">
-          <h2 className="font-serif text-3xl font-normal tracking-tight text-[#1C1917] text-balance sm:text-4xl lg:text-[42px] lg:leading-[1.12]">
+          <h2 className="font-serif text-3xl font-normal tracking-tight text-[#151514] text-balance sm:text-4xl lg:text-[42px] lg:leading-[1.12]">
             {title}
           </h2>
           {subtitle && (
-            <p className="mt-3 text-base leading-relaxed text-[#44403C] text-pretty">
+            <p className="mt-3 text-base leading-relaxed text-[#544E46] text-pretty">
               {subtitle}
             </p>
           )}
@@ -107,7 +113,7 @@ export const SectionHeader: React.FC<{
       <div
         data-scroll="rule-expand"
         aria-hidden="true"
-        className="absolute right-0 bottom-0 left-0 h-px bg-[#D6CEBE]"
+        className="absolute right-0 bottom-0 left-0 h-px bg-[#D8D1C5]"
       />
     </div>
   );
@@ -139,7 +145,7 @@ export function SegmentedFilter<T extends string>({
     <div
       role="group"
       aria-label={ariaLabel}
-      className="inline-flex max-w-full overflow-x-auto sm:flex-wrap items-center gap-1 border border-[#D6CEBE] bg-[#EBE6DF]/70 p-1"
+      className="inline-flex max-w-full overflow-x-auto sm:flex-wrap items-center gap-1 border border-[#D8D1C5] bg-[#E8E2D8]/70 p-1"
     >
       {options.map((option) => {
         const isActive = option.value === activeValue;
@@ -150,17 +156,17 @@ export function SegmentedFilter<T extends string>({
             disabled={option.disabled}
             aria-pressed={isActive}
             onClick={() => onChange(option.value)}
-            className={`min-h-[44px] sm:min-h-[38px] px-3.5 py-2 text-xs font-medium whitespace-nowrap shrink-0 transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78350F] active:scale-[0.99] disabled:opacity-40 disabled:pointer-events-none cursor-pointer ${
+            className={`min-h-[44px] sm:min-h-[38px] px-3.5 py-2 text-xs font-medium whitespace-nowrap shrink-0 transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#986046] active:scale-[0.99] disabled:opacity-40 disabled:pointer-events-none cursor-pointer ${
               isActive
-                ? 'bg-[#1C1917] text-[#FBF9F5]'
-                : 'text-[#44403C] hover:bg-[#D6CEBE]/50 hover:text-[#1C1917]'
+                ? 'bg-[#151514] text-[#F2EEE7]'
+                : 'text-[#544E46] hover:bg-[#D8D1C5]/50 hover:text-[#151514]'
             }`}
           >
             <span>{option.label}</span>
             {typeof option.count === 'number' && (
               <span
                 className={`ml-1.5 font-mono text-[11px] tabular-nums ${
-                  isActive ? 'text-[#D6CEBE]' : 'text-[#57534E]'
+                  isActive ? 'text-[#A59D90]' : 'text-[#736B63]'
                 }`}
               >
                 ({option.count})
@@ -206,16 +212,16 @@ export const ActionButton: React.FC<{
   );
 
   const baseStyles =
-    'inline-flex min-h-[44px] items-center justify-center gap-2 px-5 py-2.5 text-xs font-medium tracking-wide whitespace-nowrap shrink-0 transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78350F] active:scale-[0.985] disabled:opacity-45 disabled:pointer-events-none cursor-pointer';
+    'inline-flex min-h-[44px] items-center justify-center gap-2 px-5 py-2.5 text-xs font-medium tracking-wide whitespace-nowrap shrink-0 transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#986046] active:scale-[0.985] disabled:opacity-45 disabled:pointer-events-none cursor-pointer';
 
   const variantStyles = {
-    primary: 'bg-[#1C1917] text-[#FBF9F5] hover:bg-[#78350F]',
+    primary: 'bg-[#151514] text-[#F2EEE7] hover:bg-[#986046]',
     secondary:
-      'border border-[#1C1917] bg-transparent text-[#1C1917] hover:bg-[#1C1917] hover:text-[#FBF9F5]',
+      'border border-[#151514] bg-transparent text-[#151514] hover:bg-[#151514] hover:text-[#F2EEE7]',
     inverse:
-      'bg-[#FBF9F5] text-[#1C1917] hover:bg-[#D6CEBE] focus-visible:outline-[#FBF9F5]',
+      'bg-[#F2EEE7] text-[#151514] hover:bg-[#E8E2D8] focus-visible:outline-[#F2EEE7]',
     quiet:
-      'min-h-[36px] border-b border-[#1C1917]/35 px-0 py-1 text-[#1C1917] hover:border-[#78350F] hover:text-[#78350F]',
+      'min-h-[36px] border-b border-[#151514]/35 px-0 py-1 text-[#151514] hover:border-[#986046] hover:text-[#986046]',
   }[variant];
 
   const content = (
@@ -268,13 +274,13 @@ export const EditorialFieldLabel: React.FC<{
 }> = ({ htmlFor, label, required, optionalNote }) => (
   <label
     htmlFor={htmlFor}
-    className="flex items-baseline justify-between text-xs font-medium text-[#1C1917]"
+    className="flex items-baseline justify-between text-xs font-medium text-[#151514]"
   >
     <span>
-      {label} {required && <span className="text-[#78350F]">*</span>}
+      {label} {required && <span className="text-[#986046]">*</span>}
     </span>
     {optionalNote && (
-      <span className="font-mono text-[10px] text-[#57534E]">{optionalNote}</span>
+      <span className="font-mono text-[10px] text-[#736B63]">{optionalNote}</span>
     )}
   </label>
 );
@@ -295,16 +301,16 @@ export const EditorialGridSection: React.FC<{
   borderBottom = false,
 }) => {
   const surfaceClasses = {
-    canvas: 'bg-[#FBF9F5] text-[#1C1917]',
-    structural: 'bg-[#EBE6DF]/45 text-[#1C1917]',
+    canvas: 'bg-[#F2EEE7] text-[#151514]',
+    structural: 'bg-[#E8E2D8]/50 text-[#151514]',
     obsidian: 'surface-dark-optical',
   }[surface];
 
   return (
     <section
       id={id}
-      className={`${surfaceClasses} ${borderTop ? 'border-t border-[#D6CEBE]' : ''} ${
-        borderBottom ? 'border-b border-[#D6CEBE]' : ''
+      className={`${surfaceClasses} ${borderTop ? 'border-t border-[#D8D1C5]' : ''} ${
+        borderBottom ? 'border-b border-[#D8D1C5]' : ''
       } py-14 sm:py-20 lg:py-[112px] ${className}`}
     >
       <div className="mx-auto max-w-[1360px] px-5 sm:px-6 md:px-12">{children}</div>

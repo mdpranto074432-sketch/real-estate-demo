@@ -310,6 +310,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
             src={primarySrc}
             alt=""
             aria-hidden="true"
+            referrerPolicy="no-referrer"
             onLoad={() => console.info('[Hero] primary architectural image loaded:', primarySrc)}
             onError={() => {
               console.error('[Hero] ERROR loading primarySrc, switching to public fallback:', primarySrc);
@@ -340,6 +341,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
           <img
             src={primarySrc}
             alt={fallbackAlt}
+            referrerPolicy="no-referrer"
             className="h-full w-full object-cover object-[54%_38%] sm:object-center"
             draggable={false}
           />
@@ -360,6 +362,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
             src={primarySrc}
             alt=""
             aria-hidden="true"
+            referrerPolicy="no-referrer"
             className="h-full w-full object-cover object-[54%_38%] sm:object-center"
             draggable={false}
           />
@@ -379,6 +382,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         <img
           src={detailSrc}
           alt="Close-up architectural study of cantilevered concrete overhangs, exterior iron-wood louvers, and hanging gardens"
+          referrerPolicy="no-referrer"
           onLoad={() => console.info('[Hero] detail facade image loaded')}
           onError={() => {
             console.error('[Hero] ERROR loading detailSrc, falling back to primary');
@@ -407,6 +411,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         <img
           src={interiorSrc}
           alt="Full-length cross-ventilated interior living gallery and shaded monsoon verandah"
+          referrerPolicy="no-referrer"
           onLoad={() => console.info('[Hero] interior gallery image loaded')}
           onError={() => {
             console.error('[Hero] ERROR loading interiorSrc, falling back to public path');
@@ -435,6 +440,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         <img
           src={nightSrc}
           alt="Nocturnal architectural elevation with warm interior illumination and rainwater court reflections"
+          referrerPolicy="no-referrer"
           onLoad={() => console.info('[Hero] nocturnal elevation image loaded')}
           onError={() => {
             console.error('[Hero] ERROR loading nightSrc, falling back to public path');

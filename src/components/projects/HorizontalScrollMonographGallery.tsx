@@ -244,6 +244,7 @@ export const HorizontalScrollMonographGallery: React.FC<
                           data-depth="arch-image"
                           src={project.heroImage}
                           alt={`${project.title} — ${project.enclaveName}`}
+                          referrerPolicy="no-referrer"
                           loading={idx === 0 ? 'eager' : 'lazy'}
                           decoding="async"
                           className="h-full w-full object-cover opacity-90 transition-transform duration-700"
@@ -283,6 +284,7 @@ export const HorizontalScrollMonographGallery: React.FC<
                           <img
                             src={project.interiorImage}
                             alt={`${project.title} interior salon`}
+                            referrerPolicy="no-referrer"
                             loading="lazy"
                             decoding="async"
                             className="h-full w-full object-cover"

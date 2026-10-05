@@ -2,33 +2,47 @@
 
 @layer base {
   :root {
-    /* 1. COLOR SYSTEM TOKENS (60-30-10 Archival & Architectural Palette) */
-    --color-canvas-primary: #FBF9F5;
-    --color-canvas-elevated: #F5F1EA;
-    --color-surface-structural: #EBE6DF;
-    --color-surface-obsidian: #141210;
+    /* =========================================================================
+       CORE ARCHITECTURAL LUXURY BRAND PALETTE & ROLE-BASED TOKENS
+       - Warm Ivory: #F2EEE7 (Natural plaster, limestone, deltaic warmth)
+       - Architectural Charcoal: #151514 (Deep warm stone, never harsh pure black)
+       - Stone: #A59D90 / #D8D1C5 (Honed travertine, board-formed concrete)
+       - Muted Olive: #66705B (Bengal rain-tree canopy, microclimatic foliage)
+       - Muted Cinnamon: #986046 (Dhamrai kiln-fired terracotta & seasoned teak)
+       - Soft Champagne: #B5A07D (Brushed architectural brass & monsoon light)
+       ========================================================================= */
 
-    --color-ink-primary: #1C1917;
-    --color-ink-secondary: #44403C;
-    --color-ink-muted: #57534E;
-    --color-ink-caption: #78716C;
-    --color-ink-inverse: #FBF9F5;
+    --color-canvas-primary: #F2EEE7;
+    --color-canvas-elevated: #FAF7F2;
+    --color-surface-structural: #E8E2D8;
+    --color-surface-obsidian: #151514;
+    --color-surface-charcoal-elevated: #1D1C1A;
 
-    --color-border-hairline: #D6CEBE;
-    --color-border-subtle: #E5DEC9;
-    --color-border-strong: #1C1917;
+    --color-ink-primary: #151514;
+    --color-ink-secondary: #544E46;
+    --color-ink-muted: #736B63;
+    --color-ink-caption: #8C827A;
+    --color-ink-inverse: #F2EEE7;
+    --color-ink-inverse-secondary: #A59D90;
 
-    --color-accent-bronze: #78350F;
-    --color-accent-bronze-hover: #5C280B;
-    --color-accent-terracotta: #9A3412;
-    --color-accent-botanical: #14532D;
+    --color-border-hairline: #D8D1C5;
+    --color-border-subtle: #E4DDD2;
+    --color-border-strong: #151514;
+    --color-border-dark: #2A2825;
+    --color-border-dark-subtle: #3A3632;
 
-    /* 2. TYPOGRAPHY TOKENS (2+1 Font Discipline) */
+    --color-accent-cinnamon: #986046;
+    --color-accent-cinnamon-hover: #7E4F39;
+    --color-accent-champagne: #B5A07D;
+    --color-accent-olive: #66705B;
+    --color-accent-stone: #A59D90;
+
+    /* TYPOGRAPHY TOKENS (Cormorant Garamond + Plus Jakarta Sans + JetBrains Mono) */
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    /* 3. SPACING & RHYTHM TOKENS */
+    /* SPATIAL & RHYTHM TOKENS */
     --space-section-y: 4rem;
     --space-container-x: 1.5rem;
     --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
@@ -70,7 +84,7 @@
 
   /* Visible Keyboard Focus Standard (WCAG AA) */
   :focus-visible {
-    outline: 2px solid var(--color-accent-bronze);
+    outline: 2px solid var(--color-accent-cinnamon);
     outline-offset: 2px;
   }
 }
@@ -98,65 +112,30 @@
 /* Editorial Drop Cap */
 .editorial-dropcap::first-letter {
   float: left;
-  margin-right: 0.85rem;
-  margin-top: 0.15rem;
   font-family: var(--font-serif);
-  font-size: 3.35rem;
-  line-height: 0.85;
-  font-weight: 600;
-  color: var(--color-accent-bronze);
+  font-size: 4.25rem;
+  line-height: 0.82;
+  padding-top: 4px;
+  padding-right: 12px;
+  padding-bottom: 2px;
+  color: var(--color-accent-cinnamon);
 }
 
-/* Subtle Architectural Hover Underline */
-.editorial-link-underline {
-  position: relative;
-}
-.editorial-link-underline::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-accent-bronze);
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 240ms var(--ease-editorial);
-}
-.editorial-link-underline:hover::after,
-.editorial-link-underline:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: left center;
+/* Micro-dot Architectural Grid Background */
+.bg-architectural-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--color-border-hairline) 1px,
+    transparent 0
+  );
+  background-size: 32px 32px;
 }
 
-/* Masked Word / Line Container for Split Typography */
-.split-mask-line {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding-bottom: 0.06em;
-  margin-bottom: -0.06em;
+/* Hide Scrollbar for Horizontal Editorial Rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.split-mask-word {
-  display: inline-block;
-  will-change: transform, opacity;
-}
-
-/* Clip-path Aperture Transition Helper */
-.architectural-clip-frame {
-  clip-path: inset(0% 0% 0% 0%);
-  transition: clip-path 700ms var(--ease-architectural);
-}
-
-/* Reduced Motion Compliance */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

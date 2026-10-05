@@ -271,10 +271,10 @@ export const ProjectsPage: React.FC = () => {
   const containerRef = useEditorialEntrance<HTMLDivElement>(animKey);
 
   const selectControlClass =
-    'mt-1.5 min-h-[44px] lg:min-h-[38px] w-full border border-[#D6CEBE] bg-[#FBF9F5] px-3 py-2 text-xs font-medium text-[#1C1917] transition-colors duration-150 hover:border-[#78716C] focus:border-[#78350F] focus:outline-none cursor-pointer';
+    'mt-1.5 min-h-[44px] lg:min-h-[38px] w-full border border-[#D8D1C5] bg-[#FAF7F2] px-3 py-2 text-xs font-medium text-[#151514] transition-colors duration-150 hover:border-[#736B63] focus:border-[#986046] focus:outline-none cursor-pointer';
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FBF9F5]">
+    <div ref={containerRef} className="min-h-screen bg-[#F2EEE7]">
       {/* =====================================================================
           1. HERO / EDITORIAL INTRODUCTION WITH OVERSIZED SPATIAL WATERMARK
       ===================================================================== */}
@@ -282,14 +282,14 @@ export const ProjectsPage: React.FC = () => {
         {/* Oversized Background Architectural Watermark */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-6 right-6 select-none font-serif text-[140px] leading-none text-[#EBE6DF] sm:text-[220px] lg:right-12 lg:text-[280px]"
+          className="pointer-events-none absolute -top-6 right-6 select-none font-serif text-[140px] font-light leading-none text-[#E8E2D8]/60 sm:text-[220px] lg:right-12 lg:text-[280px]"
         >
           ARCHIVE
         </div>
 
         <div
           data-animate="editorial"
-          className="relative z-10 border-b border-[#D6CEBE] pb-10"
+          className="relative z-10 border-b border-[#D8D1C5] pb-10"
         >
           <div className="flex flex-wrap items-center justify-between gap-4">
             <EditorialMetaLine
@@ -299,16 +299,16 @@ export const ProjectsPage: React.FC = () => {
                 'DHAKA, BANGLADESH (CONCEPT DEMO)',
               ]}
             />
-            <span className="font-mono text-xs text-[#78350F] tabular-nums">
+            <span className="font-mono text-xs text-[#986046] tabular-nums">
               1 RESIDENCE PER FLOOR · 100% NATURAL CROSS-VENTILATION
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-normal leading-[1.04] tracking-tight text-[#1C1917] text-balance sm:text-6xl lg:text-[72px]">
+          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-normal leading-[1.04] tracking-tight text-[#151514] text-balance sm:text-6xl lg:text-[72px]">
             Curated Residences & Spatial Monographs Across Dhaka
           </h1>
 
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#44403C]">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#544E46]">
             Explore our portfolio of full-floor lakeside sanctuaries, diplomatic
             limestone residences, and low-rise courtyard villas. Filter by Dhaka
             enclave, architectural typology, floor plate volume, or handover
@@ -873,24 +873,24 @@ export const ProjectsPage: React.FC = () => {
           /* Tabular Archival Index View */
           <div
             data-animate="editorial"
-            className="overflow-x-auto border border-[#D6CEBE] bg-[#FBF9F5]"
+            className="overflow-x-auto border border-[#D8D1C5] bg-[#FAF7F2]"
           >
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-[#1C1917] bg-[#EBE6DF]/60 text-xs font-semibold text-[#1C1917]">
-                  <th className="py-4 px-4">Catalogue</th>
-                  <th className="py-4 px-4">Monograph Title</th>
-                  <th className="py-4 px-4">Dhaka Enclave</th>
-                  <th className="py-4 px-4">Property Type</th>
-                  <th className="py-4 px-4">Area (sq. ft.)</th>
-                  <th className="py-4 px-4">Beds / Baths</th>
-                  <th className="py-4 px-4">Floor & Parking</th>
-                  <th className="py-4 px-4">Handover (Demo)</th>
-                  <th className="py-4 px-4">Valuation (BDT)</th>
-                  <th className="py-4 px-4 text-right">Dossier</th>
+                <tr className="border-b border-[#151514] bg-[#E8E2D8]/70 text-xs font-semibold text-[#151514]">
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Catalogue</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Monograph Title</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Dhaka Enclave</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Property Type</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Area (sq. ft.)</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Beds / Baths</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Floor & Parking</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Handover (Demo)</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider">Valuation (BDT)</th>
+                  <th className="py-4 px-4 font-mono text-[11px] tracking-wider text-right">Dossier</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#D6CEBE]">
+              <tbody className="divide-y divide-[#D8D1C5]">
                 {filteredAndSortedProjects.map((project) => {
                   const metrics = getProjectUnitMetrics(project);
                   const localizedPrice =
@@ -904,32 +904,32 @@ export const ProjectsPage: React.FC = () => {
                   return (
                     <tr
                       key={project.id}
-                      className="transition-colors hover:bg-[#EBE6DF]/50"
+                      className="transition-colors hover:bg-[#E8E2D8]/40"
                     >
-                      <td className="py-4 px-4 font-mono text-xs text-[#78350F] tabular-nums">
+                      <td className="py-4 px-4 font-mono text-xs text-[#986046] tabular-nums">
                         {project.catalogNumber.replace('MONOGRAPH ', '')}
                       </td>
-                      <td className="py-4 px-4 font-serif text-lg font-medium text-[#1C1917]">
+                      <td className="py-4 px-4 font-serif text-lg font-medium text-[#151514]">
                         <Link
                           to={`/projects/${project.slug}`}
-                          className="transition-colors hover:text-[#78350F]"
+                          className="transition-colors hover:text-[#986046]"
                         >
                           {project.title}
                         </Link>
                       </td>
-                      <td className="py-4 px-4 text-xs text-[#44403C]">
+                      <td className="py-4 px-4 text-xs text-[#544E46]">
                         {project.enclaveName}
                       </td>
-                      <td className="py-4 px-4 text-xs text-[#44403C]">
+                      <td className="py-4 px-4 text-xs text-[#544E46]">
                         {metrics.propertyTypeLabel}
                       </td>
-                      <td className="py-4 px-4 font-mono text-xs text-[#1C1917] tabular-nums">
+                      <td className="py-4 px-4 font-mono text-xs text-[#151514] tabular-nums">
                         {metrics.areaRangeLabel}
                       </td>
-                      <td className="py-4 px-4 font-mono text-xs text-[#57534E] tabular-nums">
+                      <td className="py-4 px-4 font-mono text-xs text-[#736B63] tabular-nums">
                         {metrics.bedroomsLabel} · {metrics.bathroomsLabel.split('+')[0]}
                       </td>
-                      <td className="py-4 px-4 font-mono text-xs text-[#57534E] tabular-nums">
+                      <td className="py-4 px-4 font-mono text-xs text-[#736B63] tabular-nums">
                         {project.stories}F · {metrics.parkingLabel}
                       </td>
                       <td className="py-4 px-4">
@@ -942,13 +942,13 @@ export const ProjectsPage: React.FC = () => {
                           }
                         />
                       </td>
-                      <td className="py-4 px-4 font-mono text-xs font-semibold text-[#78350F] tabular-nums">
+                      <td className="py-4 px-4 font-mono text-xs font-semibold text-[#986046] tabular-nums">
                         {localizedPrice}
                       </td>
                       <td className="py-4 px-4 text-right">
                         <Link
                           to={`/projects/${project.slug}`}
-                          className="font-mono text-xs font-medium text-[#1C1917] underline hover:text-[#78350F]"
+                          className="font-mono text-xs font-medium text-[#151514] underline hover:text-[#986046]"
                         >
                           Inspect →
                         </Link>

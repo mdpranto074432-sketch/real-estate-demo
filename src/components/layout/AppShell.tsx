@@ -99,106 +99,124 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     if (prefersReducedMotion()) return;
 
     const veil = transitionVeilRef.current;
-    const label = transitionLabelRef.current;
     const mainEl = mainCanvasRef.current;
+    const labelEl = transitionLabelRef.current;
+    if (!veil || !mainEl) return;
 
     const ctx = gsap.context(() => {
-      if (veil && label) {
-        const tl = gsap.timeline();
-        tl.set(veil, { scaleY: 1, transformOrigin: 'bottom center', opacity: 1 })
-          .fromTo(
-            label,
-            { opacity: 0, y: 8 },
-            { opacity: 1, y: 0, duration: 0.16, ease: 'power2.out' },
-            0
-          )
-          .to(
-            label,
-            { opacity: 0, y: -8, duration: 0.18, ease: 'power2.in' },
-            0.2
-          )
-          .to(
-            veil,
-            {
-              scaleY: 0,
-              transformOrigin: 'top center',
-              duration: 0.5,
-              ease: 'expo.inOut',
-            },
-            0.16
-          );
-      }
+      const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
 
-      if (mainEl) {
-        gsap.fromTo(
+      tl.set(veil, { scaleY: 0, transformOrigin: 'bottom', display: 'flex' })
+        .set(mainEl, { opacity: 0.82, y: 12 })
+        .to(veil, {
+          scaleY: 1,
+          duration: 0.32,
+          ease: 'power4.inOut',
+        })
+        .fromTo(
+          labelEl,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.16, ease: 'power2.out' },
+          '-=0.12'
+        )
+        .set(veil, { transformOrigin: 'top' })
+        .to(veil, {
+          scaleY: 0,
+          duration: 0.38,
+          delay: 0.08,
+          ease: 'power4.inOut',
+        })
+        .to(
           mainEl,
-          { opacity: 0.88, y: 8 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.48,
+            duration: 0.44,
             ease: 'power3.out',
-            clearProps: 'transform,opacity',
-          }
-        );
-      }
+          },
+          '-=0.28'
+        )
+        .set(veil, { display: 'none' });
     });
 
     return () => ctx.revert();
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#FBF9F5] text-[#1C1917]">
-      {/* 06. Minimal Premium Draughtsman Cursor System (Desktop fine-pointer only) */}
+    <div className="relative min-h-screen bg-[#F2EEE7] text-[#151514] selection:bg-[#986046] selection:text-[#F2EEE7]">
+      {/* Magnetic Architectural Cursor Follower */}
       <ArchitecturalCursor />
 
-      {/* 01. Page Transition Architectural Veil */}
+      {/* Fullscreen Route Transition Architectural Wipe Veil */}
       <div
         ref={transitionVeilRef}
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-[#141210] text-[#FBF9F5] origin-top scale-y-0"
+        className="pointer-events-none fixed inset-0 z-50 hidden flex-col items-center justify-center bg-[#151514] text-[#F2EEE7]"
       >
-        <span
-          ref={transitionLabelRef}
-          className="px-6 text-center font-mono text-xs tracking-[0.22em] text-[#D6CEBE] opacity-0"
-        >
-          {currentChapterLabel}
-        </span>
+        <div className="flex flex-col items-center gap-3 text-center">
+          <span className="font-mono text-[10px] tracking-[0.24em] text-[#986046] uppercase">
+            CHAPTER TRANSITION
+          </span>
+          <span
+            ref={transitionLabelRef}
+            className="font-serif text-2xl sm:text-3xl font-normal tracking-wide text-[#F2EEE7]"
+          >
+            {currentChapterLabel}
+          </span>
+          <div className="mt-2 h-px w-16 bg-[#B5A07D]/40" />
+        </div>
       </div>
 
-      {/* Accessibility Skip Link */}
+      {/* Skip to Main Content Link (Accessibility) */}
       <a
         href="#main-editorial-canvas"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[#1C1917] focus:px-4 focus:py-2.5 focus:text-xs focus:font-medium focus:text-[#FBF9F5]"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:border focus:border-[#986046] focus:bg-[#151514] focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:text-[#F2EEE7]"
       >
-        Skip to primary architectural content
+        Skip to main architectural content
       </a>
 
       {/* Strict 3-Zone Top Bar Contract (56px mobile height respects <15% viewport cap) */}
-      <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-[#D6CEBE]/70 bg-[#FBF9F5]/92 backdrop-blur-md">
-        <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 sm:px-10 md:px-14">
-          {/* Zone 1: Single text element wordmark */}
-          <Link
-            to="/"
-            className="font-serif text-lg sm:text-[21px] font-normal tracking-tight text-[#1C1917] whitespace-nowrap shrink-0 py-2 transition-colors duration-200 hover:text-[#78350F] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#78350F]"
-          >
-            {languageMode === 'BN' ? 'বরেন্দ্র অ্যান্ড কোং' : DEVELOPER_PROFILE.brandName}
-          </Link>
+      <header className="sticky top-0 z-40 h-14 sm:h-16 border-b border-[#D8D1C5] bg-[#F2EEE7]/94 backdrop-blur-md">
+        <div className="mx-auto flex h-full max-w-[1360px] items-center justify-between px-5 sm:px-6 md:px-12">
+          {/* Zone 1: Unboxed Brand Logotype & Live Monograph Chapter Indicator */}
+          <div className="flex items-baseline gap-3">
+            <Link
+              to="/"
+              data-cursor="home"
+              className="inline-flex flex-col items-start group focus-visible:outline-2 focus-visible:outline-[#986046]"
+              aria-label="Varendra & Co. Home Page"
+            >
+              <span className="font-serif text-xl sm:text-2xl font-normal tracking-tight text-[#151514] transition-colors group-hover:text-[#986046]">
+                {DEVELOPER_PROFILE.brandName}
+              </span>
+              <span className="hidden sm:inline font-mono text-[9px] tracking-[0.18em] text-[#736B63] uppercase">
+                DHAKA RESIDENCES
+              </span>
+            </Link>
 
-          {/* Zone 2: 4 clean text navigation links */}
+            <span aria-hidden="true" className="hidden lg:inline text-[#D8D1C5]">
+              /
+            </span>
+            <span className="hidden lg:inline font-mono text-[10px] tracking-widest text-[#736B63] truncate max-w-[280px]">
+              {currentChapterLabel}
+            </span>
+          </div>
+
+          {/* Zone 2: Quiet Text Navigation Links (Zero Pill Enclosures) */}
           <nav
             aria-label="Primary Navigation"
-            className="hidden md:flex items-center gap-10 font-mono text-[11px] tracking-[0.18em] uppercase text-[#44403C]"
+            className="hidden md:flex items-center gap-7 lg:gap-9 text-xs tracking-wide"
           >
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
+                data-cursor="view"
                 className={({ isActive }) =>
-                  `py-2 whitespace-nowrap shrink-0 transition-colors duration-200 border-b ${
+                  `inline-flex min-h-[44px] items-center border-b-2 py-1 transition-all duration-150 focus-visible:outline-2 focus-visible:outline-[#986046] ${
                     isActive
-                      ? 'border-[#1C1917] text-[#1C1917] font-medium'
-                      : 'border-transparent hover:border-[#78350F]/50 hover:text-[#1C1917]'
+                      ? 'border-[#151514] text-[#151514] font-medium'
+                      : 'border-transparent text-[#544E46] hover:border-[#986046]/60 hover:text-[#151514]'
                   }`
                 }
               >
@@ -220,15 +238,15 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   : 'Switch to English editorial headings'
               }
               title="Toggle English / বাংলা Bilingual Readiness"
-              className="inline-flex min-h-[44px] sm:min-h-[36px] items-center gap-1.5 border border-[#D6CEBE]/80 bg-transparent px-3 py-1 font-mono text-[10px] tracking-[0.14em] text-[#1C1917] transition-colors hover:border-[#1C1917] cursor-pointer"
+              className="inline-flex min-h-[44px] sm:min-h-[36px] items-center gap-1.5 border border-[#D8D1C5] bg-transparent px-3 py-1 font-mono text-[10px] tracking-[0.14em] text-[#151514] transition-colors hover:border-[#151514] cursor-pointer"
             >
-              <span className={languageMode === 'EN' ? 'font-semibold text-[#1C1917]' : 'text-[#78716C]'}>
+              <span className={languageMode === 'EN' ? 'font-semibold text-[#151514]' : 'text-[#8C827A]'}>
                 EN
               </span>
-              <span aria-hidden="true" className="text-[#D6CEBE]">
+              <span aria-hidden="true" className="text-[#D8D1C5]">
                 /
               </span>
-              <span className={languageMode === 'BN' ? 'font-semibold text-[#1C1917]' : 'text-[#78716C]'}>
+              <span className={languageMode === 'BN' ? 'font-semibold text-[#151514]' : 'text-[#8C827A]'}>
                 বাংলা
               </span>
             </button>
@@ -236,7 +254,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <Link
               ref={headerCtaRef}
               to="/contact"
-              className="hidden sm:inline-flex min-h-[38px] items-center justify-center border border-[#1C1917] bg-[#1C1917] px-5 py-2 font-mono text-[10px] tracking-[0.2em] uppercase text-[#FBF9F5] whitespace-nowrap shrink-0 transition-all duration-200 hover:bg-transparent hover:text-[#1C1917] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78350F]"
+              className="hidden sm:inline-flex min-h-[38px] items-center justify-center border border-[#151514] bg-[#151514] px-5 py-2 font-mono text-[10px] tracking-[0.2em] uppercase text-[#F2EEE7] whitespace-nowrap shrink-0 transition-all duration-200 hover:bg-[#986046] hover:border-[#986046] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#986046]"
             >
               {languageMode === 'BN' ? 'পরামর্শ বুকিং' : 'Schedule Briefing'}
             </Link>
@@ -247,7 +265,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center border border-[#D6CEBE] text-[#1C1917] transition-colors hover:bg-[#EBE6DF] active:bg-[#D6CEBE] md:hidden cursor-pointer"
+              className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center border border-[#D8D1C5] text-[#151514] transition-colors hover:bg-[#E8E2D8] active:bg-[#D8D1C5] md:hidden cursor-pointer"
             >
               <ArchitecturalIcon name={mobileMenuOpen ? 'close' : 'menu'} size={18} />
             </button>
@@ -260,31 +278,31 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           className="pointer-events-none absolute right-0 bottom-0 left-0 h-[1.5px] bg-transparent overflow-hidden"
         >
           <div
-            className="h-full w-full origin-left bg-[#78350F] transition-transform duration-75 ease-out"
+            className="h-full w-full origin-left bg-[#986046] transition-transform duration-75 ease-out"
             style={{ transform: `scaleX(${scrollProgress})` }}
           />
         </div>
       </header>
 
-      {/* Dedicated Mobile Navigation Sheet (Thumb-Zone Ergonomics & Full Accessibility) */}
+      {/* Dedicated Mobile Navigation Sheet */}
       {mobileMenuOpen && (
         <div
           id="mobile-navigation-drawer"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Primary Navigation"
-          className="fixed inset-0 top-14 z-50 flex flex-col justify-between bg-[#FBF9F5] md:hidden overflow-y-auto"
+          className="fixed inset-0 top-14 z-50 flex flex-col justify-between bg-[#F2EEE7] md:hidden overflow-y-auto"
         >
           <div className="px-5 pt-6 pb-8">
             <div className="flex items-center justify-between">
-              <p className="font-mono text-[10px] tracking-widest text-[#78350F]">
+              <p className="font-mono text-[10px] tracking-widest text-[#986046]">
                 ARCHITECTURAL INDEX · DHAKA
               </p>
-              <span className="font-mono text-[10px] text-[#57534E]">
+              <span className="font-mono text-[10px] text-[#736B63]">
                 BDT (৳) · {languageMode === 'BN' ? 'বাংলা সংস্করণ' : 'ENGLISH EDITION'}
               </span>
             </div>
-            <nav aria-label="Mobile Navigation" className="mt-4 divide-y divide-[#D6CEBE] border-t border-b border-[#D6CEBE]">
+            <nav aria-label="Mobile Navigation" className="mt-4 divide-y divide-[#D8D1C5] border-t border-b border-[#D8D1C5]">
               {NAV_ITEMS.map((item, idx) => (
                 <NavLink
                   key={item.path}
@@ -292,27 +310,27 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `flex min-h-[60px] items-center justify-between py-3 transition-colors ${
-                      isActive ? 'text-[#78350F]' : 'text-[#1C1917]'
+                      isActive ? 'text-[#986046]' : 'text-[#151514]'
                     }`
                   }
                 >
                   <div>
-                    <span className="font-mono text-[10px] text-[#78716C] mr-2">
+                    <span className="font-mono text-[10px] text-[#8C827A] mr-2">
                       0{idx + 1}.
                     </span>
                     <span className="font-serif text-2xl">
                       {languageMode === 'BN' ? item.labelBn : item.label}
                     </span>
-                    <p className="mt-0.5 text-xs text-[#57534E]">{item.subtitle}</p>
+                    <p className="mt-0.5 text-xs text-[#736B63]">{item.subtitle}</p>
                   </div>
                   <ArchitecturalIcon name="arrow-up-right" size={16} />
                 </NavLink>
               ))}
             </nav>
 
-            {/* Quick Monograph Jump List for Mobile Thumb Reach */}
+            {/* Quick Monograph Jump List for Mobile */}
             <div className="mt-6">
-              <p className="font-mono text-[10px] tracking-widest text-[#57534E]">
+              <p className="font-mono text-[10px] tracking-widest text-[#736B63]">
                 SIGNATURE MONOGRAPHS (DIRECT ACCESS)
               </p>
               <div className="mt-3 grid grid-cols-1 gap-2">
@@ -321,30 +339,30 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                     key={proj.id}
                     to={`/projects/${proj.slug}`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex min-h-[48px] items-center justify-between border border-[#D6CEBE] bg-[#EBE6DF]/40 px-3.5 py-2.5 text-xs text-[#1C1917] active:bg-[#D6CEBE]"
+                    className="flex min-h-[48px] items-center justify-between border border-[#D8D1C5] bg-[#E8E2D8]/50 px-3.5 py-2.5 text-xs text-[#151514] active:bg-[#D8D1C5]"
                   >
                     <span className="font-serif text-base font-medium">{proj.title}</span>
-                    <span className="font-mono text-[11px] text-[#78350F]">{proj.enclaveName}</span>
+                    <span className="font-mono text-[11px] text-[#986046]">{proj.enclaveName}</span>
                   </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Natural Thumb-Zone Sticky Bottom Action Bar */}
-          <div className="sticky bottom-0 border-t border-[#D6CEBE] bg-[#FBF9F5] p-5 shadow-lg">
+          {/* Sticky Bottom Action Bar */}
+          <div className="sticky bottom-0 border-t border-[#D8D1C5] bg-[#F2EEE7] p-5 shadow-lg">
             <div className="grid grid-cols-2 gap-3">
               <Link
                 to="/projects"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex min-h-[48px] items-center justify-center border border-[#1C1917] bg-transparent px-4 py-3 text-xs font-medium text-[#1C1917]"
+                className="inline-flex min-h-[48px] items-center justify-center border border-[#151514] bg-transparent px-4 py-3 text-xs font-medium text-[#151514]"
               >
                 Explore Portfolio
               </Link>
               <Link
                 to="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex min-h-[48px] items-center justify-center bg-[#1C1917] px-4 py-3 text-xs font-medium text-[#FBF9F5]"
+                className="inline-flex min-h-[48px] items-center justify-center bg-[#151514] px-4 py-3 text-xs font-medium text-[#F2EEE7]"
               >
                 Schedule Briefing
               </Link>
@@ -364,15 +382,15 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
       </main>
 
       {/* Quiet Institutional Footer with Bangladesh Localization & BDT Controls */}
-      <footer className="border-t border-[#D6CEBE] bg-[#EBE6DF]/55 text-[#1C1917]">
+      <footer className="border-t border-[#D8D1C5] bg-[#E8E2D8]/50 text-[#151514]">
         <div className="mx-auto max-w-[1360px] px-5 sm:px-6 py-14 sm:py-16 md:px-12 lg:py-20">
           {/* Bangladesh Localization & Currency Convention Bar */}
-          <div className="mb-10 flex flex-col justify-between gap-4 border border-[#D6CEBE] bg-[#FBF9F5] p-4 sm:flex-row sm:items-center">
+          <div className="mb-10 flex flex-col justify-between gap-4 border border-[#D8D1C5] bg-[#FAF7F2] p-4 sm:flex-row sm:items-center">
             <div className="flex flex-wrap items-center gap-3 text-xs">
-              <span className="font-mono font-semibold text-[#78350F]">
+              <span className="font-mono font-semibold text-[#986046]">
                 BANGLADESH LOCALIZATION & CURRENCY CONVENTION:
               </span>
-              <span className="text-[#44403C]">
+              <span className="text-[#544E46]">
                 1 Katha = 720 sq. ft. · 1 Crore = 100 Lakh BDT (৳)
               </span>
             </div>
@@ -381,7 +399,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               <div
                 role="group"
                 aria-label="BDT Valuation Display Format"
-                className="inline-flex border border-[#D6CEBE] bg-[#EBE6DF]/50 p-0.5 font-mono text-[11px]"
+                className="inline-flex border border-[#D8D1C5] bg-[#E8E2D8]/60 p-0.5 font-mono text-[11px]"
               >
                 {(['CRORE', 'LAKH', 'SYMBOL'] as const).map((unit) => (
                   <button
@@ -390,8 +408,8 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                     onClick={() => setBdtDisplayUnit(unit)}
                     className={`px-2.5 py-1 transition-colors cursor-pointer ${
                       bdtDisplayUnit === unit
-                        ? 'bg-[#1C1917] text-[#FBF9F5]'
-                        : 'text-[#57534E] hover:text-[#1C1917]'
+                        ? 'bg-[#151514] text-[#F2EEE7]'
+                        : 'text-[#736B63] hover:text-[#151514]'
                     }`}
                   >
                     {unit === 'CRORE'
@@ -408,7 +426,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 onClick={() =>
                   setLanguageMode(languageMode === 'EN' ? 'BN' : 'EN')
                 }
-                className="border border-[#D6CEBE] bg-[#FBF9F5] px-3 py-1 font-mono text-[11px] font-medium text-[#1C1917] hover:border-[#78350F] cursor-pointer"
+                className="border border-[#D8D1C5] bg-[#FAF7F2] px-3 py-1 font-mono text-[11px] font-medium text-[#151514] hover:border-[#986046] cursor-pointer"
               >
                 {languageMode === 'EN'
                   ? 'Language: English (Switch to বাংলা)'
@@ -417,25 +435,25 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-10 sm:gap-12 border-b border-[#D6CEBE] pb-12 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-10 sm:gap-12 border-b border-[#D8D1C5] pb-12 lg:grid-cols-12">
             {/* Brand & Manifesto Summary */}
             <div className="lg:col-span-5">
-              <p className="font-serif text-2xl font-medium tracking-tight text-[#1C1917]">
+              <p className="font-serif text-2xl font-medium tracking-tight text-[#151514]">
                 {DEVELOPER_PROFILE.brandName}{' '}
-                <span className="font-serif text-base text-[#78716C]">
+                <span className="font-serif text-base text-[#8C827A]">
                   · বরেন্দ্র অ্যান্ড কোং
                 </span>
               </p>
-              <p className="mt-2 font-mono text-xs text-[#78350F]">
+              <p className="mt-2 font-mono text-xs text-[#986046]">
                 {DEVELOPER_PROFILE.monographEdition}
               </p>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-[#44403C]">
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-[#544E46]">
                 {DEVELOPER_PROFILE.manifestoLead}
               </p>
-              <p className="mt-4 font-mono text-xs text-[#57534E]">
+              <p className="mt-4 font-mono text-xs text-[#736B63]">
                 {DEVELOPER_PROFILE.headquarters}
               </p>
-              <div className="mt-3 flex flex-wrap items-center gap-3 font-mono text-[11px] text-[#78350F]">
+              <div className="mt-3 flex flex-wrap items-center gap-3 font-mono text-[11px] text-[#986046]">
                 <span>Direct Salon Desk (Demo): +880 1711-000000</span>
                 <span>·</span>
                 <span>WhatsApp Concierge Ready</span>
@@ -444,24 +462,24 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
             {/* Monographs Index */}
             <div className="lg:col-span-4">
-              <h3 className="text-xs font-semibold tracking-wide text-[#1C1917]">
+              <h3 className="text-xs font-semibold tracking-wide text-[#151514]">
                 Architectural Monographs (Concept Portfolio)
               </h3>
-              <ul className="mt-4 space-y-2.5 text-sm text-[#44403C]">
+              <ul className="mt-4 space-y-2.5 text-sm text-[#544E46]">
                 {PROJECTS_DATA.map((proj) => (
                   <li key={proj.id}>
                     <Link
                       to={`/projects/${proj.slug}`}
                       data-cursor="explore"
-                      className="group inline-flex min-h-[36px] flex-wrap items-baseline gap-x-2 py-1 transition-colors hover:text-[#78350F]"
+                      className="group inline-flex min-h-[36px] flex-wrap items-baseline gap-x-2 py-1 transition-colors hover:text-[#986046]"
                     >
-                      <span className="font-mono text-xs text-[#78716C] tabular-nums">
+                      <span className="font-mono text-xs text-[#8C827A] tabular-nums">
                         {proj.catalogNumber.replace('MONOGRAPH ', '')}
                       </span>
-                      <span className="font-serif text-lg text-[#1C1917] group-hover:text-[#78350F]">
+                      <span className="font-serif text-lg text-[#151514] group-hover:text-[#986046]">
                         {proj.title}
                       </span>
-                      <span className="text-xs text-[#78716C]">· {proj.enclaveName}</span>
+                      <span className="text-xs text-[#8C827A]">· {proj.enclaveName}</span>
                     </Link>
                   </li>
                 ))}
@@ -470,14 +488,14 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
             {/* Navigation & Salon Hours */}
             <div className="lg:col-span-3">
-              <h3 className="text-xs font-semibold tracking-wide text-[#1C1917]">
+              <h3 className="text-xs font-semibold tracking-wide text-[#151514]">
                 Index & Private Salon
               </h3>
-              <ul className="mt-4 space-y-2 text-sm text-[#44403C]">
+              <ul className="mt-4 space-y-2 text-sm text-[#544E46]">
                 <li>
                   <Link
                     to="/projects"
-                    className="inline-flex min-h-[36px] items-center editorial-link-underline hover:text-[#1C1917] transition-colors"
+                    className="inline-flex min-h-[36px] items-center hover:text-[#986046] transition-colors"
                   >
                     Portfolio Archive
                   </Link>
@@ -485,7 +503,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 <li>
                   <Link
                     to="/locations"
-                    className="inline-flex min-h-[36px] items-center editorial-link-underline hover:text-[#1C1917] transition-colors"
+                    className="inline-flex min-h-[36px] items-center hover:text-[#986046] transition-colors"
                   >
                     Dhaka Enclave Studies
                   </Link>
@@ -493,7 +511,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 <li>
                   <Link
                     to="/about"
-                    className="inline-flex min-h-[36px] items-center editorial-link-underline hover:text-[#1C1917] transition-colors"
+                    className="inline-flex min-h-[36px] items-center hover:text-[#986046] transition-colors"
                   >
                     Practice & Craft Standards
                   </Link>
@@ -501,14 +519,14 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                 <li>
                   <Link
                     to="/contact"
-                    className="inline-flex min-h-[36px] items-center editorial-link-underline hover:text-[#1C1917] transition-colors"
+                    className="inline-flex min-h-[36px] items-center hover:text-[#986046] transition-colors"
                   >
                     Request Private Briefing
                   </Link>
                 </li>
               </ul>
-              <div className="mt-6 border-t border-[#D6CEBE] pt-4 text-xs text-[#57534E]">
-                <p className="font-medium text-[#1C1917]">By Private Appointment</p>
+              <div className="mt-6 border-t border-[#D8D1C5] pt-4 text-xs text-[#736B63]">
+                <p className="font-medium text-[#151514]">By Private Appointment</p>
                 <p className="mt-1 font-mono tabular-nums">
                   Saturday – Thursday · 10:00 – 19:00 BST (UTC+6)
                 </p>
@@ -516,10 +534,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             </div>
           </div>
 
-          {/* Transparent Demo & Non-Approval Disclaimer */}
-          <div className="mt-8 flex flex-col justify-between gap-4 text-xs text-[#57534E] lg:flex-row lg:items-center">
+          {/* Transparent Demo Disclaimer */}
+          <div className="mt-8 flex flex-col justify-between gap-4 text-xs text-[#736B63] lg:flex-row lg:items-center">
             <p className="max-w-3xl leading-relaxed">{GLOBAL_DEMO_NOTICE}</p>
-            <p className="shrink-0 font-mono text-[11px] text-[#78716C] tabular-nums">
+            <p className="shrink-0 font-mono text-[11px] text-[#8C827A] tabular-nums">
               © {new Date().getFullYear()} {DEVELOPER_PROFILE.brandName} · Concept Architecture
             </p>
           </div>

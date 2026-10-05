@@ -16,6 +16,9 @@ import bashundharaCourtUrl from '../assets/images/bashundhara_court_residence_17
 import jolshiriEstateUrl from '../assets/images/jolshiri_estate_panoramic_1791210394270.jpg';
 import craftMaterialUrl from '../assets/images/architectural_craft_material_1791210407236.jpg';
 import monsoonVerandahUrl from '../assets/images/dhaka_monsoon_verandah_lifestyle_1791210420618.jpg';
+import amenityInfinityPoolUrl from '../assets/images/amenity_infinity_pool_1791211945621.jpg';
+import dhakaLakeEnclaveUrl from '../assets/images/dhaka_lake_enclave_1791211965339.jpg';
+import architectAtelierDraftUrl from '../assets/images/architect_atelier_draft_1791211988225.jpg';
 
 export const IMAGE_ASSETS = {
   ehlDhakaPlate: ehlDhakaPlateUrl,
@@ -30,6 +33,9 @@ export const IMAGE_ASSETS = {
   jolshiriEstate: jolshiriEstateUrl,
   craftMaterial: craftMaterialUrl,
   monsoonVerandah: monsoonVerandahUrl,
+  amenityInfinityPool: amenityInfinityPoolUrl,
+  dhakaLakeEnclave: dhakaLakeEnclaveUrl,
+  architectAtelierDraft: architectAtelierDraftUrl,
 } as const;
 
 export const GLOBAL_DEMO_NOTICE =
@@ -67,7 +73,7 @@ export const LOCATION_ENCLAVES: LocationEnclave[] = [
         spatialNote: 'Primary Greenbelt Horizon',
       },
     ],
-    featuredImage: IMAGE_ASSETS.gulshanSanctuary,
+    featuredImage: IMAGE_ASSETS.dhakaLakeEnclave,
   },
   {
     id: 'loc-baridhara',
@@ -194,7 +200,7 @@ export const LOCATION_ENCLAVES: LocationEnclave[] = [
         spatialNote: 'Contiguous Western Precinct',
       },
     ],
-    featuredImage: IMAGE_ASSETS.penthouseInterior,
+    featuredImage: IMAGE_ASSETS.bashundharaCourt,
   },
   {
     id: 'loc-jolshiri',
@@ -222,7 +228,7 @@ export const LOCATION_ENCLAVES: LocationEnclave[] = [
         spatialNote: 'Eastern Metropolitan Belt',
       },
     ],
-    featuredImage: IMAGE_ASSETS.heroDhaka,
+    featuredImage: IMAGE_ASSETS.jolshiriEstate,
   },
 ];
 

@@ -113,10 +113,10 @@ export const HomePage: React.FC = () => {
   const lifestyleChapters = [
     {
       index: '01',
-      kicker: 'HYDROTHERAPY & THERMAL STILLNESS',
-      title: '25-Meter Cantilevered Horizon Pool & Subterranean Hammam',
+      kicker: 'HYDROTHERAPY & THERMAL STILLNESS (POOL & SPA)',
+      title: '25-Meter Cantilevered Horizon Pool & Thermal Spa',
       setting: 'Level 03 Podium & Substructure · The Jamuna Pavilion (Demo)',
-      image: IMAGE_ASSETS.baridharaPavilion,
+      image: IMAGE_ASSETS.amenityInfinityPool,
       essay:
         'Suspended above the eastern rain-tree canopy of Gulshan Lake, our 25-meter infinity lap pool is lined in dark Sukabumi stone to absorb solar glare and mirror the monsoon sky. Below grade, residents reserve private honed-limestone steam chambers and vitality plunge pools by individual household appointment.',
       metrics: [
@@ -127,8 +127,8 @@ export const HomePage: React.FC = () => {
     },
     {
       index: '02',
-      kicker: 'PRIVATE HOSPITALITY & INTELLECTUAL LIFE',
-      title: 'The Monsoon Tea Pavilion, Rare Book Library & Baithak',
+      kicker: 'PRIVATE HOSPITALITY & INTELLECTUAL LIFE (LOUNGE)',
+      title: 'The Baithak, Monsoon Tea Pavilion & Rare Book Library',
       setting: 'Ground Courtyard Sanctuary · All Dhaka Commissions (Demo)',
       image: IMAGE_ASSETS.penthouseInterior,
       essay:
@@ -141,16 +141,44 @@ export const HomePage: React.FC = () => {
     },
     {
       index: '03',
-      kicker: 'BOTANICAL MICROCLIMATE & AIR SOVEREIGNTY',
-      title: 'Fourteen-Foot Sky Verandas & Hospital-Grade Air Filtration',
+      kicker: 'BOTANICAL MICROCLIMATE & AIR SOVEREIGNTY (SKY TERRACE)',
+      title: 'Fourteen-Foot Sky Verandas & High-Altitude Rain Gardens',
       setting: 'Full-Floor Perimeter · Every Residence (Demo)',
-      image: IMAGE_ASSETS.dhanmondiTerrace,
+      image: IMAGE_ASSETS.monsoonVerandah,
       essay:
         'Each veranda is engineered with recessed structural soil planters capable of sustaining mature frangipani, kamini, and bamboo groves at high altitude. Indoors, centralized MERV-16 and activated-carbon energy recovery ventilation maintains interior particulate levels below 8 µg/m³ year-round.',
       metrics: [
         { label: 'Particulate Standard', value: 'PM2.5 < 8 µg/m³ Continuous' },
         { label: 'Veranda Soil Depth', value: '750mm Structural Root Trench' },
         { label: 'Irrigation', value: 'Automated Harvested Rainwater Drip' },
+      ],
+    },
+    {
+      index: '04',
+      kicker: 'PRIVATE WELLNESS & MOVEMENT ATRIUM (GYM)',
+      title: 'Acoustically Isolated Wellness Studio & Subterranean Hammam',
+      setting: 'Level -01 Subterranean Vault · The Jamuna Pavilion (Demo)',
+      image: IMAGE_ASSETS.ehlDhakaNightPlate,
+      essay:
+        'Engineered with calibrated spring-isolated timber flooring and sound-dampening fair-faced concrete, the private fitness atrium accommodates bespoke personal training, pilates reformers, and hydrotherapy plunge pools with dedicated air exchange every four minutes.',
+      metrics: [
+        { label: 'Acoustic Decoupling', value: 'Floating Concrete Slab on Neoprene' },
+        { label: 'Air Exchange', value: '14 ACH Fresh Tempered Air' },
+        { label: 'Equipment Curation', value: 'Custom Teak & Matte Black Artisanal' },
+      ],
+    },
+    {
+      index: '05',
+      kicker: 'CEREMONIAL MOTORCOURT & RECEPTION (LOBBY)',
+      title: 'Triple-Height Basalt Arrival Atrium & Concierge Salon',
+      setting: 'Ground Arrival Court · Private Porte-Cochère (Demo)',
+      image: IMAGE_ASSETS.dhanmondiTerrace,
+      essay:
+        'An unhurried procession from the street leads past water reflecting pools into a 28-foot high arrival salon lined in split-face basalt and teak panelling, served 24/7 by discrete resident concierge stewards.',
+      metrics: [
+        { label: 'Ceiling Volume', value: '28-Foot Clear Structural Height' },
+        { label: 'Stone Cladding', value: 'Flamed Basalt & Honed Travertine' },
+        { label: 'Logistics Core', value: 'Independent Subterranean Loading Bay' },
       ],
     },
   ];
@@ -191,23 +219,23 @@ export const HomePage: React.FC = () => {
           Oversized numeric & architectural watermark layers, asymmetry,
           and sculptural editorial rhythm.
       ===================================================================== */}
-      <section className="relative overflow-hidden border-b border-[#D6CEBE] bg-[#FBF9F5] py-28 md:py-40 lg:py-48">
+      <section className="relative overflow-hidden border-b border-[#D8D1C5] bg-[#F2EEE7] py-32 md:py-44 lg:py-52">
         {/* Giant Background Architectural Index Number */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-8 right-6 select-none font-serif text-[180px] leading-none text-[#EBE6DF] sm:text-[260px] lg:right-12 lg:text-[340px]"
+          className="pointer-events-none absolute -top-10 right-6 select-none font-serif text-[180px] font-light leading-none text-[#E8E2D8]/70 sm:text-[280px] lg:right-16 lg:text-[360px]"
         >
           01
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1360px] px-6 md:px-12">
-          <div data-scroll="statement-reveal" className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
+          <div data-scroll="statement-reveal" className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-9">
-              <p className="font-mono text-xs tracking-widest text-[#78350F]">
+              <p className="font-mono text-xs tracking-[0.24em] text-[#986046] uppercase">
                 01. ARCHITECTURAL MANIFESTO · TECTONIC DOCTRINE
               </p>
 
-              <h2 className="mt-6 font-serif text-3xl font-normal leading-[1.1] tracking-tight text-[#1C1917] text-balance sm:text-5xl lg:text-[64px]">
+              <h2 className="mt-8 font-serif text-3xl font-normal leading-[1.12] tracking-tight text-[#151514] text-balance sm:text-5xl lg:text-[62px]">
                 We do not build speculative volume. We commission generational
                 sanctuaries—restricted to a single residence per floor, shaped by
                 four-sided daylight, deep monsoon verandas, and materials that gain
@@ -215,14 +243,14 @@ export const HomePage: React.FC = () => {
               </h2>
             </div>
 
-            <div className="border-l border-[#D6CEBE] pl-6 lg:col-span-3">
-              <span className="block font-mono text-[10px] tracking-widest text-[#78716C]">
+            <div className="border-l border-[#D8D1C5] pl-8 lg:col-span-3">
+              <span className="block font-mono text-[10px] tracking-[0.2em] text-[#736B63] uppercase">
                 ACOUSTIC & SPATIAL STANDARD
               </span>
-              <p className="mt-2 font-serif text-4xl text-[#1C1917] sm:text-5xl">
+              <p className="mt-3 font-serif text-4xl text-[#151514] sm:text-5xl">
                 360°
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-[#57534E]">
+              <p className="mt-2 text-xs leading-relaxed text-[#544E46]">
                 Unobstructed horizon exposure on every commissioned level—zero shared party walls, zero internal corridors.
               </p>
             </div>
@@ -230,10 +258,10 @@ export const HomePage: React.FC = () => {
 
           <div
             data-scroll="rule-expand"
-            className="mt-14 h-px w-full bg-[#D6CEBE]"
+            className="mt-16 h-px w-full bg-[#D8D1C5]"
           />
 
-          <div className="mt-8 flex flex-col justify-between gap-6 text-xs text-[#57534E] sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col justify-between gap-6 text-xs text-[#544E46] sm:flex-row sm:items-center">
             <EditorialMetaLine
               items={[
                 'Studio Varendra Architectural Practice',
@@ -244,10 +272,10 @@ export const HomePage: React.FC = () => {
             <Link
               to="/about"
               data-cursor="EXPLORE"
-              className="inline-flex items-center gap-1.5 font-medium text-[#1C1917] transition-colors hover:text-[#78350F]"
+              className="inline-flex items-center gap-2 font-mono text-[11px] tracking-wider text-[#151514] transition-colors hover:text-[#986046]"
             >
               <span>Read Our Architectural Doctrine</span>
-              <ArchitecturalIcon name="arrow-up-right" size={14} />
+              <ArchitecturalIcon name="arrow-up-right" size={13} />
             </Link>
           </div>
         </div>
@@ -514,7 +542,7 @@ export const HomePage: React.FC = () => {
                     y1="14"
                     x2="32"
                     y2="63"
-                    stroke="#14532D"
+                    stroke="#66705B"
                     strokeWidth="0.9"
                     strokeDasharray="2 1"
                   />
@@ -524,7 +552,7 @@ export const HomePage: React.FC = () => {
                 <path
                   d="M 4 22 C 18 22, 28 20, 58 20"
                   fill="none"
-                  stroke="#78350F"
+                  stroke="#986046"
                   strokeWidth="0.5"
                   strokeDasharray="1.5 1"
                 />
@@ -533,7 +561,7 @@ export const HomePage: React.FC = () => {
                   y="10"
                   fontSize="2.7"
                   fontFamily="JetBrains Mono, monospace"
-                  fill="#78350F"
+                  fill="#986046"
                 >
                   14&apos;-0&quot; CANTILEVER OVERHANG
                 </text>
@@ -542,7 +570,7 @@ export const HomePage: React.FC = () => {
                   y="22"
                   fontSize="2.7"
                   fontFamily="JetBrains Mono, monospace"
-                  fill="#1C1917"
+                  fill="#151514"
                 >
                   11&apos;-6&quot; CLEAR POST-TENSIONED VOLUME
                 </text>
@@ -551,7 +579,7 @@ export const HomePage: React.FC = () => {
                   y="39"
                   fontSize="2.7"
                   fontFamily="JetBrains Mono, monospace"
-                  fill="#14532D"
+                  fill="#66705B"
                 >
                   32 dBA FLOATING TRAVERTINE ACOUSTIC SLAB
                 </text>
@@ -567,8 +595,8 @@ export const HomePage: React.FC = () => {
                     onClick={() => setActiveArchLayer(layer)}
                     className={`border px-3 py-1.5 font-mono text-[11px] uppercase transition-colors cursor-pointer ${
                       activeArchLayer === layer
-                        ? 'border-[#1C1917] bg-[#1C1917] text-[#FBF9F5]'
-                        : 'border-[#D6CEBE] bg-[#FBF9F5] text-[#57534E] hover:border-[#1C1917]'
+                        ? 'border-[#151514] bg-[#151514] text-[#F2EEE7]'
+                        : 'border-[#D8D1C5] bg-[#F2EEE7] text-[#736B63] hover:border-[#151514]'
                     }`}
                   >
                     {layer}
@@ -582,13 +610,13 @@ export const HomePage: React.FC = () => {
           <div ref={archLayerTransitionRef} className="space-y-8 lg:col-span-6">
             {activeArchLayer === 'facade' && (
               <div>
-                <p className="font-mono text-xs text-[#78350F]">
+                <p className="font-mono text-xs text-[#986046]">
                   LAYER 01 · BREATHING ENVELOPE & BRISE-SOLEIL
                 </p>
-                <h3 className="mt-2 font-serif text-3xl text-[#1C1917]">
+                <h3 className="mt-2 font-serif text-3xl text-[#151514]">
                   Double-Skin Burmese Teak & Low-Iron Acoustic Glazing
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#44403C]">
+                <p className="mt-4 text-base leading-relaxed text-[#544E46]">
                   Rather than exposing glass directly to Dhaka’s western summer
                   sun, our facades interpose a fourteen-foot structural veranda
                   and operable seasoned Burmese teak louvers. This outer veil
@@ -600,13 +628,13 @@ export const HomePage: React.FC = () => {
 
             {activeArchLayer === 'massing' && (
               <div>
-                <p className="font-mono text-xs text-[#78350F]">
+                <p className="font-mono text-xs text-[#986046]">
                   LAYER 02 · STEPPED MASSING & HORIZONTAL SOVEREIGNTY
                 </p>
-                <h3 className="mt-2 font-serif text-3xl text-[#1C1917]">
+                <h3 className="mt-2 font-serif text-3xl text-[#151514]">
                   Column-Free Post-Tensioned Floor Plates
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#44403C]">
+                <p className="mt-4 text-base leading-relaxed text-[#544E46]">
                   Every residence occupies an entire structural level with zero
                   intrusive drop-beams, allowing 52-foot uninterrupted living
                   salons and four-sided natural cross-ventilation. Dual elevator
@@ -618,13 +646,13 @@ export const HomePage: React.FC = () => {
 
             {activeArchLayer === 'materials' && (
               <div>
-                <p className="font-mono text-xs text-[#78350F]">
+                <p className="font-mono text-xs text-[#986046]">
                   LAYER 03 · TACTILE PERMANENCE & FIFTY-YEAR PATINA
                 </p>
-                <h3 className="mt-2 font-serif text-3xl text-[#1C1917]">
+                <h3 className="mt-2 font-serif text-3xl text-[#151514]">
                   Honed Roman Travertine, Dhamrai Kiln Brick & Board-Formed Concrete
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#44403C]">
+                <p className="mt-4 text-base leading-relaxed text-[#544E46]">
                   We reject synthetic coatings and fragile veneers. Our
                   structures are cast in architectural fair-faced concrete paired
                   with high-density compressed clay bricks fired in Dhamrai and
@@ -636,13 +664,13 @@ export const HomePage: React.FC = () => {
 
             {activeArchLayer === 'philosophy' && (
               <div>
-                <p className="font-mono text-xs text-[#78350F]">
+                <p className="font-mono text-xs text-[#986046]">
                   LAYER 04 · BENGAL CLIMATIC MODERNISM
                 </p>
-                <h3 className="mt-2 font-serif text-3xl text-[#1C1917]">
+                <h3 className="mt-2 font-serif text-3xl text-[#151514]">
                   Dialogues Between Solid Monolith and Monsoon Breeze
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#44403C]">
+                <p className="mt-4 text-base leading-relaxed text-[#544E46]">
                   Continuing the intellectual lineage of twentieth-century Bengal
                   architecture, our buildings treat shadow and air movement as
                   primary building materials—creating residences that remain
@@ -652,23 +680,89 @@ export const HomePage: React.FC = () => {
             )}
 
             {/* Material Provenance Trio */}
-            <div className="grid grid-cols-1 gap-4 border-t border-[#D6CEBE] pt-6 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 border-t border-[#D8D1C5] pt-6 sm:grid-cols-3">
               {featuredResidence.materialPalette.map((mat) => (
                 <div
                   key={mat.material}
-                  className="border border-[#D6CEBE] bg-[#EBE6DF]/35 p-4"
+                  className="border border-[#D8D1C5] bg-[#E8E2D8]/35 p-4"
                 >
-                  <p className="font-serif text-base font-medium text-[#1C1917]">
+                  <p className="font-serif text-base font-medium text-[#151514]">
                     {mat.material}
                   </p>
-                  <p className="mt-1 font-mono text-[10px] text-[#78350F]">
+                  <p className="mt-1 font-mono text-[10px] text-[#986046]">
                     {mat.origin}
                   </p>
-                  <p className="mt-2 text-xs leading-relaxed text-[#57534E]">
+                  <p className="mt-2 text-xs leading-relaxed text-[#544E46]">
                     {mat.application}
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Visual Architectural Sequence: Wide → Detail → Material → Wide */}
+        <div className="mt-16 border-t border-[#D8D1C5] pt-12">
+          <div className="mb-6 flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline">
+            <p className="font-mono text-xs tracking-[0.22em] text-[#986046] uppercase">
+              VISUAL CADENCE · WIDE → DETAIL → MATERIAL → WIDE
+            </p>
+            <span className="font-mono text-[11px] text-[#736B63]">
+              4-Plate Architectural Examination
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex flex-col">
+              <ArchitecturalImage
+                src={IMAGE_ASSETS.ehlDhakaPlate}
+                alt="Wide elevation showing cantilevered concrete floor plates at The Jamuna Pavilion"
+                aspectRatioClass="aspect-[4/3]"
+                figureNumber="PLATE 01 · WIDE"
+                caption="Full-Floor Cantilever Elevation"
+              />
+              <p className="mt-2 font-mono text-[10px] text-[#736B63]">
+                01. Structural Silhouette (Kashef Chowdhury / URBANA)
+              </p>
+            </div>
+
+            <div className="flex flex-col">
+              <ArchitecturalImage
+                src={IMAGE_ASSETS.ehlDhakaDetailPlate}
+                alt="Close-up tectonic detail of board-formed concrete and Burmese teak joinery"
+                aspectRatioClass="aspect-[4/3]"
+                figureNumber="PLATE 02 · DETAIL"
+                caption="Board-Formed Concrete & Teak"
+              />
+              <p className="mt-2 font-mono text-[10px] text-[#736B63]">
+                02. 14-Foot Verandah Joinery & Brise-Soleil
+              </p>
+            </div>
+
+            <div className="flex flex-col">
+              <ArchitecturalImage
+                src={IMAGE_ASSETS.craftMaterial}
+                alt="Tactile terracotta brick samples and honed Roman travertine in Dhaka atelier"
+                aspectRatioClass="aspect-[4/3]"
+                figureNumber="PLATE 03 · MATERIAL"
+                caption="Bengal Kiln Brick & Travertine"
+              />
+              <p className="mt-2 font-mono text-[10px] text-[#736B63]">
+                03. Natural Material Provenance & Fifty-Year Patina
+              </p>
+            </div>
+
+            <div className="flex flex-col">
+              <ArchitecturalImage
+                src={IMAGE_ASSETS.dhakaLakeEnclave}
+                alt="Wide architectural setting showing lush rain-tree canopy over Gulshan lakefront"
+                aspectRatioClass="aspect-[4/3]"
+                figureNumber="PLATE 04 · WIDE"
+                caption="Gulshan Lakefront Canopy"
+              />
+              <p className="mt-2 font-mono text-[10px] text-[#736B63]">
+                04. Monsoon Microclimate & Canopy Setting
+              </p>
             </div>
           </div>
         </div>
@@ -711,7 +805,7 @@ export const HomePage: React.FC = () => {
         />
 
         {/* Chapter Selector Tabs */}
-        <div className="mt-10 grid grid-cols-1 gap-4 border-b border-[#D6CEBE] pb-8 md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-3 border-b border-[#D8D1C5] pb-8 sm:grid-cols-3 lg:grid-cols-5">
           {lifestyleChapters.map((chap, idx) => {
             const isActive = idx === activeLifestyleIndex;
             return (
@@ -719,20 +813,20 @@ export const HomePage: React.FC = () => {
                 key={chap.index}
                 type="button"
                 onClick={() => setActiveLifestyleIndex(idx)}
-                className={`border p-5 text-left transition-all duration-150 cursor-pointer ${
+                className={`border p-4 text-left transition-all duration-150 cursor-pointer ${
                   isActive
-                    ? 'border-[#1C1917] bg-[#1C1917] text-[#FBF9F5]'
-                    : 'border-[#D6CEBE] bg-[#FBF9F5] text-[#1C1917] hover:border-[#78350F]'
+                    ? 'border-[#151514] bg-[#151514] text-[#F2EEE7]'
+                    : 'border-[#D8D1C5] bg-[#FAF7F2] text-[#151514] hover:border-[#986046]'
                 }`}
               >
                 <span
                   className={`font-mono text-xs tabular-nums ${
-                    isActive ? 'text-[#D6CEBE]' : 'text-[#78350F]'
+                    isActive ? 'text-[#B5A07D]' : 'text-[#986046]'
                   }`}
                 >
                   CHAPTER {chap.index}
                 </span>
-                <p className="mt-1.5 font-serif text-xl font-normal">
+                <p className="mt-1.5 font-serif text-base font-normal line-clamp-2">
                   {chap.title.split('&')[0]}
                 </p>
               </button>
@@ -753,21 +847,21 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="space-y-6 lg:col-span-5">
-            <p className="font-mono text-xs text-[#78350F]">
+            <p className="font-mono text-xs text-[#986046]">
               {currentLifestyle.kicker}
             </p>
-            <h3 className="font-serif text-3xl text-[#1C1917] sm:text-4xl">
+            <h3 className="font-serif text-3xl text-[#151514] sm:text-4xl">
               {currentLifestyle.title}
             </h3>
-            <p className="text-base leading-relaxed text-[#44403C]">
+            <p className="text-base leading-relaxed text-[#544E46]">
               {currentLifestyle.essay}
             </p>
 
-            <dl className="divide-y divide-[#D6CEBE] border-t border-b border-[#D6CEBE] pt-2 text-xs">
+            <dl className="divide-y divide-[#D8D1C5] border-t border-b border-[#D8D1C5] pt-2 text-xs">
               {currentLifestyle.metrics.map((m) => (
                 <div key={m.label} className="flex justify-between py-3">
-                  <dt className="text-[#78716C]">{m.label}</dt>
-                  <dd className="font-mono font-medium text-[#1C1917] tabular-nums">
+                  <dt className="text-[#736B63]">{m.label}</dt>
+                  <dd className="font-mono font-medium text-[#151514] tabular-nums">
                     {m.value}
                   </dd>
                 </div>
@@ -806,7 +900,7 @@ export const HomePage: React.FC = () => {
           }
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-10 border border-[#D6CEBE] bg-[#EBE6DF]/35 p-6 md:p-10 lg:grid-cols-12">
+        <div className="mt-12 grid grid-cols-1 gap-10 border border-[#D8D1C5] bg-[#E8E2D8]/35 p-6 md:p-10 lg:grid-cols-12">
           {/* Left 7 Columns: Typology Dossier & Spatial Narrative */}
           <div className="flex flex-col justify-between lg:col-span-7">
             <div>
@@ -818,36 +912,36 @@ export const HomePage: React.FC = () => {
                 ]}
               />
 
-              <h3 className="mt-3 font-serif text-3xl text-[#1C1917] sm:text-4xl">
+              <h3 className="mt-3 font-serif text-3xl text-[#151514] sm:text-4xl">
                 {activeArchetype.title}
               </h3>
 
-              <p className="mt-4 max-w-prose text-base leading-relaxed text-[#44403C]">
+              <p className="mt-4 max-w-prose text-base leading-relaxed text-[#544E46]">
                 {activeArchetype.spatialNarrative}
               </p>
 
               {/* Key Proportions Table */}
               <div className="mt-8">
-                <h4 className="font-mono text-xs text-[#78350F]">
+                <h4 className="font-mono text-xs text-[#986046]">
                   REPRESENTATIVE ROOM PROPORTIONS (CLEAR SPAN)
                 </h4>
-                <div className="mt-3 divide-y divide-[#D6CEBE] border-t border-b border-[#D6CEBE]">
+                <div className="mt-3 divide-y divide-[#D8D1C5] border-t border-b border-[#D8D1C5]">
                   {activeArchetype.keyProportions.map((prop, i) => (
                     <div
                       key={prop.zone}
                       className="flex flex-wrap items-center justify-between gap-2 py-3 text-xs"
                     >
                       <div className="flex items-baseline gap-3">
-                        <span className="font-mono text-[#78716C] tabular-nums">
+                        <span className="font-mono text-[#736B63] tabular-nums">
                           0{i + 1}
                         </span>
-                        <span className="font-serif text-base font-medium text-[#1C1917]">
+                        <span className="font-serif text-base font-medium text-[#151514]">
                           {prop.zone}
                         </span>
                       </div>
                       <div className="flex items-center gap-4 font-mono">
-                        <span className="text-[#57534E]">{prop.aspect}</span>
-                        <span className="font-semibold text-[#1C1917] tabular-nums">
+                        <span className="text-[#544E46]">{prop.aspect}</span>
+                        <span className="font-semibold text-[#151514] tabular-nums">
                           {prop.dimensions}
                         </span>
                       </div>
@@ -874,58 +968,58 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Right 5 Columns: Tabular Specification Summary */}
-          <div className="flex flex-col justify-between border border-[#D6CEBE] bg-[#FBF9F5] p-6 md:p-8 lg:col-span-5">
+          <div className="flex flex-col justify-between border border-[#D8D1C5] bg-[#FAF7F2] p-6 md:p-8 lg:col-span-5">
             <div>
-              <p className="font-mono text-xs text-[#78350F]">
+              <p className="font-mono text-xs text-[#986046]">
                 ARCHITECTURAL SPECIFICATION SCHEDULE
               </p>
-              <dl className="mt-5 divide-y divide-[#D6CEBE] text-xs">
+              <dl className="mt-5 divide-y divide-[#D8D1C5] text-xs">
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Gross Floor Plate Range</dt>
-                  <dd className="mt-1 font-mono text-lg font-semibold text-[#1C1917] tabular-nums">
+                  <dt className="text-[#736B63]">Gross Floor Plate Range</dt>
+                  <dd className="mt-1 font-mono text-lg font-semibold text-[#151514] tabular-nums">
                     {activeArchetype.grossAreaRangeSqFt}
                   </dd>
                 </div>
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Cantilevered Veranda Depth</dt>
-                  <dd className="mt-1 font-mono text-sm font-medium text-[#1C1917] tabular-nums">
+                  <dt className="text-[#736B63]">Cantilevered Veranda Depth</dt>
+                  <dd className="mt-1 font-mono text-sm font-medium text-[#151514] tabular-nums">
                     {activeArchetype.verandaDepthFeet}
                   </dd>
                 </div>
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Clear Ceiling Height</dt>
-                  <dd className="mt-1 font-mono text-sm font-medium text-[#1C1917] tabular-nums">
+                  <dt className="text-[#736B63]">Clear Ceiling Height</dt>
+                  <dd className="mt-1 font-mono text-sm font-medium text-[#151514] tabular-nums">
                     {activeArchetype.ceilingHeightFeet}
                   </dd>
                 </div>
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Sleeping Chambers</dt>
-                  <dd className="mt-1 font-medium text-[#1C1917]">
+                  <dt className="text-[#736B63]">Sleeping Chambers</dt>
+                  <dd className="mt-1 font-medium text-[#151514]">
                     {activeArchetype.bedroomsLabel}
                   </dd>
                 </div>
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Service & Culinary Core</dt>
-                  <dd className="mt-1 text-[#44403C]">
+                  <dt className="text-[#736B63]">Service & Culinary Core</dt>
+                  <dd className="mt-1 text-[#544E46]">
                     {activeArchetype.staffSuiteLabel}
                   </dd>
                 </div>
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Vertical Circulation</dt>
-                  <dd className="mt-1 text-[#44403C]">
+                  <dt className="text-[#736B63]">Vertical Circulation</dt>
+                  <dd className="mt-1 text-[#544E46]">
                     {activeArchetype.privateLiftsLabel}
                   </dd>
                 </div>
                 <div className="py-3.5">
-                  <dt className="text-[#78716C]">Indicative Allocation (Demo)</dt>
-                  <dd className="mt-1 font-mono font-semibold text-[#78350F] tabular-nums">
+                  <dt className="text-[#736B63]">Indicative Allocation (Demo)</dt>
+                  <dd className="mt-1 font-mono font-semibold text-[#986046] tabular-nums">
                     {activeArchetype.indicativeValuationDemo}
                   </dd>
                 </div>
               </dl>
             </div>
 
-            <p className="mt-4 font-mono text-[11px] text-[#78716C]">
+            <p className="mt-4 font-mono text-[11px] text-[#736B63]">
               All measurements and valuations are concept demonstration figures.
             </p>
           </div>
@@ -958,24 +1052,24 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* Quantitative Craft Standards Table & Principal Endorsement */}
-        <div className="mt-12 grid grid-cols-1 gap-10 border-t border-[#D6CEBE] pt-12 lg:grid-cols-12 lg:items-center">
+        <div className="mt-12 grid grid-cols-1 gap-10 border-t border-[#D8D1C5] pt-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
-            <h3 className="font-serif text-2xl text-[#1C1917]">
+            <h3 className="font-serif text-2xl text-[#151514]">
               Physical Engineering Benchmarks (Concept Specification)
             </h3>
-            <dl className="mt-4 divide-y divide-[#D6CEBE] border-t border-b border-[#D6CEBE]">
+            <dl className="mt-4 divide-y divide-[#D8D1C5] border-t border-b border-[#D8D1C5]">
               {DEVELOPER_PROFILE.craftStandards.map((std) => (
                 <div
                   key={std.category}
                   className="grid grid-cols-1 gap-2 py-3.5 sm:grid-cols-12 sm:items-baseline"
                 >
-                  <dt className="font-serif text-base font-medium text-[#1C1917] sm:col-span-4">
+                  <dt className="font-serif text-base font-medium text-[#151514] sm:col-span-4">
                     {std.category}
                   </dt>
-                  <dd className="text-xs text-[#44403C] sm:col-span-5">
+                  <dd className="text-xs text-[#544E46] sm:col-span-5">
                     {std.specification}
                   </dd>
-                  <dd className="font-mono text-xs font-medium text-[#78350F] tabular-nums sm:col-span-3 sm:text-right">
+                  <dd className="font-mono text-xs font-medium text-[#986046] tabular-nums sm:col-span-3 sm:text-right">
                     <ArchitecturalTooltip
                       term={std.benchmark}
                       definition={std.specification}
@@ -987,15 +1081,15 @@ export const HomePage: React.FC = () => {
             </dl>
           </div>
 
-          <div className="border border-[#D6CEBE] bg-[#FBF9F5] p-8 lg:col-span-5">
-            <p className="font-mono text-xs text-[#78350F]">
+          <div className="border border-[#D8D1C5] bg-[#FAF7F2] p-8 lg:col-span-5">
+            <p className="font-mono text-xs text-[#986046]">
               PRINCIPAL’S COMMITMENT
             </p>
-            <blockquote className="mt-3 font-serif text-xl italic leading-relaxed text-[#1C1917]">
+            <blockquote className="mt-3 font-serif text-xl italic leading-relaxed text-[#151514]">
               “{DEVELOPER_PROFILE.principals[1].quote}”
             </blockquote>
-            <div className="mt-4 border-t border-[#D6CEBE] pt-4 text-xs text-[#57534E]">
-              <p className="font-medium text-[#1C1917]">
+            <div className="mt-4 border-t border-[#D8D1C5] pt-4 text-xs text-[#736B63]">
+              <p className="font-medium text-[#151514]">
                 {DEVELOPER_PROFILE.principals[1].name}
               </p>
               <p className="mt-0.5">{DEVELOPER_PROFILE.principals[1].role}</p>
@@ -1016,29 +1110,29 @@ export const HomePage: React.FC = () => {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left 6 Columns: Editorial Invitation */}
           <div className="lg:col-span-6">
-            <p className="font-mono text-xs tracking-widest text-[#D6CEBE]">
+            <p className="font-mono text-xs tracking-widest text-[#B5A07D]">
               09. PRIVATE SALON & ARCHITECTURAL BRIEFING
             </p>
-            <h2 className="mt-4 font-serif text-4xl font-normal leading-[1.08] tracking-tight text-[#FBF9F5] text-balance sm:text-5xl lg:text-6xl">
+            <h2 className="mt-4 font-serif text-4xl font-normal leading-[1.08] tracking-tight text-[#F2EEE7] text-balance sm:text-5xl lg:text-6xl">
               Experience the Residence in Person.
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#D6CEBE]/85">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#D8D1C5]/85">
               We invite prospective principals, family offices, and architectural
               patrons to inspect our 1:50 timber scale models, full-slab Roman
               travertine and Dhamrai kiln-brick samples, and complete floor plate
               blueprints at our Gulshan North salon.
             </p>
 
-            <dl className="mt-8 grid grid-cols-1 gap-6 border-t border-[#D6CEBE]/20 pt-6 text-xs sm:grid-cols-2">
+            <dl className="mt-8 grid grid-cols-1 gap-6 border-t border-[#D8D1C5]/20 pt-6 text-xs sm:grid-cols-2">
               <div>
-                <dt className="text-[#A8A29E]">Private Salon Address</dt>
-                <dd className="mt-1 font-medium text-[#FBF9F5]">
+                <dt className="text-[#A59D90]">Private Salon Address</dt>
+                <dd className="mt-1 font-medium text-[#F2EEE7]">
                   {DEVELOPER_PROFILE.headquarters}
                 </dd>
               </div>
               <div>
-                <dt className="text-[#A8A29E]">Appointment Hours</dt>
-                <dd className="mt-1 font-mono text-[#FBF9F5] tabular-nums">
+                <dt className="text-[#A59D90]">Appointment Hours</dt>
+                <dd className="mt-1 font-mono text-[#F2EEE7] tabular-nums">
                   Sat – Thu · 10:00 – 19:00 BST
                 </dd>
               </div>
@@ -1046,22 +1140,22 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Right 6 Columns: Instant Private Briefing Register */}
-          <div className="border border-[#D6CEBE]/30 bg-[#1C1917] p-6 md:p-10 lg:col-span-6">
+          <div className="border border-[#D8D1C5]/30 bg-[#1D1C1A] p-6 md:p-10 lg:col-span-6">
             {consultReference ? (
-              <div role="status" aria-live="polite" className="py-6 text-[#FBF9F5]">
-                <div className="flex items-center gap-2 font-mono text-xs text-[#D6CEBE]">
+              <div role="status" aria-live="polite" className="py-6 text-[#F2EEE7]">
+                <div className="flex items-center gap-2 font-mono text-xs text-[#B5A07D]">
                   <ArchitecturalIcon name="check" size={16} />
                   <span>APPOINTMENT LOGGED · REF {consultReference}</span>
                 </div>
-                <h3 className="mt-3 font-serif text-3xl text-[#FBF9F5]">
+                <h3 className="mt-3 font-serif text-3xl text-[#F2EEE7]">
                   Briefing Reserved for {consultName}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#D6CEBE]/85">
+                <p className="mt-2 text-sm leading-relaxed text-[#D8D1C5]/85">
                   Thank you. Your request for a{' '}
-                  <strong className="text-[#FBF9F5]">{consultEnclave}</strong>{' '}
+                  <strong className="text-[#F2EEE7]">{consultEnclave}</strong>{' '}
                   has been recorded in this concept demonstration.
                 </p>
-                <p className="mt-4 font-mono text-[11px] text-[#A8A29E]">
+                <p className="mt-4 font-mono text-[11px] text-[#A59D90]">
                   {GLOBAL_DEMO_NOTICE}
                 </p>
                 <div className="mt-6">
@@ -1075,8 +1169,8 @@ export const HomePage: React.FC = () => {
               </div>
             ) : (
               <form onSubmit={handleQuickConsultationSubmit} noValidate className="space-y-5">
-                <div className="border-b border-[#D6CEBE]/20 pb-3">
-                  <p className="font-mono text-xs text-[#D6CEBE]">
+                <div className="border-b border-[#D8D1C5]/20 pb-3">
+                  <p className="font-mono text-xs text-[#B5A07D]">
                     REQUEST PRIVATE SALON APPOINTMENT (DEMO)
                   </p>
                 </div>
@@ -1085,7 +1179,7 @@ export const HomePage: React.FC = () => {
                   <div>
                     <label
                       htmlFor="home-consult-name"
-                      className="block text-xs font-medium text-[#D6CEBE]"
+                      className="block text-xs font-medium text-[#D8D1C5]"
                     >
                       Principal Name *
                     </label>
@@ -1097,14 +1191,14 @@ export const HomePage: React.FC = () => {
                       value={consultName}
                       onChange={(e) => setConsultName(e.target.value)}
                       placeholder="Full Name"
-                      className="mt-1.5 min-h-[48px] w-full border border-[#D6CEBE]/35 bg-[#141210] px-3.5 py-2.5 text-sm text-[#FBF9F5] placeholder:text-[#78716C] focus:border-[#FBF9F5] focus:outline-none"
+                      className="mt-1.5 min-h-[48px] w-full border border-[#D8D1C5]/35 bg-[#151514] px-3.5 py-2.5 text-sm text-[#F2EEE7] placeholder:text-[#8C827A] focus:border-[#F2EEE7] focus:outline-none"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="home-consult-phone"
-                      className="block text-xs font-medium text-[#D6CEBE]"
+                      className="block text-xs font-medium text-[#D8D1C5]"
                     >
                       Direct Telephone / WhatsApp *
                     </label>
@@ -1117,7 +1211,7 @@ export const HomePage: React.FC = () => {
                       value={consultPhone}
                       onChange={(e) => setConsultPhone(e.target.value)}
                       placeholder="+880 17XX-XXXXXX"
-                      className="mt-1.5 min-h-[48px] w-full border border-[#D6CEBE]/35 bg-[#141210] px-3.5 py-2.5 font-mono text-sm text-[#FBF9F5] placeholder:text-[#78716C] focus:border-[#FBF9F5] focus:outline-none"
+                      className="mt-1.5 min-h-[48px] w-full border border-[#D8D1C5]/35 bg-[#151514] px-3.5 py-2.5 font-mono text-sm text-[#F2EEE7] placeholder:text-[#8C827A] focus:border-[#F2EEE7] focus:outline-none"
                     />
                   </div>
                 </div>
@@ -1126,7 +1220,7 @@ export const HomePage: React.FC = () => {
                   <div>
                     <label
                       htmlFor="home-consult-email"
-                      className="block text-xs font-medium text-[#D6CEBE]"
+                      className="block text-xs font-medium text-[#D8D1C5]"
                     >
                       Electronic Mail *
                     </label>
@@ -1139,14 +1233,14 @@ export const HomePage: React.FC = () => {
                       value={consultEmail}
                       onChange={(e) => setConsultEmail(e.target.value)}
                       placeholder="principal@domain.com"
-                      className="mt-1.5 min-h-[48px] w-full border border-[#D6CEBE]/35 bg-[#141210] px-3.5 py-2.5 text-sm text-[#FBF9F5] placeholder:text-[#78716C] focus:border-[#FBF9F5] focus:outline-none"
+                      className="mt-1.5 min-h-[48px] w-full border border-[#D8D1C5]/35 bg-[#151514] px-3.5 py-2.5 text-sm text-[#F2EEE7] placeholder:text-[#8C827A] focus:border-[#F2EEE7] focus:outline-none"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="home-consult-format"
-                      className="block text-xs font-medium text-[#D6CEBE]"
+                      className="block text-xs font-medium text-[#D8D1C5]"
                     >
                       Consultation Preference
                     </label>
@@ -1154,7 +1248,7 @@ export const HomePage: React.FC = () => {
                       id="home-consult-format"
                       value={consultEnclave}
                       onChange={(e) => setConsultEnclave(e.target.value)}
-                      className="mt-1.5 min-h-[48px] w-full border border-[#D6CEBE]/35 bg-[#141210] px-3.5 py-2.5 text-sm text-[#FBF9F5] focus:border-[#FBF9F5] focus:outline-none"
+                      className="mt-1.5 min-h-[48px] w-full border border-[#D8D1C5]/35 bg-[#151514] px-3.5 py-2.5 text-sm text-[#F2EEE7] focus:border-[#F2EEE7] focus:outline-none"
                     >
                       <option value="Gulshan North Salon Private Viewing">
                         Gulshan North Salon Private Viewing
@@ -1170,13 +1264,13 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 {consultError && (
-                  <p role="alert" className="text-xs text-[#F59E0B]">
+                  <p role="alert" className="text-xs text-[#986046]">
                     {consultError}
                   </p>
                 )}
 
-                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#D6CEBE]/20 pt-4">
-                  <span className="font-mono text-[11px] text-[#A8A29E]">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#D8D1C5]/20 pt-4">
+                  <span className="font-mono text-[11px] text-[#A59D90]">
                     Frontend Concept Demo · Zero Server Transmission
                   </span>
                   <ActionButton type="submit" variant="inverse" magnetic>
