@@ -8,6 +8,7 @@ import {
   isMobileOrConstrainedDevice,
   prefersReducedMotion,
 } from '../../utils/animation';
+import { IMAGE_ASSETS } from '../../data/mockRealEstateData';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,14 +63,72 @@ const HERO_EDITORIAL_BEATS: ScrollEditorialBeat[] = [
 ];
 
 /**
- * WORLD-CLASS LUXURY REAL-ESTATE CINEMATIC HERO
- *
- * Implements:
- * - Staged intro choreography (atmosphere -> building settles -> headline mask reveal -> CTA)
- * - Editorial typographic hierarchy ("GULSHAN / DHAKA" -> "ARCHITECTURE SHAPED BY LIGHT, SHADE & MONSOON." -> supporting statement -> "EXPLORE RESIDENCES")
- * - Minimal scroll indicator with animated vertical hairline
- * - Seamless exit transition into the next architectural section
+ * 12 — PRODUCTION ERROR BOUNDARY FOR THE HERO VISUAL ENGINE
+ * Guarantees that if any child visual engine or runtime API throws an exception,
+ * the homepage never renders a blank/black screen and immediately displays the
+ * real architectural hero image with full editorial typography and CTA.
  */
+interface VisualBoundaryProps {
+  fallbackImageSrc: string;
+  fallbackAlt: string;
+  children: React.ReactNode;
+}
+
+interface VisualBoundaryState {
+  hasError: boolean;
+}
+
+class HeroVisualErrorBoundary extends React.Component<
+  VisualBoundaryProps,
+  VisualBoundaryState
+> {
+  constructor(props: VisualBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: unknown): VisualBoundaryState {
+    console.error('[Hero] ERROR caught by HeroVisualErrorBoundary:', error);
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo): void {
+    console.error('[Hero] ERROR stack trace:', error.message, info.componentStack);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      const safeSrc =
+        this.props.fallbackImageSrc ||
+        IMAGE_ASSETS.ehlDhakaPlate ||
+        '/images/ehl_dhaka_condominium_plate_1791106691381.jpg';
+      return (
+        <div className="relative h-full w-full overflow-hidden bg-[#13161B]">
+          <img
+            src={safeSrc}
+            alt={this.props.fallbackAlt}
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (!target.src.endsWith('/images/ehl_dhaka_condominium_plate_1791106691381.jpg')) {
+                target.src = '/images/ehl_dhaka_condominium_plate_1791106691381.jpg';
+              }
+            }}
+            className="h-full w-full object-cover object-center"
+          />
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(14,17,22,0.18) 0%, rgba(14,17,22,0.0) 20%, rgba(14,17,22,0.0) 58%, rgba(14,17,22,0.72) 100%)',
+            }}
+          />
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export const HeroScrollArchitectureChapter: React.FC<
   HeroScrollArchitectureChapterProps
 > = ({
@@ -93,8 +152,8 @@ export const HeroScrollArchitectureChapter: React.FC<
       setCtaReady(true);
       return;
     }
-    const tType = window.setTimeout(() => setTypographyReady(true), 620);
-    const tCta = window.setTimeout(() => setCtaReady(true), 1080);
+    const tType = window.setTimeout(() => setTypographyReady(true), 420);
+    const tCta = window.setTimeout(() => setCtaReady(true), 820);
     return () => {
       window.clearTimeout(tType);
       window.clearTimeout(tCta);
@@ -109,23 +168,28 @@ export const HeroScrollArchitectureChapter: React.FC<
       return;
     }
 
-    const isConstrained = isMobileOrConstrainedDevice();
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionEl,
-        start: 'top top',
-        end: isConstrained ? '+=155%' : '+=245%',
-        pin: true,
-        scrub: 0.7,
-        onUpdate: (self) => {
-          setScrollProgress(self.progress);
-        },
-      });
-    }, sectionEl);
+    try {
+      const isConstrained = isMobileOrConstrainedDevice();
+      const ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: sectionEl,
+          start: 'top top',
+          end: isConstrained ? '+=155%' : '+=245%',
+          pin: true,
+          scrub: 0.7,
+          onUpdate: (self) => {
+            setScrollProgress(self.progress);
+          },
+        });
+      }, sectionEl);
 
-    return () => {
-      ctx.revert();
-    };
+      return () => {
+        ctx.revert();
+      };
+    } catch (err) {
+      console.error('[Hero] ERROR initializing ScrollTrigger:', err);
+      return;
+    }
   }, []);
 
   const activeBeat =
@@ -138,10 +202,6 @@ export const HeroScrollArchitectureChapter: React.FC<
       ? enclaveLabel
       : activeBeat.eyebrow;
 
-  // 15 — CONTINUOUS VISUAL EXIT TRANSITION INTO NEXT SECTION
-  // During the final 12% of the hero scroll (0.88 -> 1.00), the hero visual
-  // glides upward slightly while a warm alabaster architectural curtain rises
-  // at the bottom edge so Section 02 emerges as one continuous spatial sequence.
   const exitTransitionT = Math.max(0, Math.min(1, (scrollProgress - 0.88) / 0.12));
   const heroLiftY = -exitTransitionT * 36;
 
@@ -153,6 +213,7 @@ export const HeroScrollArchitectureChapter: React.FC<
     >
       {/* =====================================================================
           1. FULL-BLEED REAL BUILDING VISUAL & LIVE CAMERA MOTION
+          Wrapped in HeroVisualErrorBoundary for guaranteed production safety.
       ===================================================================== */}
       <div
         className="absolute inset-0 z-0 h-full w-full will-change-transform"
@@ -160,23 +221,25 @@ export const HeroScrollArchitectureChapter: React.FC<
           transform: `translate3d(0, ${heroLiftY.toFixed(1)}px, 0)`,
         }}
       >
-        <HeroRealtimeArchitectureCanvas
+        <HeroVisualErrorBoundary
           fallbackImageSrc={fallbackImageSrc}
           fallbackAlt={fallbackAlt}
-          scrollProgress={scrollProgress}
-        />
+        >
+          <HeroRealtimeArchitectureCanvas
+            fallbackImageSrc={fallbackImageSrc}
+            fallbackAlt={fallbackAlt}
+            scrollProgress={scrollProgress}
+          />
+        </HeroVisualErrorBoundary>
       </div>
 
       {/* =====================================================================
           2. SUBORDINATE EDITORIAL TYPOGRAPHY & COMPOSITIONAL BALANCE
-          Positioned in the lower-left negative space so the building's
-          cantilevered slabs, iron-wood screens, and hanging gardens dominate.
       ===================================================================== */}
       <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1440px] flex-col justify-end px-6 pb-10 pt-24 sm:px-10 md:px-14 md:pb-14">
         <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
           {/* LEFT COLUMN: Editorial Eyebrow + Masked Line Reveal Headline + Short Statement */}
           <div className="lg:col-span-8">
-            {/* Small Location / Architectural Eyebrow */}
             <div className="overflow-hidden">
               <p
                 className={`font-mono text-[10px] tracking-[0.26em] text-[#E7C396] uppercase transition-all duration-700 ease-out sm:text-[11px] ${
@@ -190,7 +253,6 @@ export const HeroScrollArchitectureChapter: React.FC<
               </p>
             </div>
 
-            {/* Large Editorial Headline with Staggered Line Mask Reveal */}
             {isProjectDetail && projectTitle && scrollProgress < 0.36 ? (
               <div className="mt-3 overflow-hidden">
                 <h1
@@ -228,7 +290,6 @@ export const HeroScrollArchitectureChapter: React.FC<
               </h1>
             )}
 
-            {/* Supporting Editorial Statement */}
             <p
               className={`mt-4 max-w-md text-sm leading-relaxed text-[#F5F2EB]/90 transition-all duration-900 delay-300 ease-out sm:text-[15px] ${
                 typographyReady
@@ -277,7 +338,7 @@ export const HeroScrollArchitectureChapter: React.FC<
               </Link>
             )}
 
-            {/* 13 — MINIMAL SCROLL INDICATOR (Animated Hairline + Subtle Typography) */}
+            {/* 13 — MINIMAL SCROLL INDICATOR */}
             <div className="flex items-center gap-3.5">
               <span
                 className="font-mono text-[9px] tracking-[0.26em] text-[#E7E2DA]/80 uppercase"
@@ -300,7 +361,6 @@ export const HeroScrollArchitectureChapter: React.FC<
 
       {/* =====================================================================
           15 — CONTINUOUS SECTION BRIDGE AT HERO EXIT
-          Soft alabaster horizon reveal during the final 12% of hero scroll
       ===================================================================== */}
       <div
         aria-hidden="true"

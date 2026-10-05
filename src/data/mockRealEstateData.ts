@@ -4,15 +4,24 @@ import {
   ProjectMonograph,
 } from '../types/realEstate';
 
+import ehlDhakaPlateUrl from '../assets/images/ehl_dhaka_condominium_plate_1791106691381.jpg';
+import ehlDhakaDetailPlateUrl from '../assets/images/ehl_dhaka_detail_plate_1791108740864.jpg';
+import ehlDhakaNightPlateUrl from '../assets/images/ehl_dhaka_night_plate_1791108753816.jpg';
+import heroDhakaUrl from '../assets/images/hero_dhaka_residence_1791097284081.jpg';
+import gulshanSanctuaryUrl from '../assets/images/project_gulshan_sanctuary_1791097297928.jpg';
+import baridharaPavilionUrl from '../assets/images/project_baridhara_pavilion_1791097313429.jpg';
+import dhanmondiTerraceUrl from '../assets/images/project_dhanmondi_terrace_1791097325390.jpg';
+import penthouseInteriorUrl from '../assets/images/interior_penthouse_living_1791097388057.jpg';
+
 export const IMAGE_ASSETS = {
-  ehlDhakaPlate: '/src/assets/images/ehl_dhaka_condominium_plate_1791106691381.jpg',
-  ehlDhakaDetailPlate: '/src/assets/images/ehl_dhaka_detail_plate_1791108740864.jpg',
-  ehlDhakaNightPlate: '/src/assets/images/ehl_dhaka_night_plate_1791108753816.jpg',
-  heroDhaka: '/src/assets/images/hero_dhaka_residence_1791097284081.jpg',
-  gulshanSanctuary: '/src/assets/images/project_gulshan_sanctuary_1791097297928.jpg',
-  baridharaPavilion: '/src/assets/images/project_baridhara_pavilion_1791097313429.jpg',
-  dhanmondiTerrace: '/src/assets/images/project_dhanmondi_terrace_1791097325390.jpg',
-  penthouseInterior: '/src/assets/images/interior_penthouse_living_1791097388057.jpg',
+  ehlDhakaPlate: ehlDhakaPlateUrl,
+  ehlDhakaDetailPlate: ehlDhakaDetailPlateUrl,
+  ehlDhakaNightPlate: ehlDhakaNightPlateUrl,
+  heroDhaka: heroDhakaUrl,
+  gulshanSanctuary: gulshanSanctuaryUrl,
+  baridharaPavilion: baridharaPavilionUrl,
+  dhanmondiTerrace: dhanmondiTerraceUrl,
+  penthouseInterior: penthouseInteriorUrl,
 } as const;
 
 export const GLOBAL_DEMO_NOTICE =

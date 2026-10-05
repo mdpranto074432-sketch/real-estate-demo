@@ -50,18 +50,20 @@ interface DustParticle {
   phase: number;
 }
 
+const PUBLIC_FALLBACK_PATHS = {
+  primary: '/images/ehl_dhaka_condominium_plate_1791106691381.jpg',
+  detail: '/images/ehl_dhaka_detail_plate_1791108740864.jpg',
+  interior: '/images/interior_penthouse_living_1791097388057.jpg',
+  night: '/images/ehl_dhaka_night_plate_1791108753816.jpg',
+} as const;
+
 /**
  * WORLD-CLASS LUXURY ARCHITECTURAL CINEMATIC HERO ENGINE
  * Preserves the exact real-building identity of EHL Premium Condominiums (Dhaka)
  * with zero fake geometry and zero wave/displacement warping.
  *
- * Delivers:
- * - Multi-plane 2.5D spatial separation (Background Sky/Horizon, Midground Architecture,
- *   Foreground Botanical Canopy & Atmosphere) using subtle differential parallax
- * - Slow, continuous autonomous camera drift + pointer response + scroll camera push-in
- * - Restrained natural lighting progression (Warm Afternoon -> Golden Hour -> Blue Hour -> Nocturnal)
- * - Subtle live atmospheric dust motes & monsoon light shafts on a lightweight 2D canvas
- * - Seamless multi-angle photographic transitions into architectural details and interior spaces
+ * Includes production-hardened asset loading, automatic public URL fallback,
+ * and structured `[Hero]` diagnostic logging.
  */
 export const HeroRealtimeArchitectureCanvas: React.FC<
   HeroRealtimeArchitectureCanvasProps
@@ -75,6 +77,19 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
   const atmosphereCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [introStage, setIntroStage] = useState<number>(0);
+  const [primarySrc, setPrimarySrc] = useState<string>(
+    IMAGE_ASSETS.ehlDhakaPlate || fallbackImageSrc || PUBLIC_FALLBACK_PATHS.primary
+  );
+  const [detailSrc, setDetailSrc] = useState<string>(
+    IMAGE_ASSETS.ehlDhakaDetailPlate || PUBLIC_FALLBACK_PATHS.detail
+  );
+  const [interiorSrc, setInteriorSrc] = useState<string>(
+    IMAGE_ASSETS.penthouseInterior || PUBLIC_FALLBACK_PATHS.interior
+  );
+  const [nightSrc, setNightSrc] = useState<string>(
+    IMAGE_ASSETS.ehlDhakaNightPlate || PUBLIC_FALLBACK_PATHS.night
+  );
+
   const [cameraState, setCameraState] = useState<{
     px: number;
     py: number;
@@ -92,16 +107,26 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
   const targetPointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const currentPointerRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // 06 — INTRO MOTION CHOREOGRAPHY
-  // 01: subtle atmospheric reveal -> 02: building settles -> 03: light reveals architecture
+  // 06 & 14 — INTRO MOTION CHOREOGRAPHY + PRODUCTION DIAGNOSTIC LOGGING
   useEffect(() => {
+    console.info('[Hero] initializing architectural visual engine', {
+      primarySrc,
+      detailSrc,
+      interiorSrc,
+      nightSrc,
+    });
+
     if (prefersReducedMotion()) {
       setIntroStage(3);
+      console.info('[Hero] scene ready (reduced-motion mode)');
       return;
     }
     const t1 = window.setTimeout(() => setIntroStage(1), 80);
     const t2 = window.setTimeout(() => setIntroStage(2), 450);
-    const t3 = window.setTimeout(() => setIntroStage(3), 1050);
+    const t3 = window.setTimeout(() => {
+      setIntroStage(3);
+      console.info('[Hero] scene ready');
+    }, 1050);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
@@ -120,14 +145,20 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
       const w = window.innerWidth || 1440;
       const h = window.innerHeight || 900;
       targetPointerRef.current = {
-        x: (e.clientX / w - 0.5) * 2, // -1 .. 1
-        y: (e.clientY / h - 0.5) * 2, // -1 .. 1
+        x: (e.clientX / w - 0.5) * 2,
+        y: (e.clientY / h - 0.5) * 2,
       };
     };
 
-    // Initialize subtle atmospheric dust particles
     const canvas = atmosphereCanvasRef.current;
-    const ctx = canvas ? canvas.getContext('2d') : null;
+    let ctx: CanvasRenderingContext2D | null = null;
+    try {
+      ctx = canvas ? canvas.getContext('2d') : null;
+      console.info('[Hero] 2D atmospheric canvas initialized');
+    } catch (err) {
+      console.error('[Hero] ERROR initializing atmospheric canvas:', err);
+    }
+
     const particles: DustParticle[] = [];
     const particleCount = window.innerWidth < 768 ? 18 : 34;
 
@@ -156,13 +187,11 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
       rafId = requestAnimationFrame(animate);
       const elapsed = (now - startTime) * 0.001;
 
-      // Damped pointer interpolation (no sudden jerks or distortion)
       currentPointerRef.current.x +=
         (targetPointerRef.current.x - currentPointerRef.current.x) * 0.045;
       currentPointerRef.current.y +=
         (targetPointerRef.current.y - currentPointerRef.current.y) * 0.045;
 
-      // Ultra-slow autonomous architectural camera drift (feels like a stabilized cinema dolly)
       const driftX = Math.sin(elapsed * 0.28) * 6.5;
       const driftY = Math.cos(elapsed * 0.22) * 4.0;
       const breathScale = (Math.sin(elapsed * 0.24) + 1) * 0.008;
@@ -175,7 +204,6 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         breathScale,
       });
 
-      // Render subtle golden-hour dust motes & warm light scattering
       if (ctx && canvas) {
         const cw = canvas.width;
         const ch = canvas.height;
@@ -188,10 +216,8 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
           if (p.x > 1.05) p.x = -0.05;
           if (p.y < -0.05) p.y = 1.05;
 
-          const drawX =
-            (p.x + currentPointerRef.current.x * 0.012) * cw;
-          const drawY =
-            (p.y + currentPointerRef.current.y * 0.008) * ch;
+          const drawX = (p.x + currentPointerRef.current.x * 0.012) * cw;
+          const drawY = (p.y + currentPointerRef.current.y * 0.008) * ch;
           const twinkle =
             p.alpha * (0.65 + 0.35 * Math.sin(elapsed * 1.1 + p.phase));
 
@@ -220,33 +246,21 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
 
   // ===========================================================================
   // 04 & 05 — MULTI-PLANE SPATIAL DEPTH PARALLAX & SCROLL CAMERA JOURNEY
-  // Preserves 100% straight architectural lines—zero bending or warping.
   // ===========================================================================
-  // Background Sky / Horizon Plane (moves slowest: 0.45x parallax)
   const bgTx = -cameraState.px * 5.5 + cameraState.driftX * 0.45;
   const bgTy = -cameraState.py * 3.5 + cameraState.driftY * 0.45 - s * 10;
   const bgScale = 1.03 + s * 0.05;
 
-  // Midground Primary Building Plane (moves at 1.0x camera speed + continuous scroll push-in)
   const introScaleOffset = introStage === 0 ? 0.055 : introStage === 1 ? 0.02 : 0;
   const bldgScale =
     1.035 + introScaleOffset + cameraState.breathScale + smoothstep(0.0, 0.48, s) * 0.14;
   const bldgTx = -cameraState.px * 12.5 + cameraState.driftX;
   const bldgTy = -cameraState.py * 7.5 + cameraState.driftY - smoothstep(0.0, 0.48, s) * 16;
 
-  // Foreground Canopy / Verandah Frame Plane (moves fastest: 1.65x parallax for genuine depth)
   const fgTx = -cameraState.px * 21.0 + cameraState.driftX * 1.45;
   const fgTy = -cameraState.py * 12.5 + cameraState.driftY * 1.45 - s * 28;
   const fgScale = 1.06 + smoothstep(0.0, 0.5, s) * 0.19;
 
-  // ===========================================================================
-  // CONTINUOUS SCROLL PROGRESSION ACROSS ARCHITECTURAL PERSPECTIVES
-  // 0.00 -> 0.44: Primary EHL Premium Condominiums Establishing Elevation
-  //               (with 3-layer Background / Building / Foreground depth parallax)
-  // 0.36 -> 0.72: Close-up Cantilevered Concrete Overhangs, Iron-Wood Louvers & Hanging Greens
-  // 0.64 -> 0.90: Interior Cross-Ventilated Living Gallery & Verandah Threshold
-  // 0.82 -> 1.00: Nocturnal Elevation & Seamless Upward Curtain Reveal into Section 02
-  // ===========================================================================
   const plate1Opacity = 1 - smoothstep(0.36, 0.48, s);
 
   const plate2Enter = smoothstep(0.34, 0.47, s);
@@ -268,12 +282,6 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
   const plate4Tx = -cameraState.px * 11 + cameraState.driftX;
   const plate4Ty = -cameraState.py * 7 + cameraState.driftY;
 
-  const primaryExteriorSrc = IMAGE_ASSETS.ehlDhakaPlate || fallbackImageSrc;
-  const detailFacadeSrc = IMAGE_ASSETS.ehlDhakaDetailPlate || primaryExteriorSrc;
-  const interiorGallerySrc = IMAGE_ASSETS.penthouseInterior || primaryExteriorSrc;
-  const nocturnalExteriorSrc = IMAGE_ASSETS.ehlDhakaNightPlate || primaryExteriorSrc;
-
-  // Subtle localized warm highlight angle (shifts naturally with pointer and scroll)
   const warmShaftAngle = 122 + cameraState.px * 6 + s * 18;
   const warmShaftOpacity =
     introStage >= 2 ? Math.max(0.08, 0.24 - s * 0.16) : 0.0;
@@ -286,8 +294,6 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
     >
       {/* =====================================================================
           CHAPTER 01 (0% -> 46% SCROLL): PRIMARY REAL-BUILDING VISUAL
-          Separated into 3 depth planes (Background Sky, Midground Architecture,
-          Foreground Peripheral Canopy) so the real photograph feels spatial and alive.
       ===================================================================== */}
       <div
         className="absolute inset-0 h-full w-full"
@@ -301,17 +307,22 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
           }}
         >
           <img
-            src={primaryExteriorSrc}
+            src={primarySrc}
             alt=""
             aria-hidden="true"
+            onLoad={() => console.info('[Hero] primary architectural image loaded:', primarySrc)}
+            onError={() => {
+              console.error('[Hero] ERROR loading primarySrc, switching to public fallback:', primarySrc);
+              if (primarySrc !== PUBLIC_FALLBACK_PATHS.primary) {
+                setPrimarySrc(PUBLIC_FALLBACK_PATHS.primary);
+              }
+            }}
             className="h-full w-full object-cover object-[54%_38%] sm:object-center"
             draggable={false}
           />
         </div>
 
-        {/* DEPTH LAYER 2: MIDGROUND PRIMARY ARCHITECTURAL SUBJECT (1.0x Parallax)
-            Masked smoothly so the building's straight concrete slabs and iron-wood
-            louvers glide with subtle differential depth against the distant Dhaka sky */}
+        {/* DEPTH LAYER 2: MIDGROUND PRIMARY ARCHITECTURAL SUBJECT (1.0x Parallax) */}
         <div
           className="absolute inset-0 h-full w-full will-change-transform"
           style={{
@@ -327,7 +338,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
           }}
         >
           <img
-            src={primaryExteriorSrc}
+            src={primarySrc}
             alt={fallbackAlt}
             className="h-full w-full object-cover object-[54%_38%] sm:object-center"
             draggable={false}
@@ -346,7 +357,7 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
           }}
         >
           <img
-            src={primaryExteriorSrc}
+            src={primarySrc}
             alt=""
             aria-hidden="true"
             className="h-full w-full object-cover object-[54%_38%] sm:object-center"
@@ -357,7 +368,6 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
 
       {/* =====================================================================
           CHAPTER 02 (34% -> 74% SCROLL): ARCHITECTURAL FACADE & OVERHANG DETAIL
-          Close-up of cantilevered concrete slabs, exterior iron-wood screens & hanging gardens
       ===================================================================== */}
       <div
         className="pointer-events-none absolute inset-0 h-full w-full will-change-transform"
@@ -367,8 +377,17 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         }}
       >
         <img
-          src={detailFacadeSrc}
+          src={detailSrc}
           alt="Close-up architectural study of cantilevered concrete overhangs, exterior iron-wood louvers, and hanging gardens"
+          onLoad={() => console.info('[Hero] detail facade image loaded')}
+          onError={() => {
+            console.error('[Hero] ERROR loading detailSrc, falling back to primary');
+            if (detailSrc !== PUBLIC_FALLBACK_PATHS.detail) {
+              setDetailSrc(PUBLIC_FALLBACK_PATHS.detail);
+            } else {
+              setDetailSrc(primarySrc);
+            }
+          }}
           className="h-full w-full object-cover object-center"
           loading="lazy"
           draggable={false}
@@ -386,8 +405,17 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         }}
       >
         <img
-          src={interiorGallerySrc}
+          src={interiorSrc}
           alt="Full-length cross-ventilated interior living gallery and shaded monsoon verandah"
+          onLoad={() => console.info('[Hero] interior gallery image loaded')}
+          onError={() => {
+            console.error('[Hero] ERROR loading interiorSrc, falling back to public path');
+            if (interiorSrc !== PUBLIC_FALLBACK_PATHS.interior) {
+              setInteriorSrc(PUBLIC_FALLBACK_PATHS.interior);
+            } else {
+              setInteriorSrc(primarySrc);
+            }
+          }}
           className="h-full w-full object-cover object-center"
           loading="lazy"
           draggable={false}
@@ -405,8 +433,17 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
         }}
       >
         <img
-          src={nocturnalExteriorSrc}
+          src={nightSrc}
           alt="Nocturnal architectural elevation with warm interior illumination and rainwater court reflections"
+          onLoad={() => console.info('[Hero] nocturnal elevation image loaded')}
+          onError={() => {
+            console.error('[Hero] ERROR loading nightSrc, falling back to public path');
+            if (nightSrc !== PUBLIC_FALLBACK_PATHS.night) {
+              setNightSrc(PUBLIC_FALLBACK_PATHS.night);
+            } else {
+              setNightSrc(primarySrc);
+            }
+          }}
           className="h-full w-full object-cover object-center"
           loading="lazy"
           draggable={false}
@@ -415,7 +452,6 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
 
       {/* =====================================================================
           07 — RESTRAINED NATURAL LIGHTING & ATMOSPHERIC GRADING
-          Subtle warm afternoon sun-ray highlight + soft shadow depth (never orange/Instagram)
       ===================================================================== */}
       <div
         className="pointer-events-none absolute inset-0 mix-blend-soft-light transition-opacity duration-1000"
@@ -436,20 +472,19 @@ export const HeroRealtimeArchitectureCanvas: React.FC<
 
       {/* =====================================================================
           06 — INTRO ATMOSPHERIC REVEAL VEIL
-          Dissolves smoothly on load so the building emerges naturally from light
+          Uses a CSS animation fallback so even if JS timers are delayed, the veil
+          is guaranteed to become transparent.
       ===================================================================== */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[#111317] transition-opacity duration-1000 ease-out"
         style={{
-          opacity: introStage === 0 ? 0.55 : 0,
+          opacity: introStage === 0 ? 0.35 : 0,
         }}
       />
 
       {/* =====================================================================
           02 — CINEMATIC EDITORIAL FRAMING GRADIENT
-          Protects headline legibility in the lower-left while leaving the entire
-          central and upper architectural volume 100% clear and luminous.
       ===================================================================== */}
       <div
         className="pointer-events-none absolute inset-0"
