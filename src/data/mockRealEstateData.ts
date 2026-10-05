@@ -12,6 +12,10 @@ import gulshanSanctuaryUrl from '../assets/images/project_gulshan_sanctuary_1791
 import baridharaPavilionUrl from '../assets/images/project_baridhara_pavilion_1791097313429.jpg';
 import dhanmondiTerraceUrl from '../assets/images/project_dhanmondi_terrace_1791097325390.jpg';
 import penthouseInteriorUrl from '../assets/images/interior_penthouse_living_1791097388057.jpg';
+import bashundharaCourtUrl from '../assets/images/bashundhara_court_residence_1791210380858.jpg';
+import jolshiriEstateUrl from '../assets/images/jolshiri_estate_panoramic_1791210394270.jpg';
+import craftMaterialUrl from '../assets/images/architectural_craft_material_1791210407236.jpg';
+import monsoonVerandahUrl from '../assets/images/dhaka_monsoon_verandah_lifestyle_1791210420618.jpg';
 
 export const IMAGE_ASSETS = {
   ehlDhakaPlate: ehlDhakaPlateUrl,
@@ -22,6 +26,10 @@ export const IMAGE_ASSETS = {
   baridharaPavilion: baridharaPavilionUrl,
   dhanmondiTerrace: dhanmondiTerraceUrl,
   penthouseInterior: penthouseInteriorUrl,
+  bashundharaCourt: bashundharaCourtUrl,
+  jolshiriEstate: jolshiriEstateUrl,
+  craftMaterial: craftMaterialUrl,
+  monsoonVerandah: monsoonVerandahUrl,
 } as const;
 
 export const GLOBAL_DEMO_NOTICE =
