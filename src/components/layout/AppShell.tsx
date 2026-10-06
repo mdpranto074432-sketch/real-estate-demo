@@ -381,6 +381,37 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         {children}
       </main>
 
+      {/* 15. PERSISTENT MOBILE LUXURY ACTION BAR (Discreet & Elegant) */}
+      <div
+        aria-hidden={scrollProgress < 0.06 || mobileMenuOpen}
+        className={`fixed bottom-4 left-4 right-4 z-40 transition-all duration-300 md:hidden ${
+          scrollProgress > 0.06 && !mobileMenuOpen
+            ? 'translate-y-0 opacity-100'
+            : 'pointer-events-none translate-y-8 opacity-0'
+        }`}
+      >
+        <div className="flex items-center justify-between gap-3 border border-[#D8D1C5]/80 bg-[#151514]/94 px-4 py-2.5 shadow-2xl backdrop-blur-md">
+          <div className="flex flex-col min-w-0">
+            <span className="truncate font-serif text-sm font-medium text-[#F2EEE7]">
+              Varendra &amp; Co.
+            </span>
+            <span className="font-mono text-[9px] tracking-wider text-[#B5A07D] uppercase">
+              Dhaka Salon Desk
+            </span>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <Link
+              to="/contact?intent=book-viewing"
+              className="inline-flex min-h-[40px] items-center justify-center gap-1.5 border border-[#986046] bg-[#986046] px-3.5 py-2 font-mono text-[10px] tracking-wider text-[#F2EEE7] uppercase active:bg-[#7E4F39]"
+            >
+              <span>Briefing</span>
+              <ArchitecturalIcon name="arrow-up-right" size={11} />
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Quiet Institutional Footer with Bangladesh Localization & BDT Controls */}
       <footer className="border-t border-[#D8D1C5] bg-[#E8E2D8]/50 text-[#151514]">
         <div className="mx-auto max-w-[1360px] px-5 sm:px-6 py-14 sm:py-16 md:px-12 lg:py-20">

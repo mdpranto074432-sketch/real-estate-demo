@@ -288,6 +288,48 @@ export const ProjectDetailPage: React.FC = () => {
               </span>
             </div>
 
+            {/* Mobile Executive Quick Specs - Compact 2-Column Luxury Stack */}
+            <div className="mb-6 grid grid-cols-2 gap-3 border border-[#D8D1C5] bg-[#FAF7F2] p-4 sm:hidden">
+              <div>
+                <span className="text-[10px] font-mono tracking-wider text-[#736B63] uppercase">
+                  TYPICAL RESIDENCE
+                </span>
+                <p className="font-serif text-lg font-medium text-[#151514]">
+                  {metrics.areaRangeLabel}
+                </p>
+              </div>
+              <div>
+                <span className="text-[10px] font-mono tracking-wider text-[#736B63] uppercase">
+                  CONFIGURATION
+                </span>
+                <p className="font-serif text-lg font-medium text-[#151514]">
+                  {metrics.bedroomsLabel.replace(' Bedrooms', ' Bed')}
+                </p>
+              </div>
+              <div>
+                <span className="text-[10px] font-mono tracking-wider text-[#736B63] uppercase">
+                  ELEVATION &amp; PLOT
+                </span>
+                <p className="font-mono text-sm font-medium text-[#151514]">
+                  {project.stories}F · {project.landAreaKathas} Katha
+                </p>
+              </div>
+              <div>
+                <span className="text-[10px] font-mono tracking-wider text-[#736B63] uppercase">
+                  VALUATION (DEMO)
+                </span>
+                <p className="font-mono text-sm font-medium text-[#986046]">
+                  {metrics.minPriceCrore !== null
+                    ? formatBdtValuation(
+                        `${metrics.minPriceCrore} Crore`,
+                        bdtDisplayUnit,
+                        languageMode
+                      )
+                    : 'On Request'}
+                </p>
+              </div>
+            </div>
+
             <dl className="grid grid-cols-2 gap-y-7 gap-x-6 border-t border-b border-[#D6CEBE] py-8 sm:grid-cols-3 lg:grid-cols-7">
               <div>
                 <dt className="text-xs text-[#78716C]">01. Project Name</dt>
@@ -747,8 +789,83 @@ export const ProjectDetailPage: React.FC = () => {
           }
         />
 
-        {/* Project-Specific Unit Allocation Schedule Table */}
-        <div className="mt-10 overflow-x-auto border border-[#D6CEBE] bg-[#FBF9F5]">
+        {/* Mobile Unit Cards (Touch-First & Non-Overflown) */}
+        <div className="mt-8 space-y-4 md:hidden">
+          {displayedUnits.map((unit) => {
+            const isAvailable =
+              unit.allocationStatus === 'Available for Private Briefing';
+            return (
+              <div
+                key={unit.id}
+                className="border border-[#D8D1C5] bg-[#FAF7F2] p-5 shadow-sm"
+              >
+                <div className="flex items-baseline justify-between border-b border-[#D8D1C5] pb-3">
+                  <div>
+                    <span className="font-mono text-xs font-semibold text-[#986046]">
+                      {unit.unitCode}
+                    </span>
+                    <h4 className="font-serif text-xl font-medium text-[#151514]">
+                      {unit.residenceType}
+                    </h4>
+                  </div>
+                  <span className="font-mono text-xs text-[#736B63]">
+                    Level {unit.floorNumber < 10 ? `0${unit.floorNumber}` : unit.floorNumber}
+                  </span>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#736B63]">GROSS AREA</span>
+                    <p className="font-mono font-medium text-[#151514]">
+                      {unit.areaSqFt.toLocaleString()} sq. ft.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#736B63]">ROOM CONFIG</span>
+                    <p className="font-mono font-medium text-[#151514]">
+                      {unit.bedrooms}BR · {unit.baths} Bath
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#736B63]">VALUATION</span>
+                    <p className="font-mono font-medium text-[#986046]">
+                      {unit.indicativeValuationBDT}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#736B63]">ALLOCATION</span>
+                    <div className="mt-0.5">
+                      <ArchitecturalStatusText
+                        status={unit.allocationStatus}
+                        tone={isAvailable ? 'botanical' : 'muted'}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between border-t border-[#D8D1C5] pt-3">
+                  <a
+                    href="#floor-plans"
+                    onClick={() => setSelectedPlanId(unit.floorPlanId)}
+                    className="font-mono text-xs text-[#986046] underline"
+                  >
+                    View Floor Plate
+                  </a>
+                  <Link
+                    to={`/contact?project=${project.slug}&unit=${encodeURIComponent(unit.unitCode)}`}
+                    className="inline-flex min-h-[40px] items-center gap-1.5 bg-[#151514] px-4 py-2 text-xs font-medium text-[#F2EEE7]"
+                  >
+                    <span>Inquire</span>
+                    <ArchitecturalIcon name="arrow-up-right" size={12} />
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop Unit Allocation Schedule Table */}
+        <div className="mt-10 hidden md:block overflow-x-auto border border-[#D6CEBE] bg-[#FBF9F5]">
           <table className="w-full border-collapse text-left text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-[#1C1917] bg-[#EBE6DF]/60 text-xs font-semibold text-[#1C1917]">

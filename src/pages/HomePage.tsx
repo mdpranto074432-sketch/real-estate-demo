@@ -219,11 +219,11 @@ export const HomePage: React.FC = () => {
           Oversized numeric & architectural watermark layers, asymmetry,
           and sculptural editorial rhythm.
       ===================================================================== */}
-      <section className="relative overflow-hidden border-b border-[#D8D1C5] bg-[#F2EEE7] py-32 md:py-44 lg:py-52">
+      <section className="relative overflow-hidden border-b border-[#D8D1C5] bg-[#F2EEE7] py-16 sm:py-28 md:py-44 lg:py-52">
         {/* Giant Background Architectural Index Number */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-10 right-6 select-none font-serif text-[180px] font-light leading-none text-[#E8E2D8]/70 sm:text-[280px] lg:right-16 lg:text-[360px]"
+          className="pointer-events-none absolute -top-8 right-2 select-none font-serif text-[120px] font-light leading-none text-[#E8E2D8]/70 sm:-top-10 sm:right-6 sm:text-[240px] lg:right-16 lg:text-[360px]"
         >
           01
         </div>

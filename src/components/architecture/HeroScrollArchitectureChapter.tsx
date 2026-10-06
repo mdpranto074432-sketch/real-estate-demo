@@ -209,7 +209,7 @@ export const HeroScrollArchitectureChapter: React.FC<
     <section
       ref={sectionRef}
       aria-label="Architectural Hero"
-      className="relative h-screen min-h-[680px] w-screen max-w-full overflow-hidden bg-[#151514] text-[#F2EEE7]"
+      className="relative h-[100svh] min-h-[600px] md:min-h-[680px] w-full max-w-full overflow-hidden bg-[#151514] text-[#F2EEE7]"
     >
       {/* =====================================================================
           1. FULL-BLEED REAL BUILDING VISUAL & LIVE CAMERA MOTION
@@ -235,41 +235,43 @@ export const HeroScrollArchitectureChapter: React.FC<
 
       {/* =====================================================================
           2. SUBORDINATE EDITORIAL TYPOGRAPHY & COMPOSITIONAL BALANCE
+          Mobile Art-Direction: Architecture is PRIMARY, Headline is SECONDARY,
+          CTA is TERTIARY. Building upper cantilevers remain completely visible.
       ===================================================================== */}
-      <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1440px] flex-col justify-end px-6 pb-10 pt-24 sm:px-10 md:px-14 md:pb-14">
-        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+      <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1440px] flex-col justify-end px-5 pb-8 pt-20 sm:px-10 sm:pb-12 md:px-14 md:pb-14">
+        <div className="grid grid-cols-1 items-end gap-6 sm:gap-8 lg:grid-cols-12">
           {/* LEFT COLUMN: Editorial Eyebrow + Masked Line Reveal Headline + Short Statement */}
           <div className="lg:col-span-8">
             <div className="overflow-hidden">
               <p
-                className={`font-mono text-[10px] tracking-[0.26em] text-[#B5A07D] uppercase transition-all duration-700 ease-out sm:text-[11px] ${
+                className={`font-mono text-[9px] sm:text-[11px] tracking-[0.22em] text-[#B5A07D] uppercase transition-all duration-700 ease-out ${
                   typographyReady
                     ? 'translate-y-0 opacity-100'
                     : 'translate-y-4 opacity-0'
                 }`}
-                style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}
+                style={{ textShadow: '0 2px 12px rgba(0,0,0,0.85)' }}
               >
                 {displayedEyebrow}
               </p>
             </div>
 
             {isProjectDetail && projectTitle && scrollProgress < 0.36 ? (
-              <div className="mt-3 overflow-hidden">
+              <div className="mt-2.5 sm:mt-3 overflow-hidden">
                 <h1
-                  className={`font-serif text-4xl font-normal leading-[1.04] tracking-tight text-[#F2EEE7] transition-all duration-900 ease-out sm:text-5xl lg:text-[62px] ${
+                  className={`font-serif text-3xl font-normal leading-[1.08] tracking-tight text-[#F2EEE7] transition-all duration-900 ease-out sm:text-5xl lg:text-[62px] ${
                     typographyReady
                       ? 'translate-y-0 opacity-100'
                       : 'translate-y-8 opacity-0'
                   }`}
-                  style={{ textShadow: '0 8px 32px rgba(0,0,0,0.65)' }}
+                  style={{ textShadow: '0 8px 32px rgba(0,0,0,0.75)' }}
                 >
                   {projectTitle}
                 </h1>
               </div>
             ) : (
               <h1
-                className="mt-3 font-serif text-3xl font-normal leading-[1.03] tracking-tight text-[#F2EEE7] sm:text-5xl lg:text-[58px]"
-                style={{ textShadow: '0 8px 32px rgba(0,0,0,0.65)' }}
+                className="mt-2.5 sm:mt-3 font-serif text-[28px] sm:text-5xl lg:text-[58px] font-normal leading-[1.06] tracking-tight text-[#F2EEE7]"
+                style={{ textShadow: '0 8px 32px rgba(0,0,0,0.75)' }}
               >
                 {activeBeat.lines.map((line, idx) => (
                   <span key={line} className="block overflow-hidden pb-0.5">
@@ -291,12 +293,12 @@ export const HeroScrollArchitectureChapter: React.FC<
             )}
 
             <p
-              className={`mt-4 max-w-md text-sm leading-relaxed text-[#F2EEE7]/90 transition-all duration-900 delay-300 ease-out sm:text-[15px] ${
+              className={`mt-3 sm:mt-4 max-w-md text-xs sm:text-[15px] leading-relaxed text-[#F2EEE7]/90 transition-all duration-900 delay-300 ease-out line-clamp-2 sm:line-clamp-none ${
                 typographyReady
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
               }`}
-              style={{ textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
+              style={{ textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}
             >
               {activeBeat.statement}
             </p>
@@ -304,11 +306,11 @@ export const HeroScrollArchitectureChapter: React.FC<
 
           {/* RIGHT COLUMN: One Primary CTA + One Secondary CTA + Minimal Scroll Indicator */}
           <div
-            className={`pointer-events-auto flex flex-col items-start justify-between gap-6 transition-all duration-900 ease-out lg:col-span-4 lg:items-end ${
+            className={`pointer-events-auto flex flex-col items-start justify-between gap-4 sm:gap-6 transition-all duration-900 ease-out lg:col-span-4 lg:items-end ${
               ctaReady ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
             }`}
           >
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="flex w-full flex-col sm:w-auto sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
               {isProjectDetail ? (
                 <a
                   href="#project-facts"
@@ -319,7 +321,7 @@ export const HeroScrollArchitectureChapter: React.FC<
                       onLaunchGallery();
                     }
                   }}
-                  className="group inline-flex min-h-[44px] items-center justify-center gap-3 border border-[#F2EEE7] bg-[#F2EEE7] px-6 py-3 font-mono text-[11px] tracking-[0.22em] text-[#151514] uppercase transition-all duration-300 hover:bg-[#986046] hover:border-[#986046] hover:text-[#F2EEE7]"
+                  className="group inline-flex min-h-[44px] items-center justify-center gap-3 border border-[#F2EEE7] bg-[#F2EEE7] px-5 sm:px-6 py-3 font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-[#151514] uppercase transition-all duration-300 hover:bg-[#986046] hover:border-[#986046] hover:text-[#F2EEE7]"
                 >
                   <span>Explore Residences</span>
                   <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -330,7 +332,7 @@ export const HeroScrollArchitectureChapter: React.FC<
                 <Link
                   to={`/projects/${projectSlug}`}
                   data-cursor="ENTER"
-                  className="group inline-flex min-h-[44px] items-center justify-center gap-3 border border-[#F2EEE7] bg-[#F2EEE7] px-6 py-3 font-mono text-[11px] tracking-[0.22em] text-[#151514] uppercase transition-all duration-300 hover:bg-[#986046] hover:border-[#986046] hover:text-[#F2EEE7]"
+                  className="group inline-flex min-h-[44px] items-center justify-center gap-3 border border-[#F2EEE7] bg-[#F2EEE7] px-5 sm:px-6 py-3 font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-[#151514] uppercase transition-all duration-300 hover:bg-[#986046] hover:border-[#986046] hover:text-[#F2EEE7]"
                 >
                   <span>Explore Residences</span>
                   <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -342,21 +344,21 @@ export const HeroScrollArchitectureChapter: React.FC<
               <Link
                 to="/contact"
                 data-cursor="BRIEFING"
-                className="group inline-flex min-h-[44px] items-center justify-center gap-2.5 border border-[#F2EEE7]/40 bg-[#151514]/60 px-5 py-3 font-mono text-[11px] tracking-[0.2em] text-[#F2EEE7] uppercase backdrop-blur-md transition-all duration-300 hover:border-[#F2EEE7] hover:bg-[#151514]/90"
+                className="group inline-flex min-h-[44px] items-center justify-center gap-2 border border-[#F2EEE7]/40 bg-[#151514]/60 px-4 sm:px-5 py-3 font-mono text-[10px] sm:text-[11px] tracking-[0.18em] text-[#F2EEE7] uppercase backdrop-blur-md transition-all duration-300 hover:border-[#F2EEE7] hover:bg-[#151514]/90"
               >
                 <span>Schedule Briefing</span>
               </Link>
             </div>
 
             {/* 13 — MINIMAL SCROLL INDICATOR */}
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3">
               <span
-                className="font-mono text-[9px] tracking-[0.26em] text-[#A59D90] uppercase"
-                style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+                className="font-mono text-[9px] tracking-[0.22em] text-[#A59D90] uppercase"
+                style={{ textShadow: '0 2px 10px rgba(0,0,0,0.9)' }}
               >
                 Scroll to Explore
               </span>
-              <div className="relative h-7 w-[1px] overflow-hidden bg-[#F2EEE7]/20">
+              <div className="relative h-6 w-[1px] overflow-hidden bg-[#F2EEE7]/20">
                 <div
                   className="w-full bg-[#986046] transition-all duration-150"
                   style={{
